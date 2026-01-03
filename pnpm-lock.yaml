@@ -7,11 +7,22 @@ settings:
 importers:
   .:
     devDependencies:
+      prettier:
+        specifier: ^3.7.4
+        version: 3.7.4
       turbo:
         specifier: 2.7.2
         version: 2.7.2
 
 packages:
+  prettier@3.7.4:
+    resolution:
+      {
+        integrity: sha512-v6UNi1+3hSlVvv8fSaoUbggEM5VErKmmpGA7Pl3HF8V6uKY7rvClBOJlH6yNwQtfTueNkGVpOv/mtWL9L4bgRA==,
+      }
+    engines: { node: ">=14" }
+    hasBin: true
+
   turbo-darwin-64@2.7.2:
     resolution:
       {
@@ -68,6 +79,8 @@ packages:
     hasBin: true
 
 snapshots:
+  prettier@3.7.4: {}
+
   turbo-darwin-64@2.7.2:
     optional: true
 

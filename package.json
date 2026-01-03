@@ -3,7 +3,11 @@
   "description": "Monorepo template for agent-assisted development",
   "private": true,
   "packageManager": "pnpm@10.19.0",
+  "scripts": {
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+  },
   "devDependencies": {
+    "prettier": "^3.7.4",
     "turbo": "2.7.2"
   }
 }
