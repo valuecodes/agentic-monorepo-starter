@@ -1,0 +1,9 @@
+{
+  "name": "turborepo-agents",
+  "description": "Monorepo template for agent-assisted development",
+  "private": true,
+  "packageManager": "pnpm@10.19.0",
+  "devDependencies": {
+    "turbo": "2.7.2"
+  }
+}
