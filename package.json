@@ -5,9 +5,11 @@
   "packageManager": "pnpm@10.19.0",
   "scripts": {
     "dev": "turbo run dev",
+    "build": "turbo run build",
     "typecheck": "turbo run typecheck",
     "lint": "turbo run lint --continue -- --cache --cache-location .cache/.eslintcache",
-    "format": "prettier --write \"**/*.{ts,tsx,md,json,yaml,yml}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md,json,yaml,yml}\"",
+    "clean": "turbo run clean"
   },
   "devDependencies": {
     "prettier": "3.7.4",
