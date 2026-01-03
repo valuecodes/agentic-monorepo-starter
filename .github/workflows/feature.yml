@@ -1,7 +1,7 @@
-name: Main branch CI
+name: Feature branch CI
 
 on:
-  push:
+  pull_request:
     branches: [main]
 
 permissions: {}
