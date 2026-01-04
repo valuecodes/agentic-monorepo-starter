@@ -47,7 +47,7 @@ Guidelines for AI agents and contributors working in this Turborepo monorepo.
 
 **Prerequisites:**
 
-- Node.js 22.21.0 (see `.nvmrc`)
+- Node.js 24.12.0 (see `.nvmrc`)
 - pnpm 10.19.0 (see `packageManager` in root `package.json`)
 
 ### Install
