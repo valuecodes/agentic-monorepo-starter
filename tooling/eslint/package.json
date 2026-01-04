@@ -9,6 +9,7 @@
   },
   "scripts": {
     "clean": "rm -rf .turbo node_modules .cache",
+    "format": "prettier --write .",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -24,6 +25,7 @@
     "typescript-eslint": "8.46.4"
   },
   "devDependencies": {
+    "@turborepo-agents/prettier": "workspace:*",
     "@turborepo-agents/typescript": "workspace:*",
     "@types/node": "24.10.1",
     "eslint": "9.39.1",

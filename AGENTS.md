@@ -37,6 +37,7 @@ Guidelines for AI agents and contributors working in this Turborepo monorepo.
 | Name       | Filter                         | Description                                                       |
 | ---------- | ------------------------------ | ----------------------------------------------------------------- |
 | eslint     | `@turborepo-agents/eslint`     | Shared ESLint flat configs (base, react, nextjs)                  |
+| prettier   | `@turborepo-agents/prettier`   | Shared Prettier config with import sorting and Tailwind plugins   |
 | typescript | `@turborepo-agents/typescript` | Shared TypeScript configs (base, react, nextjs, compiled-package) |
 | github     | `@turborepo-agents/github`     | GitHub Actions composite setup action                             |
 
@@ -82,10 +83,14 @@ Runs: `turbo run build`
 ### Format
 
 ```bash
-pnpm format
+pnpm format                    # Format entire repo
+pnpm --filter <pkg> format     # Format specific package
 ```
 
-Runs: `prettier --write "**/*.{ts,tsx,md,json,yaml,yml}"`
+Uses shared config from `@turborepo-agents/prettier` with plugins:
+
+- `@ianvs/prettier-plugin-sort-imports` — auto-sorts imports
+- `prettier-plugin-tailwindcss` — sorts Tailwind classes
 
 ### Dev (per app)
 
@@ -255,6 +260,7 @@ pnpm --filter @turborepo-agents/ui <command>
 
 # Tooling
 pnpm --filter @turborepo-agents/eslint <command>
+pnpm --filter @turborepo-agents/prettier <command>
 pnpm --filter @turborepo-agents/typescript <command>
 ```
 

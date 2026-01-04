@@ -11,6 +11,7 @@
   },
   "scripts": {
     "lint": "eslint src",
+    "format": "prettier --write src",
     "clean": "rm -rf .turbo node_modules",
     "typecheck": "tsc --noEmit",
     "ui-add": "pnpm dlx shadcn@latest add && prettier src --write --list-different"
@@ -64,6 +65,7 @@
   "devDependencies": {
     "@tailwindcss/postcss": "4.1.17",
     "@turborepo-agents/eslint": "workspace:*",
+    "@turborepo-agents/prettier": "workspace:*",
     "@turborepo-agents/typescript": "workspace:*",
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",

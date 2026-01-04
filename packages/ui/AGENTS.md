@@ -20,6 +20,7 @@ This directory inherits `/AGENTS.md`. This file lists only additions and overrid
 | Task          | Command                                        |
 | ------------- | ---------------------------------------------- |
 | Lint          | `pnpm --filter @turborepo-agents/ui lint`      |
+| Format        | `pnpm --filter @turborepo-agents/ui format`    |
 | Typecheck     | `pnpm --filter @turborepo-agents/ui typecheck` |
 | Add component | `pnpm --filter @turborepo-agents/ui ui-add`    |
 | Clean         | `pnpm --filter @turborepo-agents/ui clean`     |

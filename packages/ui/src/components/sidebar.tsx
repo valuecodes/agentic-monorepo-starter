@@ -1,13 +1,10 @@
 "use client";
 
-import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva } from "class-variance-authority";
 import type { VariantProps } from "class-variance-authority";
 import { PanelLeftIcon } from "lucide-react";
-
-import { useIsMobile } from "../hooks/use-mobile";
-import { cn } from "../lib/utils";
+import * as React from "react";
 import { Button } from "src/components/button";
 import { Input } from "src/components/input";
 import { Separator } from "src/components/separator";
@@ -25,6 +22,9 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "src/components/tooltip";
+
+import { useIsMobile } from "../hooks/use-mobile";
+import { cn } from "../lib/utils";
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
@@ -608,7 +608,9 @@ function SidebarMenuSkeleton({
   showIcon?: boolean;
 }) {
   // Random width between 50 to 90%.
-  const [width] = React.useState(() => `${Math.floor(Math.random() * 40) + 50}%`);
+  const [width] = React.useState(
+    () => `${Math.floor(Math.random() * 40) + 50}%`
+  );
 
   return (
     <div

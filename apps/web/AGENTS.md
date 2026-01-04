@@ -23,6 +23,7 @@ This directory inherits `/AGENTS.md`. This file lists only additions and overrid
 | Start     | `pnpm --filter web start`     |
 | Typecheck | `pnpm --filter web typecheck` |
 | Lint      | `pnpm --filter web lint`      |
+| Format    | `pnpm --filter web format`    |
 | Clean     | `pnpm --filter web clean`     |
 
 Or run repo-wide via root `pnpm typecheck` / `pnpm lint` / `pnpm build`.

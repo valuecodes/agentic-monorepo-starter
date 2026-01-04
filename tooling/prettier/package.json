@@ -1,0 +1,23 @@
+{
+  "name": "@turborepo-agents/prettier",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./.prettierrc.mjs"
+  },
+  "scripts": {
+    "clean": "rm -rf .turbo node_modules .cache",
+    "format": "prettier --write .",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@turborepo-agents/typescript": "workspace:*",
+    "@types/node": "24.10.1",
+    "prettier": "3.7.4",
+    "@ianvs/prettier-plugin-sort-imports": "4.7.0",
+    "prettier-plugin-tailwindcss": "0.7.1",
+    "typescript": "5.9.3"
+  },
+  "prettier": "@turborepo-agents/prettier"
+}

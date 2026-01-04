@@ -12,7 +12,7 @@ import { Label } from "@turborepo-agents/ui/components/label";
 
 const Home = () => {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="bg-background text-foreground min-h-screen">
       <main className="mx-auto flex w-full max-w-4xl flex-col gap-10 px-6 py-16 sm:py-20">
         <header className="flex flex-col gap-5">
           <Badge variant="secondary" className="w-fit">
@@ -22,7 +22,7 @@ const Home = () => {
             <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
               Let agents handle the monorepo busywork.
             </h1>
-            <p className="max-w-2xl text-base text-muted-foreground sm:text-lg">
+            <p className="text-muted-foreground max-w-2xl text-base sm:text-lg">
               Turborepo Agents plan, execute, and report on tasks across your
               Turbo pipelines so your team can ship faster with confidence.
             </p>
@@ -44,7 +44,7 @@ const Home = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <ul className="space-y-2 text-sm text-muted-foreground">
+              <ul className="text-muted-foreground space-y-2 text-sm">
                 <li>Break down tickets into scoped changes.</li>
                 <li>Generate tasks that map to Turbo pipelines.</li>
                 <li>Prepare PRs with tests and summaries.</li>
@@ -60,7 +60,7 @@ const Home = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <ul className="space-y-2 text-sm text-muted-foreground">
+              <ul className="text-muted-foreground space-y-2 text-sm">
                 <li>Respects workspace boundaries and ownership.</li>
                 <li>Surface risks before changes land.</li>
                 <li>Delivers daily status digests for teams.</li>

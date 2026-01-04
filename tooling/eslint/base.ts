@@ -1,10 +1,10 @@
+import path from "path";
 import { includeIgnoreFile } from "@eslint/compat";
 import eslint from "@eslint/js";
 import importPlugin from "eslint-plugin-import";
 import turboPlugin from "eslint-plugin-turbo";
 import { defineConfig } from "eslint/config";
 import tseslint from "typescript-eslint";
-import path from "path";
 
 export const baseConfig = defineConfig(
   // Ignore files not tracked by VCS and any config files
