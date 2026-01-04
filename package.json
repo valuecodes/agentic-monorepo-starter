@@ -9,15 +9,19 @@
     "typecheck": "turbo run typecheck",
     "lint": "turbo run lint --continue -- --cache --cache-location .cache/.eslintcache",
     "format": "prettier --write \"**/*.{ts,tsx,md,json,yaml,yml}\"",
+    "format-changed-files": "pnpm exec tsx scripts/format-changed-files.ts",
     "clean": "turbo run clean"
   },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "4.7.0",
     "@turborepo-agents/prettier": "workspace:*",
+    "@types/node": "24.10.4",
     "prettier": "3.7.4",
     "prettier-plugin-tailwindcss": "0.7.1",
+    "tsx": "4.21.0",
     "turbo": "2.7.2",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "zx": "8.8.5"
   },
   "prettier": "@turborepo-agents/prettier"
 }
