@@ -1,5 +1,5 @@
 {
   "extends": "@turborepo-agents/typescript/base.json",
-  "include": [".prettierrc.mjs"],
+  "include": ["prettier.config.ts"],
   "exclude": ["node_modules"]
 }

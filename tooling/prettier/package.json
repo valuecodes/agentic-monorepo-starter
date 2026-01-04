@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./.prettierrc.mjs"
+    ".": "./prettier.config.ts"
   },
   "scripts": {
     "clean": "rm -rf .turbo node_modules .cache",
