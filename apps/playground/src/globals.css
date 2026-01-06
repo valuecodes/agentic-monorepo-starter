@@ -1,0 +1,5 @@
+@import "tailwindcss";
+@import "@turborepo-agents/ui/styles/default.css";
+
+@source "../**/*.{js,jsx,ts,tsx}";
+@source "../../../packages/ui/src/**/*.{js,jsx,ts,tsx}";
