@@ -9,7 +9,8 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint",
     "format": "prettier --write .",
-    "clean": "rm -rf .turbo node_modules .next .cache"
+    "clean": "rm -rf .turbo node_modules .next .cache",
+    "test": "vitest run"
   },
   "dependencies": {
     "@turborepo-agents/ui": "workspace:*",
