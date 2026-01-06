@@ -1,0 +1,23 @@
+# Primary model Codex uses for normal “do work” requests (editing files, proposing changes, running tools, etc.).
+model = "gpt-5.2-codex"
+
+# Model used specifically for /review (PR-style code review output).
+review_model = "gpt-5.2-codex"
+
+# When Codex should ask for permission before running shell commands.
+# "untrusted" = auto-runs only a small allowlist of known-safe, read-only commands;
+# prompts you for anything else (safer, less surprise execution).
+approval_policy = "untrusted"
+
+# How hard the model should “think” before acting. Higher can improve correctness,
+# but may be slower/cost more depending on your setup.
+model_reasoning_effort = "medium"
+
+# Filesystem sandbox: allow writes only inside the current workspace (your repo folder).
+# Codex can create/edit/delete files in this repo, but shouldn’t touch outside paths.
+sandbox_mode = "workspace-write"
+
+[sandbox_workspace_write]
+# Network access while in workspace-write mode.
+# false = cannot fetch remote content or call external services (reduces supply-chain / exfil risk).
+network_access = false

@@ -17,6 +17,9 @@
     "format": {
       "dependsOn": ["^format"]
     },
+    "test": {
+      "dependsOn": ["^test"]
+    },
     "clean": {
       "dependsOn": ["^clean"]
     },

@@ -123,7 +123,6 @@ async function main() {
   log("Done.");
 }
 
-}
 main().catch((err) => {
   log(`Error: ${String(err)}`);
   process.exit(1);
