@@ -10,7 +10,7 @@
     "lint": "turbo run lint --continue -- --cache --cache-location .cache/.eslintcache",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "format:changed-files": "pnpm --filter @turborepo-agents/agents format:changed-files",
+    "format:changed-files": "pnpm exex tsx tooling/agents/scripts/format-changed-files.ts",
     "test": "turbo run test",
     "agents:check": "turbo run agents:check",
     "agents:sync": "turbo run agents:sync",
@@ -22,8 +22,10 @@
     "@types/node": "24.10.4",
     "prettier": "3.7.4",
     "prettier-plugin-tailwindcss": "0.7.1",
+    "tsx": "4.21.0",
     "turbo": "2.7.3",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "zx": "8.8.5"
   },
   "prettier": "@turborepo-agents/prettier"
 }
