@@ -41,7 +41,7 @@ pnpm --filter web dev
 ## Working with Claude Code
 
 - Agent settings are in `.claude/settings.json` (hook and permission config).
-- Post-tool hook runs `pnpm format-changed-files`, which uses `scripts/format-changed-files.ts` to Prettier-format touched files with supported extensions.
+- Post-tool hook runs `pnpm format-changed-files`, which uses `tooling/agents/scripts/format-changed-files.ts` to Prettier-format touched files with supported extensions.
 - Use the same verification flow as Codex: `pnpm typecheck`, `pnpm lint`, `pnpm test` (when tests exist), `pnpm format` when relevant.
 
 ## Working with GitHub Copilot

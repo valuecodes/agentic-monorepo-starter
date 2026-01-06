@@ -123,7 +123,7 @@ Export paths: `./components/*`, `./lib/*`, `./styles/*`, `./postcss-config`
 
 ## Claude Code Hooks
 
-**Post-Edit Formatting**: After `Edit` or `Write` operations, Claude runs the configured hook from `.claude/settings.json`, which executes `pnpm format-changed-files` (backed by `scripts/format-changed-files.ts`) to run Prettier on modified files (ts, tsx, js, jsx, mjs, cjs, json, md, mdx, yaml, yml).
+**Post-Edit Formatting**: After `Edit` or `Write` operations, Claude runs the configured hook from `.claude/settings.json`, which executes `pnpm format-changed-files` (backed by `tooling/agents/scripts/format-changed-files.ts`) to run Prettier on modified files (ts, tsx, js, jsx, mjs, cjs, json, md, mdx, yaml, yml).
 
 **Permissions** (`.claude/settings.json`):
 
