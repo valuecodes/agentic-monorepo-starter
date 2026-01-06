@@ -6,22 +6,7 @@
   ],
   "github.copilot.chat.commitMessageGeneration.instructions": [
     {
-      "text": "Use Semantic Commit Messages format exactly: <type>: <subject>."
-    },
-    {
-      "text": "Allowed <type> values only: chore, docs, feat, fix, refactor, style, test."
-    },
-    {
-      "text": "Subject rules: present tense, start with a verb, keep it concise (<= 72 chars), no trailing period."
-    },
-    {
-      "text": "Tailor the subject to this monorepo: mention the area touched (landing, docs, playground, ui, lint, typecheck, agents) in the subject when helpful (e.g., 'docs: update turbo commands for docs app', 'feat: add button variants to ui')."
-    },
-    {
-      "text": "If changes span multiple areas, prefer a higher-level subject (e.g., 'chore: align tooling configs across repo') instead of listing everything."
-    },
-    {
-      "text": "If a body is generated, keep it short: 1-3 bullet points describing what changed, no extra fluff."
+      "file": ".github/commit-message-instructions.md"
     }
   ]
 }
