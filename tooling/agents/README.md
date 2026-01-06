@@ -6,7 +6,7 @@ Purpose: manage the multi-agent setup in the monorepo by keeping agent docs and 
 
 - `scripts/agents-check.ts`: validates agent docs/config consistency.
 - `scripts/agents-sync.ts`: syncs agent docs/config across the repo.
-- `scripts/format-changed-files.ts`: formats touched files based on `agents.config.ts`.
+- `scripts/format-changed-files.ts`: formats touched files from Claude Code hook JSON payloads via stdin.
 - `agents.config.ts`: configuration for agent tooling behavior.
 
 ## Sync targets
