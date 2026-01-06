@@ -11,11 +11,16 @@
 ## Tooling & commands
 
 - Node 24.12.0 (`.nvmrc`), pnpm 10.19.0 (see root `package.json`).
+- VS Code Copilot Chat uses `.vscode/settings.json` to load `.github/commit-message-instructions.md` for commit messages and `.github/pull-request-description-instructions.md` for PR descriptions.
 - Prefer Turbo tasks via pnpm:
   - `pnpm lint` → `turbo run lint --continue -- --cache --cache-location .cache/.eslintcache`
   - `pnpm typecheck` → `turbo run typecheck`
+  - `pnpm test` → `turbo run test`
+  - `pnpm agents:check` → `turbo run agents:check`
+  - `pnpm agents:sync` → `turbo run agents:sync`
   - `pnpm build` → `turbo run build`
   - `pnpm format` (Prettier with import sorting & Tailwind plugins)
+  - `pnpm format:check` (Prettier check without writes)
 - Dev server per app: `pnpm --filter web dev`.
 - When changing configs/scripts/workflows, update docs accordingly.
 

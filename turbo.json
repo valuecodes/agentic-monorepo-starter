@@ -23,6 +23,12 @@
     "clean": {
       "dependsOn": ["^clean"]
     },
+    "agents:check": {
+      "dependsOn": ["^agents:check"]
+    },
+    "agents:sync": {
+      "dependsOn": ["^agents:sync"]
+    },
     "dev": {
       "dependsOn": ["^dev"],
       "cache": false,

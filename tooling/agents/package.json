@@ -1,0 +1,23 @@
+{
+  "name": "@turborepo-agents/agents",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "agents:check": "tsx scripts/agents-check.ts",
+    "agents:sync": "tsx scripts/agents-sync.ts",
+    "format:changed-files": "tsx scripts/format-changed-files.ts",
+    "clean": "rm -rf .turbo node_modules .cache",
+    "format": "prettier --write .",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@turborepo-agents/eslint": "workspace:*",
+    "@turborepo-agents/prettier": "workspace:*",
+    "@turborepo-agents/typescript": "workspace:*",
+    "@types/node": "24.10.4",
+    "zx": "8.8.5",
+    "tsx": "4.21.0",
+    "typescript": "5.9.3"
+  },
+  "prettier": "@turborepo-agents/prettier"
+}

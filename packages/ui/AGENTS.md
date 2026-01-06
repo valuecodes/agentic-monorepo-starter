@@ -25,7 +25,7 @@ This directory inherits `/AGENTS.md`. This file lists only additions and overrid
 | Add component | `pnpm --filter @turborepo-agents/ui ui-add`    |
 | Clean         | `pnpm --filter @turborepo-agents/ui clean`     |
 
-Or run repo-wide via root `pnpm typecheck` / `pnpm lint`.
+Or run repo-wide via root `pnpm typecheck` / `pnpm lint` / `pnpm test`.
 
 ---
 

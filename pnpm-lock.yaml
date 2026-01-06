@@ -254,6 +254,30 @@ importers:
         specifier: 5.9.3
         version: 5.9.3
 
+  tooling/agents:
+    devDependencies:
+      '@turborepo-agents/eslint':
+        specifier: workspace:*
+        version: link:../eslint
+      '@turborepo-agents/prettier':
+        specifier: workspace:*
+        version: link:../prettier
+      '@turborepo-agents/typescript':
+        specifier: workspace:*
+        version: link:../typescript
+      '@types/node':
+        specifier: 24.10.4
+        version: 24.10.4
+      tsx:
+        specifier: 4.21.0
+        version: 4.21.0
+      typescript:
+        specifier: 5.9.3
+        version: 5.9.3
+      zx:
+        specifier: 8.8.5
+        version: 8.8.5
+
   tooling/eslint:
     dependencies:
       '@eslint/compat':

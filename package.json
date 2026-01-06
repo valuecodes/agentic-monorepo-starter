@@ -8,9 +8,12 @@
     "build": "turbo run build",
     "typecheck": "turbo run typecheck",
     "lint": "turbo run lint --continue -- --cache --cache-location .cache/.eslintcache",
-    "format": "prettier --write \"**/*.{ts,tsx,md,json,yaml,yml}\"",
-    "format-changed-files": "pnpm exec tsx scripts/format-changed-files.ts",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "format:changed-files": "pnpm exex tsx tooling/agents/scripts/format-changed-files.ts",
     "test": "turbo run test",
+    "agents:check": "turbo run agents:check",
+    "agents:sync": "turbo run agents:sync",
     "clean": "turbo run clean"
   },
   "devDependencies": {

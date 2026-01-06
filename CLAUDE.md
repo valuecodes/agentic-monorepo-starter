@@ -17,7 +17,7 @@ This is a Turborepo monorepo with three workspace categories:
 
 - **`apps/`** - Applications (web: Next.js 16.1.1 with App Router)
 - **`packages/`** - Shared libraries (ui: shadcn/ui component library with Radix primitives)
-- **`tooling/`** - Shared development configs (eslint, prettier, typescript, github)
+- **`tooling/`** - Shared development configs and agent tooling (eslint, prettier, typescript, github, agents)
 
 Workspace dependencies use the `workspace:*` protocol. All packages use the `@turborepo-agents/` scope.
 
@@ -31,8 +31,14 @@ pnpm --filter web dev           # Run Next.js dev server
 # Quality checks (run before pushing)
 pnpm typecheck                  # Type check all workspaces
 pnpm lint                       # Lint with ESLint (uses Turbo cache)
+pnpm test                       # Run tests across workspaces (when available)
 pnpm build                      # Build all workspaces
 pnpm format                     # Format with Prettier
+pnpm format:check               # Check formatting (no writes)
+
+# Agent tooling
+pnpm agents:check               # Check agent doc sync status
+pnpm agents:sync                # Sync agent docs across targets
 
 # Package-specific commands
 pnpm --filter <pkg> <command>   # Run command in specific workspace
@@ -46,7 +52,7 @@ pnpm clean                      # Remove build artifacts and node_modules
 
 - Apps: `web`
 - Packages: `@turborepo-agents/ui`
-- Tooling: `@turborepo-agents/eslint`, `@turborepo-agents/prettier`, `@turborepo-agents/typescript`, `@turborepo-agents/github`
+- Tooling: `@turborepo-agents/eslint`, `@turborepo-agents/prettier`, `@turborepo-agents/typescript`, `@turborepo-agents/github`, `@turborepo-agents/agents`
 
 ## Architecture
 
@@ -111,9 +117,14 @@ Export paths: `./components/*`, `./lib/*`, `./styles/*`, `./postcss-config`
 - Strict mode enabled
 - Exports: `./base`, `./react`, `./nextjs`, `./compiled-package`
 
+**Agents** (`@turborepo-agents/agents`):
+
+- Syncs and checks agent docs across the repo
+- Commands: `pnpm agents:check`, `pnpm agents:sync`
+
 ## Claude Code Hooks
 
-**Post-Edit Formatting**: After `Edit` or `Write` operations, Claude runs the configured hook from `.claude/settings.json`, which executes `pnpm format-changed-files` (backed by `scripts/format-changed-files.ts`) to run Prettier on modified files (ts, tsx, js, jsx, mjs, cjs, json, md, mdx, yaml, yml).
+**Post-Edit Formatting**: After `Edit` or `Write` operations, Claude runs the configured hook from `.claude/settings.json`, which executes `pnpm format:changed-files` (backed by `tooling/agents/scripts/format-changed-files.ts`) to run Prettier on modified files (ts, tsx, js, jsx, mjs, cjs, json, md, mdx, yaml, yml).
 
 **Permissions** (`.claude/settings.json`):
 
