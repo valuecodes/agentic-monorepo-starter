@@ -1,13 +1,13 @@
 ---
 name: frontend-ui
-description: UI/UX guidelines for app development in this Turborepo (apps/web and future apps). Use when designing or implementing app pages, layouts, navigation, or interactions with Tailwind and @turborepo-agents/ui components.
+description: UI/UX guidelines for app development in this Turborepo (apps/web and future apps). Use when designing or implementing app pages, layouts, navigation, or interactions with Tailwind and @repo/ui components.
 ---
 
 # Frontend UI (Apps)
 
 ## Overview
 
-Design and implement app UI/UX with consistent patterns, accessibility, and performance. Reuse shared components from `@turborepo-agents/ui`, keep the landing page lightweight, and follow App Router conventions.
+Design and implement app UI/UX with consistent patterns, accessibility, and performance. Reuse shared components from `@repo/ui`, keep the landing page lightweight, and follow App Router conventions.
 
 ## Scope and Boundaries
 
@@ -20,7 +20,7 @@ Design and implement app UI/UX with consistent patterns, accessibility, and perf
 
 1. Scan existing app layouts/components to preserve established patterns.
 2. Decide whether the UI should be shared (packages/ui) or app-specific.
-3. Build the UI using `@turborepo-agents/ui` components and Tailwind utilities.
+3. Build the UI using `@repo/ui` components and Tailwind utilities.
 4. Add or update local app components using the `~/` path alias.
 5. Validate UX details: hierarchy, spacing, responsive behavior, states, and a11y.
 6. Keep changes minimal and avoid new dependencies unless required; ask first.

@@ -19,7 +19,7 @@ This is a Turborepo monorepo with three workspace categories:
 - **`packages/`** - Shared libraries (ui: shadcn/ui component library with Radix primitives)
 - **`tooling/`** - Shared development configs and agent tooling (eslint, prettier, typescript, github, agents)
 
-Workspace dependencies use the `workspace:*` protocol. All packages use the `@turborepo-agents/` scope.
+Workspace dependencies use the `workspace:*` protocol. All packages use the `@repo/` scope.
 
 ## Common Commands
 
@@ -43,7 +43,7 @@ pnpm agents:sync                # Sync agent docs across targets
 
 # Package-specific commands
 pnpm --filter <pkg> <command>   # Run command in specific workspace
-pnpm --filter @turborepo-agents/ui ui-add  # Add shadcn component
+pnpm --filter @repo/ui ui-add  # Add shadcn component
 
 # Cleanup
 pnpm clean                      # Remove build artifacts and node_modules
@@ -52,8 +52,8 @@ pnpm clean                      # Remove build artifacts and node_modules
 **Workspace filters:**
 
 - Apps: `web`, `playground`
-- Packages: `@turborepo-agents/ui`
-- Tooling: `@turborepo-agents/eslint`, `@turborepo-agents/prettier`, `@turborepo-agents/typescript`, `@turborepo-agents/github`, `@turborepo-agents/agents`
+- Packages: `@repo/ui`
+- Tooling: `@repo/eslint`, `@repo/prettier`, `@repo/typescript`, `@repo/github`, `@repo/agents`
 
 ## Architecture
 
@@ -75,11 +75,11 @@ Defined in `turbo.json`:
 
 ### UI Package Exports
 
-The `@turborepo-agents/ui` package uses subpath exports:
+The `@repo/ui` package uses subpath exports:
 
 ```typescript
-import { Button } from "@turborepo-agents/ui/components/button";
-import { cn } from "@turborepo-agents/ui/lib/utils";
+import { Button } from "@repo/ui/components/button";
+import { cn } from "@repo/ui/lib/utils";
 ```
 
 Export paths: `./components/*`, `./lib/*`, `./styles/*`, `./postcss-config`
@@ -89,7 +89,7 @@ Export paths: `./components/*`, `./lib/*`, `./styles/*`, `./postcss-config`
 - Uses App Router (`src/app/`)
 - Path alias: `~/*` → `./src/*`
 - Tailwind CSS 4.x with PostCSS
-- Component library: `@turborepo-agents/ui`
+- Component library: `@repo/ui`
 
 ### Vite Configuration (playground app)
 
@@ -104,27 +104,27 @@ Export paths: `./components/*`, `./lib/*`, `./styles/*`, `./postcss-config`
 - Styling: Tailwind CSS + class-variance-authority (`cva`)
 - Icons: lucide-react
 - Form handling: react-hook-form + zod
-- Add components: `pnpm --filter @turborepo-agents/ui ui-add`
+- Add components: `pnpm --filter @repo/ui ui-add`
 
 ### Shared Tooling
 
-**ESLint** (`@turborepo-agents/eslint`):
+**ESLint** (`@repo/eslint`):
 
 - Flat config format
 - Exports: `./base`, `./react`, `./nextjs`
 - Plugins: typescript-eslint, turbo, react, jsx-a11y, import, next
 
-**Prettier** (`@turborepo-agents/prettier`):
+**Prettier** (`@repo/prettier`):
 
 - Auto-sorts imports (`@ianvs/prettier-plugin-sort-imports`)
 - Auto-sorts Tailwind classes (`prettier-plugin-tailwindcss`)
 
-**TypeScript** (`@turborepo-agents/typescript`):
+**TypeScript** (`@repo/typescript`):
 
 - Strict mode enabled
 - Exports: `./base`, `./react`, `./nextjs`, `./compiled-package`
 
-**Agents** (`@turborepo-agents/agents`):
+**Agents** (`@repo/agents`):
 
 - Syncs and checks agent docs across the repo
 - Commands: `pnpm agents:check`, `pnpm agents:sync`
@@ -186,7 +186,7 @@ The human controls all git operations.
 ## Adding New Workspaces
 
 1. Create in appropriate directory (`apps/`, `packages/`, or `tooling/`)
-2. Add `package.json` with correct name pattern (`@turborepo-agents/<name>`)
+2. Add `package.json` with correct name pattern (`@repo/<name>`)
 3. Add to Turbo pipeline in `turbo.json` if needed
 4. Update AGENTS.md structure table
 5. For tooling packages, add export paths for configs

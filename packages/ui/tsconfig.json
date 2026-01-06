@@ -1,5 +1,5 @@
 {
-  "extends": "@turborepo-agents/typescript/react.json",
+  "extends": "@repo/typescript/react.json",
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {

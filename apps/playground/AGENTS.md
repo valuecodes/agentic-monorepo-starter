@@ -7,7 +7,7 @@ This directory inherits `/AGENTS.md`. This file lists only additions and overrid
 ## What This Workspace Is
 
 - Vite 7 + React 19 playground for fast UI experiments.
-- Tailwind CSS 4 with shared `@turborepo-agents/ui` components and theme.
+- Tailwind CSS 4 with shared `@repo/ui` components and theme.
 - Single-page app rendered from `src/home.tsx`.
 
 ---
@@ -45,8 +45,8 @@ Or run repo-wide via root `pnpm typecheck` / `pnpm lint` / `pnpm test` / `pnpm b
 Import UI components using subpath exports:
 
 ```ts
-import { Button } from "@turborepo-agents/ui/components/button";
-import { cn } from "@turborepo-agents/ui/lib/utils";
+import { Button } from "@repo/ui/components/button";
+import { cn } from "@repo/ui/lib/utils";
 ```
 
 ### Vite Notes

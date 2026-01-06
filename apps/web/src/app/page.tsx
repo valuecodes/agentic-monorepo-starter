@@ -1,14 +1,14 @@
-import { Badge } from "@turborepo-agents/ui/components/badge";
-import { Button } from "@turborepo-agents/ui/components/button";
+import { Badge } from "@repo/ui/components/badge";
+import { Button } from "@repo/ui/components/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@turborepo-agents/ui/components/card";
-import { Input } from "@turborepo-agents/ui/components/input";
-import { Label } from "@turborepo-agents/ui/components/label";
+} from "@repo/ui/components/card";
+import { Input } from "@repo/ui/components/input";
+import { Label } from "@repo/ui/components/label";
 
 const Home = () => {
   return (
@@ -16,14 +16,14 @@ const Home = () => {
       <main className="mx-auto flex w-full max-w-4xl flex-col gap-10 px-6 py-16 sm:py-20">
         <header className="flex flex-col gap-5">
           <Badge variant="secondary" className="w-fit">
-            Turborepo Agents
+            Agentic Starter
           </Badge>
           <div className="space-y-3">
             <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
               Let agents handle the monorepo busywork.
             </h1>
             <p className="text-muted-foreground max-w-2xl text-base sm:text-lg">
-              Turborepo Agents plan, execute, and report on tasks across your
+              Agentic workflows plan, execute, and report on tasks across your
               Turbo pipelines so your team can ship faster with confidence.
             </p>
           </div>
@@ -79,12 +79,8 @@ const Home = () => {
           <CardContent>
             <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-end">
               <div className="flex-1 space-y-2">
-                <Label htmlFor="turborepo-agents-email">Work email</Label>
-                <Input
-                  id="turborepo-agents-email"
-                  type="email"
-                  placeholder="you@company.com"
-                />
+                <Label>Work email</Label>
+                <Input type="email" placeholder="you@company.com" />
               </div>
               <Button className="sm:min-w-40">Join updates</Button>
             </div>

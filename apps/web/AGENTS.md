@@ -8,7 +8,7 @@ This directory inherits `/AGENTS.md`. This file lists only additions and overrid
 
 - **Next.js 16.1.1** landing page / demo application using React 19
 - Uses **App Router** (`src/app/`) — no Pages Router
-- Styled with **Tailwind CSS 4.x** and `@turborepo-agents/ui` components
+- Styled with **Tailwind CSS 4.x** and `@repo/ui` components
 - Fonts: Geist Sans and Geist Mono via `next/font/google`
 - Landing page focus: keep it fast and lightweight
 
@@ -45,13 +45,9 @@ Or run repo-wide via root `pnpm typecheck` / `pnpm lint` / `pnpm test` / `pnpm b
 Import components using subpath exports (not barrel imports):
 
 ```typescript
-import { Button } from "@turborepo-agents/ui/components/button";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-} from "@turborepo-agents/ui/components/card";
-import { cn } from "@turborepo-agents/ui/lib/utils";
+import { Button } from "@repo/ui/components/button";
+import { Card, CardHeader, CardTitle } from "@repo/ui/components/card";
+import { cn } from "@repo/ui/lib/utils";
 ```
 
 ### CSS Setup
@@ -59,7 +55,7 @@ import { cn } from "@turborepo-agents/ui/lib/utils";
 `src/app/globals.css` already imports:
 
 - Tailwind base: `@import "tailwindcss";`
-- UI theme: `@import "@turborepo-agents/ui/styles/default.css";`
+- UI theme: `@import "@repo/ui/styles/default.css";`
 - Source paths for Tailwind to scan both local and UI package files
 
 Do not duplicate these imports in other CSS files.
@@ -83,13 +79,13 @@ Do not duplicate these imports in other CSS files.
 
 ## Footguns / Gotchas
 
-1. **Don't import from `@turborepo-agents/ui` barrel** — always use subpath imports (e.g., `/components/button`), otherwise bundling breaks.
+1. **Don't import from `@repo/ui` barrel** — always use subpath imports (e.g., `/components/button`), otherwise bundling breaks.
 
 2. **TypeScript build errors are ignored** — `next.config.ts` sets `ignoreBuildErrors: true` because CI runs typecheck separately. Always run `pnpm --filter web typecheck` before pushing.
 
 3. **Tailwind content scanning** — if you add new component directories, ensure they're covered by `@source` directives in `globals.css`.
 
-4. **`transpilePackages`** — `@turborepo-agents/ui` is transpiled by Next.js. If you add another workspace dependency, add it to `next.config.ts`.
+4. **`transpilePackages`** — `@repo/ui` is transpiled by Next.js. If you add another workspace dependency, add it to `next.config.ts`.
 
 5. **Clean command uses `rm -rf`** — runs on Unix. On Windows, use `pnpm --filter web clean` through pnpm which handles cross-platform execution.
 

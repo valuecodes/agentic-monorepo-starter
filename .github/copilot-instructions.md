@@ -29,7 +29,7 @@
 - TypeScript strict; avoid `any`; use explicit types at module boundaries and `import type` where appropriate.
 - UI follows shadcn/Radix conventions; style with Tailwind; lucide-react icons.
 - Next.js app router under `src/app`; path alias `~/*` → `./src/*`.
-- For UI package imports use subpaths, e.g. `@turborepo-agents/ui/components/button` and `@turborepo-agents/ui/lib/utils`.
+- For UI package imports use subpaths, e.g. `@repo/ui/components/button` and `@repo/ui/lib/utils`.
 - Keep changes minimal and scoped; add dependencies only when necessary and to the correct workspace package.
 
 ## Output expectations (when proposing changes)

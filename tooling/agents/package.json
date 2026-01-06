@@ -1,5 +1,5 @@
 {
-  "name": "@turborepo-agents/agents",
+  "name": "@repo/agents",
   "private": true,
   "type": "module",
   "scripts": {
@@ -11,13 +11,13 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@turborepo-agents/eslint": "workspace:*",
-    "@turborepo-agents/prettier": "workspace:*",
-    "@turborepo-agents/typescript": "workspace:*",
+    "@repo/eslint": "workspace:*",
+    "@repo/prettier": "workspace:*",
+    "@repo/typescript": "workspace:*",
     "@types/node": "24.10.4",
     "zx": "8.8.5",
     "tsx": "4.21.0",
     "typescript": "5.9.3"
   },
-  "prettier": "@turborepo-agents/prettier"
+  "prettier": "@repo/prettier"
 }

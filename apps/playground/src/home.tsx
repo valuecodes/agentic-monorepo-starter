@@ -1,11 +1,11 @@
-import { Badge } from "@turborepo-agents/ui/components/badge";
-import { Button } from "@turborepo-agents/ui/components/button";
+import { Badge } from "@repo/ui/components/badge";
+import { Button } from "@repo/ui/components/button";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from "@turborepo-agents/ui/components/card";
+} from "@repo/ui/components/card";
 
 export const Home = () => {
   return (

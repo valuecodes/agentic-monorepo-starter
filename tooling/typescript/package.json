@@ -1,5 +1,5 @@
 {
-  "name": "@turborepo-agents/typescript",
+  "name": "@repo/typescript",
   "version": "1.0.0",
   "private": true,
   "files": [

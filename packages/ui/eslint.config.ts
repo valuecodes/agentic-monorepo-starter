@@ -1,5 +1,5 @@
-import { baseConfig } from "@turborepo-agents/eslint/base";
-import { reactConfig } from "@turborepo-agents/eslint/react";
+import { baseConfig } from "@repo/eslint/base";
+import { reactConfig } from "@repo/eslint/react";
 import { defineConfig } from "eslint/config";
 
 export default defineConfig(

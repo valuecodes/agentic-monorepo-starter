@@ -1,4 +1,4 @@
-# Turborepo Agents Starter
+# Agentic Monorepo Starter
 
 Monorepo starter for building agent-friendly web apps (Next.js + Vite) with preconfigured tooling, shared UI, and repo-level AI settings.
 
@@ -6,7 +6,7 @@ Monorepo starter for building agent-friendly web apps (Next.js + Vite) with prec
 
 - Next.js app in `apps/web` (App Router, alias `~/*`)
 - Vite playground in `apps/playground` (React 19, Tailwind CSS 4)
-- Shared UI package `@turborepo-agents/ui` (shadcn/Radix/Tailwind)
+- Shared UI package `@repo/ui` (shadcn/Radix/Tailwind)
 - Shared configs: ESLint, Prettier (import + Tailwind sorting), TypeScript, Turbo
 - Agent tooling in `tooling/agents` (sync/check agent docs)
 - AI agent settings in `.claude/`, `.codex/`, `.cursor/`, and `.github/`

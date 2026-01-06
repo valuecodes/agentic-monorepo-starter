@@ -1,5 +1,5 @@
 {
-  "name": "@turborepo-agents/ui",
+  "name": "@repo/ui",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -64,9 +64,9 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "4.1.17",
-    "@turborepo-agents/eslint": "workspace:*",
-    "@turborepo-agents/prettier": "workspace:*",
-    "@turborepo-agents/typescript": "workspace:*",
+    "@repo/eslint": "workspace:*",
+    "@repo/prettier": "workspace:*",
+    "@repo/typescript": "workspace:*",
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
     "eslint": "9.39.1",

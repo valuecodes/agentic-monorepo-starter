@@ -14,15 +14,15 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@turborepo-agents/ui": "workspace:*",
+    "@repo/ui": "workspace:*",
     "react": "19.2.3",
     "react-dom": "19.2.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "4.1.17",
-    "@turborepo-agents/eslint": "workspace:*",
-    "@turborepo-agents/prettier": "workspace:*",
-    "@turborepo-agents/typescript": "workspace:*",
+    "@repo/eslint": "workspace:*",
+    "@repo/prettier": "workspace:*",
+    "@repo/typescript": "workspace:*",
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
     "@vitejs/plugin-react": "5.1.1",

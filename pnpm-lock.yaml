@@ -11,7 +11,7 @@ importers:
       '@ianvs/prettier-plugin-sort-imports':
         specifier: 4.7.0
         version: 4.7.0(prettier@3.7.4)
-      '@turborepo-agents/prettier':
+      '@repo/prettier':
         specifier: workspace:*
         version: link:tooling/prettier
       '@types/node':
@@ -38,7 +38,7 @@ importers:
 
   apps/playground:
     dependencies:
-      '@turborepo-agents/ui':
+      '@repo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       react:
@@ -48,18 +48,18 @@ importers:
         specifier: 19.2.3
         version: 19.2.3(react@19.2.3)
     devDependencies:
+      '@repo/eslint':
+        specifier: workspace:*
+        version: link:../../tooling/eslint
+      '@repo/prettier':
+        specifier: workspace:*
+        version: link:../../tooling/prettier
+      '@repo/typescript':
+        specifier: workspace:*
+        version: link:../../tooling/typescript
       '@tailwindcss/postcss':
         specifier: 4.1.17
         version: 4.1.17
-      '@turborepo-agents/eslint':
-        specifier: workspace:*
-        version: link:../../tooling/eslint
-      '@turborepo-agents/prettier':
-        specifier: workspace:*
-        version: link:../../tooling/prettier
-      '@turborepo-agents/typescript':
-        specifier: workspace:*
-        version: link:../../tooling/typescript
       '@types/react':
         specifier: 19.2.7
         version: 19.2.7
@@ -93,7 +93,7 @@ importers:
 
   apps/web:
     dependencies:
-      '@turborepo-agents/ui':
+      '@repo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       next:
@@ -106,18 +106,18 @@ importers:
         specifier: 19.2.3
         version: 19.2.3(react@19.2.3)
     devDependencies:
+      '@repo/eslint':
+        specifier: workspace:*
+        version: link:../../tooling/eslint
+      '@repo/prettier':
+        specifier: workspace:*
+        version: link:../../tooling/prettier
+      '@repo/typescript':
+        specifier: workspace:*
+        version: link:../../tooling/typescript
       '@tailwindcss/postcss':
         specifier: 4.1.17
         version: 4.1.17
-      '@turborepo-agents/eslint':
-        specifier: workspace:*
-        version: link:../../tooling/eslint
-      '@turborepo-agents/prettier':
-        specifier: workspace:*
-        version: link:../../tooling/prettier
-      '@turborepo-agents/typescript':
-        specifier: workspace:*
-        version: link:../../tooling/typescript
       '@types/node':
         specifier: 24.10.4
         version: 24.10.4
@@ -278,18 +278,18 @@ importers:
         specifier: 4.3.4
         version: 4.3.4
     devDependencies:
+      '@repo/eslint':
+        specifier: workspace:*
+        version: link:../../tooling/eslint
+      '@repo/prettier':
+        specifier: workspace:*
+        version: link:../../tooling/prettier
+      '@repo/typescript':
+        specifier: workspace:*
+        version: link:../../tooling/typescript
       '@tailwindcss/postcss':
         specifier: 4.1.17
         version: 4.1.17
-      '@turborepo-agents/eslint':
-        specifier: workspace:*
-        version: link:../../tooling/eslint
-      '@turborepo-agents/prettier':
-        specifier: workspace:*
-        version: link:../../tooling/prettier
-      '@turborepo-agents/typescript':
-        specifier: workspace:*
-        version: link:../../tooling/typescript
       '@types/react':
         specifier: 19.2.7
         version: 19.2.7
@@ -311,13 +311,13 @@ importers:
 
   tooling/agents:
     devDependencies:
-      '@turborepo-agents/eslint':
+      '@repo/eslint':
         specifier: workspace:*
         version: link:../eslint
-      '@turborepo-agents/prettier':
+      '@repo/prettier':
         specifier: workspace:*
         version: link:../prettier
-      '@turborepo-agents/typescript':
+      '@repo/typescript':
         specifier: workspace:*
         version: link:../typescript
       '@types/node':
@@ -366,10 +366,10 @@ importers:
         specifier: 8.46.4
         version: 8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3)
     devDependencies:
-      '@turborepo-agents/prettier':
+      '@repo/prettier':
         specifier: workspace:*
         version: link:../prettier
-      '@turborepo-agents/typescript':
+      '@repo/typescript':
         specifier: workspace:*
         version: link:../typescript
       '@types/node':
@@ -392,7 +392,7 @@ importers:
       '@ianvs/prettier-plugin-sort-imports':
         specifier: 4.7.0
         version: 4.7.0(prettier@3.7.4)
-      '@turborepo-agents/typescript':
+      '@repo/typescript':
         specifier: workspace:*
         version: link:../typescript
       '@types/node':

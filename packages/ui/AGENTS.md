@@ -17,13 +17,13 @@ This directory inherits `/AGENTS.md`. This file lists only additions and overrid
 
 ## Workspace Commands
 
-| Task          | Command                                        |
-| ------------- | ---------------------------------------------- |
-| Lint          | `pnpm --filter @turborepo-agents/ui lint`      |
-| Format        | `pnpm --filter @turborepo-agents/ui format`    |
-| Typecheck     | `pnpm --filter @turborepo-agents/ui typecheck` |
-| Add component | `pnpm --filter @turborepo-agents/ui ui-add`    |
-| Clean         | `pnpm --filter @turborepo-agents/ui clean`     |
+| Task          | Command                            |
+| ------------- | ---------------------------------- |
+| Lint          | `pnpm --filter @repo/ui lint`      |
+| Format        | `pnpm --filter @repo/ui format`    |
+| Typecheck     | `pnpm --filter @repo/ui typecheck` |
+| Add component | `pnpm --filter @repo/ui ui-add`    |
+| Clean         | `pnpm --filter @repo/ui clean`     |
 
 Or run repo-wide via root `pnpm typecheck` / `pnpm lint` / `pnpm test`.
 
@@ -37,14 +37,14 @@ This package uses **subpath exports** — no barrel file. Consumers import direc
 
 ```typescript
 // Components
-import { Button } from "@turborepo-agents/ui/components/button";
-import { Card, CardHeader, CardTitle } from "@turborepo-agents/ui/components/card";
+import { Button } from "@repo/ui/components/button";
+import { Card, CardHeader, CardTitle } from "@repo/ui/components/card";
 
 // Utilities
-import { cn } from "@turborepo-agents/ui/lib/utils";
+import { cn } from "@repo/ui/lib/utils";
 
 // Styles (in app's CSS)
-@import "@turborepo-agents/ui/styles/default.css";
+@import "@repo/ui/styles/default.css";
 ```
 
 ### Adding New Components
@@ -52,7 +52,7 @@ import { cn } from "@turborepo-agents/ui/lib/utils";
 Use the shadcn CLI to add components:
 
 ```bash
-pnpm --filter @turborepo-agents/ui ui-add
+pnpm --filter @repo/ui ui-add
 ```
 
 This runs `shadcn@latest add` interactively and auto-formats with Prettier.
@@ -119,7 +119,7 @@ Do not use the package name for internal imports.
 
 3. **RSC is disabled** — `components.json` sets `rsc: false`. All components are client components by design.
 
-4. **Relative imports internally** — use `../lib/utils`, not `@turborepo-agents/ui/lib/utils` inside this package.
+4. **Relative imports internally** — use `../lib/utils`, not `@repo/ui/lib/utils` inside this package.
 
 5. **Run `ui-add` not raw shadcn** — the `ui-add` script includes auto-formatting. Running `shadcn add` directly may leave unformatted code.
 

@@ -29,19 +29,19 @@ Guidelines for AI agents and contributors working in this Turborepo monorepo.
 
 ### Packages (`packages/`)
 
-| Name | Filter                 | Description                                                 |
-| ---- | ---------------------- | ----------------------------------------------------------- |
-| ui   | `@turborepo-agents/ui` | React component library (shadcn/ui style, Radix primitives) |
+| Name | Filter     | Description                                                 |
+| ---- | ---------- | ----------------------------------------------------------- |
+| ui   | `@repo/ui` | React component library (shadcn/ui style, Radix primitives) |
 
 ### Tooling (`tooling/`)
 
-| Name       | Filter                         | Description                                                       |
-| ---------- | ------------------------------ | ----------------------------------------------------------------- |
-| eslint     | `@turborepo-agents/eslint`     | Shared ESLint flat configs (base, react, nextjs)                  |
-| prettier   | `@turborepo-agents/prettier`   | Shared Prettier config with import sorting and Tailwind plugins   |
-| typescript | `@turborepo-agents/typescript` | Shared TypeScript configs (base, react, nextjs, compiled-package) |
-| github     | `@turborepo-agents/github`     | GitHub Actions composite setup action                             |
-| agents     | `@turborepo-agents/agents`     | Agent doc sync/check scripts                                      |
+| Name       | Filter             | Description                                                       |
+| ---------- | ------------------ | ----------------------------------------------------------------- |
+| eslint     | `@repo/eslint`     | Shared ESLint flat configs (base, react, nextjs)                  |
+| prettier   | `@repo/prettier`   | Shared Prettier config with import sorting and Tailwind plugins   |
+| typescript | `@repo/typescript` | Shared TypeScript configs (base, react, nextjs, compiled-package) |
+| github     | `@repo/github`     | GitHub Actions composite setup action                             |
+| agents     | `@repo/agents`     | Agent doc sync/check scripts                                      |
 
 ---
 
@@ -98,7 +98,7 @@ pnpm format:check              # Check formatting (no writes)
 pnpm --filter <pkg> format     # Format specific package
 ```
 
-Uses shared config from `@turborepo-agents/prettier` with plugins:
+Uses shared config from `@repo/prettier` with plugins:
 
 - `@ianvs/prettier-plugin-sort-imports` - auto-sorts imports
 - `prettier-plugin-tailwindcss` - sorts Tailwind classes
@@ -153,7 +153,7 @@ Use `workspace:*` for internal package references:
 ```json
 {
   "dependencies": {
-    "@turborepo-agents/ui": "workspace:*"
+    "@repo/ui": "workspace:*"
   }
 }
 ```
@@ -163,8 +163,8 @@ Use `workspace:*` for internal package references:
 Import UI components using the subpath pattern:
 
 ```typescript
-import { Button } from "@turborepo-agents/ui/components/button";
-import { cn } from "@turborepo-agents/ui/lib/utils";
+import { Button } from "@repo/ui/components/button";
+import { cn } from "@repo/ui/lib/utils";
 ```
 
 ---
@@ -188,7 +188,7 @@ import { cn } from "@turborepo-agents/ui/lib/utils";
 ### Adding New UI Components
 
 ```bash
-pnpm --filter @turborepo-agents/ui ui-add
+pnpm --filter @repo/ui ui-add
 ```
 
 This runs `shadcn@latest add` and auto-formats.
@@ -295,13 +295,13 @@ pnpm --filter web <command>
 pnpm --filter playground <command>
 
 # Packages
-pnpm --filter @turborepo-agents/ui <command>
+pnpm --filter @repo/ui <command>
 
 # Tooling
-pnpm --filter @turborepo-agents/eslint <command>
-pnpm --filter @turborepo-agents/prettier <command>
-pnpm --filter @turborepo-agents/typescript <command>
-pnpm --filter @turborepo-agents/agents <command>
+pnpm --filter @repo/eslint <command>
+pnpm --filter @repo/prettier <command>
+pnpm --filter @repo/typescript <command>
+pnpm --filter @repo/agents <command>
 ```
 
 ---

@@ -1,4 +1,4 @@
-# @turborepo-agents/agents
+# @repo/agents
 
 Purpose: manage the multi-agent setup in the monorepo by keeping agent docs and configs consistent and formatting changed files.
 
@@ -20,5 +20,5 @@ Run these from the repo root:
 ```bash
 pnpm agents:check
 pnpm agents:sync
-pnpm --filter @turborepo-agents/agents format:changed-files
+pnpm --filter @repo/agents format:changed-files
 ```

@@ -5,7 +5,7 @@ Vite + React playground for experimenting with UI and agent workflows in this mo
 ## Stack
 
 - Vite 7 + React 19
-- Tailwind CSS 4 with `@turborepo-agents/ui` theme
+- Tailwind CSS 4 with `@repo/ui` theme
 - Vitest for unit tests
 
 ## Getting started
@@ -37,6 +37,6 @@ Open http://localhost:3001 to view the app.
 Use subpath exports from the UI package:
 
 ```ts
-import { Button } from "@turborepo-agents/ui/components/button";
-import { cn } from "@turborepo-agents/ui/lib/utils";
+import { Button } from "@repo/ui/components/button";
+import { cn } from "@repo/ui/lib/utils";
 ```
