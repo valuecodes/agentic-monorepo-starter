@@ -47,6 +47,24 @@ jobs:
       - name: Lint
         run: pnpm lint
 
+  format-check:
+    name: format-check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Setup
+        uses: ./tooling/github/setup
+
+      - name: Format check
+        run: pnpm format:check
+
   test:
     name: test
     runs-on: ubuntu-latest
