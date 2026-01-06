@@ -1,5 +1,8 @@
 #!/usr/bin/env npx tsx
 import { existsSync } from "node:fs";
+
+import config from "../agents.config";
+import type { CheckResult } from "../src/types";
 import {
   applyTransforms,
   buildContext,
@@ -10,9 +13,7 @@ import {
   log,
   readFileNormalized,
   resolveGlobs,
-} from "../src/utils.js";
-import type { CheckResult } from "../src/types.js";
-import config from "../agents.config.js";
+} from "../src/utils";
 
 async function main(): Promise<void> {
   log("Checking agents sync status...");
@@ -41,21 +42,39 @@ async function main(): Promise<void> {
 
       // Process each source file
       for (const sourcePath of sourceFiles) {
-        const targetPath = computeTargetPath(sourcePath, targetConfig.dir, repoRoot, packageRoot);
+        const targetPath = computeTargetPath(
+          sourcePath,
+          targetConfig.dir,
+          repoRoot,
+          packageRoot
+        );
 
-        const context = buildContext(sourcePath, targetPath, targetKey, repoRoot);
+        const context = buildContext(
+          sourcePath,
+          targetPath,
+          targetKey,
+          repoRoot
+        );
 
         // Read and transform source content (expected content)
         let expectedContent = readFileNormalized(sourcePath);
 
         // Apply global transforms first
         if (config.globalTransforms) {
-          expectedContent = applyTransforms(expectedContent, config.globalTransforms, context);
+          expectedContent = applyTransforms(
+            expectedContent,
+            config.globalTransforms,
+            context
+          );
         }
 
         // Apply source-specific transforms
         if (source.transforms) {
-          expectedContent = applyTransforms(expectedContent, source.transforms, context);
+          expectedContent = applyTransforms(
+            expectedContent,
+            source.transforms,
+            context
+          );
         }
 
         // Check target file

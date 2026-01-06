@@ -34,6 +34,7 @@ pnpm lint                       # Lint with ESLint (uses Turbo cache)
 pnpm test                       # Run tests across workspaces (when available)
 pnpm build                      # Build all workspaces
 pnpm format                     # Format with Prettier
+pnpm format:check               # Check formatting (no writes)
 
 # Agent tooling
 pnpm agents:check               # Check agent doc sync status

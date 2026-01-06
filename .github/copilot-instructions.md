@@ -19,6 +19,7 @@
   - `pnpm agents:sync` → `turbo run agents:sync`
   - `pnpm build` → `turbo run build`
   - `pnpm format` (Prettier with import sorting & Tailwind plugins)
+  - `pnpm format:check` (Prettier check without writes)
 - Dev server per app: `pnpm --filter web dev`.
 - When changing configs/scripts/workflows, update docs accordingly.
 

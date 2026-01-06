@@ -2,7 +2,8 @@ import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, extname, join, relative, resolve } from "node:path";
 import { glob } from "zx";
-import type { TransformContext, TransformFn } from "./types.js";
+
+import type { TransformContext, TransformFn } from "./types";
 
 /** Logging utility - writes to stderr with prefix */
 export const log = (msg: string) => console.error(`[agents-sync] ${msg}`);
@@ -51,13 +52,19 @@ export function contentsEqual(a: string, b: string): boolean {
 export function applyTransforms(
   content: string,
   transforms: TransformFn[],
-  context: TransformContext,
+  context: TransformContext
 ): string {
-  return transforms.reduce((acc, transform) => transform(acc, context), content);
+  return transforms.reduce(
+    (acc, transform) => transform(acc, context),
+    content
+  );
 }
 
 /** Resolve glob patterns and return sorted file paths */
-export async function resolveGlobs(patterns: string[], cwd: string): Promise<string[]> {
+export async function resolveGlobs(
+  patterns: string[],
+  cwd: string
+): Promise<string[]> {
   const files = new Set<string>();
   for (const pattern of patterns) {
     const matches = await glob(pattern, { cwd, absolute: true });
@@ -74,7 +81,7 @@ export function buildContext(
   sourcePath: string,
   targetPath: string,
   targetKey: string,
-  repoRoot: string,
+  repoRoot: string
 ): TransformContext {
   return {
     sourcePath,
@@ -99,7 +106,7 @@ export function computeTargetPath(
   sourcePath: string,
   targetDir: string,
   repoRoot: string,
-  packageRoot: string,
+  packageRoot: string
 ): string {
   // Get the relative path from src/skills/
   const skillsDir = join(packageRoot, "src", "skills");

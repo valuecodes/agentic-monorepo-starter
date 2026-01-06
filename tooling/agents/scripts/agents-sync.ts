@@ -1,5 +1,8 @@
 #!/usr/bin/env npx tsx
 import { existsSync } from "node:fs";
+
+import config from "../agents.config";
+import type { SyncResult } from "../src/types";
 import {
   applyTransforms,
   buildContext,
@@ -11,9 +14,7 @@ import {
   readFileNormalized,
   resolveGlobs,
   writeFileSafe,
-} from "../src/utils.js";
-import type { SyncResult } from "../src/types.js";
-import config from "../agents.config.js";
+} from "../src/utils";
 
 async function main(): Promise<void> {
   log("Starting agents sync...");
@@ -32,7 +33,9 @@ async function main(): Promise<void> {
       continue;
     }
 
-    log(`Found ${sourceFiles.length} source file(s) for patterns: ${source.patterns.join(", ")}`);
+    log(
+      `Found ${sourceFiles.length} source file(s) for patterns: ${source.patterns.join(", ")}`
+    );
 
     // Process each target
     for (const [targetKey, targetConfig] of Object.entries(source.targets)) {
@@ -47,21 +50,39 @@ async function main(): Promise<void> {
 
       // Process each source file
       for (const sourcePath of sourceFiles) {
-        const targetPath = computeTargetPath(sourcePath, targetConfig.dir, repoRoot, packageRoot);
+        const targetPath = computeTargetPath(
+          sourcePath,
+          targetConfig.dir,
+          repoRoot,
+          packageRoot
+        );
 
-        const context = buildContext(sourcePath, targetPath, targetKey, repoRoot);
+        const context = buildContext(
+          sourcePath,
+          targetPath,
+          targetKey,
+          repoRoot
+        );
 
         // Read and transform source content
         let sourceContent = readFileNormalized(sourcePath);
 
         // Apply global transforms first
         if (config.globalTransforms) {
-          sourceContent = applyTransforms(sourceContent, config.globalTransforms, context);
+          sourceContent = applyTransforms(
+            sourceContent,
+            config.globalTransforms,
+            context
+          );
         }
 
         // Apply source-specific transforms
         if (source.transforms) {
-          sourceContent = applyTransforms(sourceContent, source.transforms, context);
+          sourceContent = applyTransforms(
+            sourceContent,
+            source.transforms,
+            context
+          );
         }
 
         // Check if target exists and compare
@@ -92,7 +113,8 @@ async function main(): Promise<void> {
             log(`  Unchanged: ${context.targetRelative}`);
           } else {
             // Target differs - warn but overwrite
-            const warning = "Target file had local modifications that were overwritten";
+            const warning =
+              "Target file had local modifications that were overwritten";
             writeFileSafe(targetPath, sourceContent);
             result = {
               sourcePath: context.sourceRelative,

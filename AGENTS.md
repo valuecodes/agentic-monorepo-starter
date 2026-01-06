@@ -93,13 +93,16 @@ Runs: `turbo run build`
 
 ```bash
 pnpm format                    # Format entire repo
+pnpm format:check              # Check formatting (no writes)
 pnpm --filter <pkg> format     # Format specific package
 ```
 
 Uses shared config from `@turborepo-agents/prettier` with plugins:
 
-- `@ianvs/prettier-plugin-sort-imports` — auto-sorts imports
-- `prettier-plugin-tailwindcss` — sorts Tailwind classes
+- `@ianvs/prettier-plugin-sort-imports` - auto-sorts imports
+- `prettier-plugin-tailwindcss` - sorts Tailwind classes
+
+Use `pnpm format:check` to verify formatting without modifying files.
 
 ### Dev (per app)
 
@@ -220,6 +223,7 @@ Before pushing, run locally:
 pnpm typecheck   # Must pass
 pnpm lint        # Must pass
 pnpm format      # Recommended
+pnpm format:check # Optional (no writes)
 ```
 
 ### Done When
@@ -303,6 +307,7 @@ pnpm --filter @turborepo-agents/agents <command>
 | Test all      | `pnpm test`             |
 | Build all     | `pnpm build`            |
 | Format code   | `pnpm format`           |
+| Format check  | `pnpm format:check`     |
 | Agents check  | `pnpm agents:check`     |
 | Agents sync   | `pnpm agents:sync`      |
 | Clean all     | `pnpm clean`            |

@@ -29,6 +29,7 @@ pnpm --filter web dev
 - Test: `pnpm test`
 - Build: `pnpm build`
 - Format: `pnpm format`
+- Format check: `pnpm format:check`
 - Agents check: `pnpm agents:check`
 - Agents sync: `pnpm agents:sync`
 
@@ -36,19 +37,19 @@ pnpm --filter web dev
 
 - Codex CLI helpers live under `.codex/` (skills for frontend and CI verification).
 - Follow `AGENTS.md` for workflow rules (no git ops, keep diffs focused, no secrets).
-- Default verification commands: `pnpm typecheck`, `pnpm lint`, `pnpm test` (when tests exist), `pnpm format` when needed.
+- Default verification commands: `pnpm typecheck`, `pnpm lint`, `pnpm test` (when tests exist), `pnpm format` or `pnpm format:check` when needed.
 
 ## Working with Claude Code
 
 - Agent settings are in `.claude/settings.json` (hook and permission config).
 - Post-tool hook runs `pnpm format:changed-files`, which uses `tooling/agents/scripts/format-changed-files.ts` to Prettier-format touched files with supported extensions.
-- Use the same verification flow as Codex: `pnpm typecheck`, `pnpm lint`, `pnpm test` (when tests exist), `pnpm format` when relevant.
+- Use the same verification flow as Codex: `pnpm typecheck`, `pnpm lint`, `pnpm test` (when tests exist), `pnpm format` or `pnpm format:check` when relevant.
 
 ## Working with GitHub Copilot
 
 - Repo-wide and workflow guidance: `.github/copilot-instructions.md`.
 - Copilot should respect `AGENTS.md`: import boundaries, no secrets, no git operations, and focused diffs without new tooling unless discussed.
-- Prefer pnpm+Turbo commands (`pnpm lint`, `pnpm typecheck`, `pnpm test`, `pnpm build`, `pnpm format`) and include files touched plus validation commands in proposals.
+- Prefer pnpm+Turbo commands (`pnpm lint`, `pnpm typecheck`, `pnpm test`, `pnpm build`, `pnpm format`, `pnpm format:check`) and include files touched plus validation commands in proposals.
 
 ## Repo conventions (see AGENTS.md for full contract)
 
