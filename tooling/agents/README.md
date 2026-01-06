@@ -9,6 +9,10 @@ Purpose: manage the multi-agent setup in the monorepo by keeping agent docs and 
 - `scripts/format-changed-files.ts`: formats touched files based on `agents.config.ts`.
 - `agents.config.ts`: configuration for agent tooling behavior.
 
+## Sync targets
+
+Agent skills are synced from `tooling/agents/src/skills` into `.claude/skills`, `.codex/skills`, and `.cursor/skills` based on `agents.config.ts`.
+
 ## Common commands
 
 Run these from the repo root:

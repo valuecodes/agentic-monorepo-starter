@@ -8,7 +8,7 @@ Monorepo starter for building agent-friendly Next.js apps with preconfigured too
 - Shared UI package `@turborepo-agents/ui` (shadcn/Radix/Tailwind)
 - Shared configs: ESLint, Prettier (import + Tailwind sorting), TypeScript, Turbo
 - Agent tooling in `tooling/agents` (sync/check agent docs)
-- AI agent settings in `.claude/`, `.codex/`, and `.github/`
+- AI agent settings in `.claude/`, `.codex/`, `.cursor/`, and `.github/`
 
 ## Prerequisites
 
@@ -43,6 +43,11 @@ pnpm --filter web dev
 
 - Agent settings are in `.claude/settings.json` (hook and permission config).
 - Post-tool hook runs `pnpm format:changed-files`, which uses `tooling/agents/scripts/format-changed-files.ts` to Prettier-format touched files with supported extensions.
+- Use the same verification flow as Codex: `pnpm typecheck`, `pnpm lint`, `pnpm test` (when tests exist), `pnpm format` or `pnpm format:check` when relevant.
+
+## Working with Cursor
+
+- Cursor skills live under `.cursor/skills` and are kept in sync by `pnpm agents:sync`.
 - Use the same verification flow as Codex: `pnpm typecheck`, `pnpm lint`, `pnpm test` (when tests exist), `pnpm format` or `pnpm format:check` when relevant.
 
 ## Working with GitHub Copilot
