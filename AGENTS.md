@@ -22,9 +22,10 @@ Guidelines for AI agents and contributors working in this Turborepo monorepo.
 
 ### Apps (`apps/`)
 
-| Name | Filter | Description                                    |
-| ---- | ------ | ---------------------------------------------- |
-| web  | `web`  | Next.js 16.1.1 application — landing page/demo |
+| Name       | Filter       | Description                                         |
+| ---------- | ------------ | --------------------------------------------------- |
+| web        | `web`        | Next.js 16.1.1 application - landing page/demo      |
+| playground | `playground` | Vite 7 + React 19 playground app for UI experiments |
 
 ### Packages (`packages/`)
 
@@ -109,6 +110,8 @@ Use `pnpm format:check` to verify formatting without modifying files.
 ```bash
 # Web app
 pnpm --filter web dev
+# Playground app
+pnpm --filter playground dev
 ```
 
 ### Clean
@@ -195,6 +198,12 @@ This runs `shadcn@latest add` and auto-formats.
 - Use App Router (`src/app/`)
 - Keep landing page fast and lightweight
 - Path alias: `~/*` maps to `./src/*`
+
+### Vite (playground app)
+
+- Entry point: `apps/playground/src/main.tsx` renders `Home` from `apps/playground/src/home.tsx`
+- Styles: `apps/playground/src/globals.css` already imports Tailwind and the UI theme
+- No `~/` alias - use relative imports
 
 ---
 
@@ -283,6 +292,7 @@ The human controls all git operations.
 ```bash
 # Apps
 pnpm --filter web <command>
+pnpm --filter playground <command>
 
 # Packages
 pnpm --filter @turborepo-agents/ui <command>
@@ -298,16 +308,17 @@ pnpm --filter @turborepo-agents/agents <command>
 
 ## Quick Reference
 
-| Task          | Command                 |
-| ------------- | ----------------------- |
-| Install deps  | `pnpm install`          |
-| Run web dev   | `pnpm --filter web dev` |
-| Lint all      | `pnpm lint`             |
-| Typecheck all | `pnpm typecheck`        |
-| Test all      | `pnpm test`             |
-| Build all     | `pnpm build`            |
-| Format code   | `pnpm format`           |
-| Format check  | `pnpm format:check`     |
-| Agents check  | `pnpm agents:check`     |
-| Agents sync   | `pnpm agents:sync`      |
-| Clean all     | `pnpm clean`            |
+| Task               | Command                        |
+| ------------------ | ------------------------------ |
+| Install deps       | `pnpm install`                 |
+| Run web dev        | `pnpm --filter web dev`        |
+| Run playground dev | `pnpm --filter playground dev` |
+| Lint all           | `pnpm lint`                    |
+| Typecheck all      | `pnpm typecheck`               |
+| Test all           | `pnpm test`                    |
+| Build all          | `pnpm build`                   |
+| Format code        | `pnpm format`                  |
+| Format check       | `pnpm format:check`            |
+| Agents check       | `pnpm agents:check`            |
+| Agents sync        | `pnpm agents:sync`             |
+| Clean all          | `pnpm clean`                   |

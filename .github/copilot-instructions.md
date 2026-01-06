@@ -21,7 +21,7 @@
   - `pnpm build` → `turbo run build`
   - `pnpm format` (Prettier with import sorting & Tailwind plugins)
   - `pnpm format:check` (Prettier check without writes)
-- Dev server per app: `pnpm --filter web dev`.
+- Dev server per app: `pnpm --filter web dev` or `pnpm --filter playground dev`.
 - When changing configs/scripts/workflows, update docs accordingly.
 
 ## Code standards

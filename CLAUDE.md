@@ -15,7 +15,7 @@ Turborepo monorepo starter optimized for agentic coding workflows with Next.js 1
 
 This is a Turborepo monorepo with three workspace categories:
 
-- **`apps/`** - Applications (web: Next.js 16.1.1 with App Router)
+- **`apps/`** - Applications (web: Next.js 16.1.1 with App Router; playground: Vite 7 + React 19)
 - **`packages/`** - Shared libraries (ui: shadcn/ui component library with Radix primitives)
 - **`tooling/`** - Shared development configs and agent tooling (eslint, prettier, typescript, github, agents)
 
@@ -27,6 +27,7 @@ Workspace dependencies use the `workspace:*` protocol. All packages use the `@tu
 # Development
 pnpm install                    # Install all dependencies
 pnpm --filter web dev           # Run Next.js dev server
+pnpm --filter playground dev    # Run Vite dev server
 
 # Quality checks (run before pushing)
 pnpm typecheck                  # Type check all workspaces
@@ -50,7 +51,7 @@ pnpm clean                      # Remove build artifacts and node_modules
 
 **Workspace filters:**
 
-- Apps: `web`
+- Apps: `web`, `playground`
 - Packages: `@turborepo-agents/ui`
 - Tooling: `@turborepo-agents/eslint`, `@turborepo-agents/prettier`, `@turborepo-agents/typescript`, `@turborepo-agents/github`, `@turborepo-agents/agents`
 
@@ -89,6 +90,12 @@ Export paths: `./components/*`, `./lib/*`, `./styles/*`, `./postcss-config`
 - Path alias: `~/*` → `./src/*`
 - Tailwind CSS 4.x with PostCSS
 - Component library: `@turborepo-agents/ui`
+
+### Vite Configuration (playground app)
+
+- Vite + React app in `apps/playground`
+- Entry point: `src/main.tsx` renders `Home` from `src/home.tsx`
+- Global styles: `src/globals.css` imports Tailwind and the UI theme
 
 ### UI Component Standards
 

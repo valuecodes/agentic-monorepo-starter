@@ -14,7 +14,7 @@ Only these `<type>` values: chore, docs, feat, fix, refactor, style, test.
 
 ## Monorepo Context
 
-Mention the area touched (landing, docs, playground, ui, lint, typecheck, agents) in the subject when helpful.
+Mention the area touched (web, playground, docs, ui, lint, typecheck, agents) in the subject when helpful.
 
 Examples:
 

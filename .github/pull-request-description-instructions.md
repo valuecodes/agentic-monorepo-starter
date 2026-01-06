@@ -15,7 +15,7 @@ Only these `<type>` values: chore, docs, feat, fix, refactor, style, test.
 - Present tense, start with a verb
 - Keep it concise (<= 72 chars)
 - No trailing period
-- Mention the area touched (landing, docs, playground, ui, lint, typecheck, agents) in the subject when helpful
+- Mention the area touched (web, playground, docs, ui, lint, typecheck, agents) in the subject when helpful
 
 Examples:
 
@@ -30,7 +30,7 @@ Use exactly these headings, in this order:
 ## What
 
 - 2–6 bullet points describing what changed and why
-- Mention affected apps/packages when relevant (apps/landing, apps/docs, apps/playground, packages/ui, tooling/\*)
+- Mention affected apps/packages when relevant (apps/web, apps/playground, packages/ui, tooling/\*)
 
 ## How to test
 

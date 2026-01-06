@@ -1,10 +1,11 @@
 # Turborepo Agents Starter
 
-Monorepo starter for building agent-friendly Next.js apps with preconfigured tooling, shared UI, and repo-level AI settings.
+Monorepo starter for building agent-friendly web apps (Next.js + Vite) with preconfigured tooling, shared UI, and repo-level AI settings.
 
 ## What's inside
 
 - Next.js app in `apps/web` (App Router, alias `~/*`)
+- Vite playground in `apps/playground` (React 19, Tailwind CSS 4)
 - Shared UI package `@turborepo-agents/ui` (shadcn/Radix/Tailwind)
 - Shared configs: ESLint, Prettier (import + Tailwind sorting), TypeScript, Turbo
 - Agent tooling in `tooling/agents` (sync/check agent docs)
@@ -20,6 +21,8 @@ Monorepo starter for building agent-friendly Next.js apps with preconfigured too
 ```bash
 pnpm install
 pnpm --filter web dev
+# or
+pnpm --filter playground dev
 ```
 
 ## Common tasks

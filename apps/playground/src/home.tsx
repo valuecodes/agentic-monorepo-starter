@@ -1,5 +1,5 @@
-import { Button } from "@turborepo-agents/ui/components/button";
 import { Badge } from "@turborepo-agents/ui/components/badge";
+import { Button } from "@turborepo-agents/ui/components/button";
 import {
   Card,
   CardContent,
@@ -57,7 +57,7 @@ export const Home = () => {
         </Card>
       </section>
 
-      <section className="rounded-2xl border bg-muted/30 p-6">
+      <section className="bg-muted/30 rounded-2xl border p-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-2">
             <h2 className="text-xl font-semibold">Build with agents in mind</h2>
