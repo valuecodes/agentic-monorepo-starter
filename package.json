@@ -20,7 +20,7 @@
     "prettier": "3.7.4",
     "prettier-plugin-tailwindcss": "0.7.1",
     "tsx": "4.21.0",
-    "turbo": "2.7.2",
+    "turbo": "2.7.3",
     "typescript": "5.9.3",
     "zx": "8.8.5"
   },
