@@ -1,5 +1,5 @@
 {
   "extends": "@turborepo-agents/typescript/base.json",
-  "include": ["src"],
+  "include": ["src", "scripts", "agents.config.ts"],
   "exclude": ["node_modules"]
 }

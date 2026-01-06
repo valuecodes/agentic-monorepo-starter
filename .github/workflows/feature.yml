@@ -64,3 +64,21 @@ jobs:
 
       - name: Test
         run: pnpm test
+
+  agents-check:
+    name: agents-check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Setup
+        uses: ./tooling/github/setup
+
+      - name: Check agents sync
+        run: pnpm agents:check

@@ -3,6 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "agents:check": "tsx scripts/agents-check.ts",
+    "agents:sync": "tsx scripts/agents-sync.ts",
     "clean": "rm -rf .turbo node_modules .cache",
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit"
