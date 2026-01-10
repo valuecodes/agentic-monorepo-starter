@@ -2,6 +2,17 @@
 
 Monorepo starter for building agent-friendly web apps (Next.js + Vite) with preconfigured tooling, shared UI, and repo-level AI settings.
 
+## Use this template
+
+This repo is intended to be used via GitHub’s **Use this template** button.
+
+After creating your repo:
+
+- Rename package scope (optional): replace `@repo/*` with your own scope (e.g. `@acme/*`)
+- Update `name`, `description`, and links in `package.json`
+- Run the checks once to verify everything is green:
+  - `pnpm turbo lint typecheck build`
+
 ## What's inside
 
 - Next.js app in `apps/web` (App Router, alias `~/*`)
@@ -20,10 +31,13 @@ Monorepo starter for building agent-friendly web apps (Next.js + Vite) with prec
 
 ```bash
 pnpm install
-pnpm --filter web dev         # http://localhost:3000
-# or
-pnpm --filter playground dev  # http://localhost:3001
+pnpm dev
 ```
+
+`pnpm dev` runs both apps:
+
+- Web: http://localhost:3000
+- Playground: http://localhost:3001
 
 ## Common tasks
 
@@ -35,6 +49,17 @@ pnpm --filter playground dev  # http://localhost:3001
 - Format check: `pnpm format:check`
 - Agents check: `pnpm agents:check`
 - Agents sync: `pnpm agents:sync`
+
+## Recommended VS Code extensions
+
+See `.vscode/extensions.json` for the full list.
+
+- Prettier (`esbenp.prettier-vscode`)
+- ESLint (`dbaeumer.vscode-eslint`)
+- Tailwind CSS (`bradlc.vscode-tailwindcss`)
+- Claude Code (`Anthropic.claude-code`)
+- Codex (`openai.chatgpt`)
+- GitHub Pull Requests (`GitHub.vscode-pull-request-github`)
 
 ## Working with Codex
 
