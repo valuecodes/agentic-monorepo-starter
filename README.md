@@ -14,17 +14,6 @@ After creating your repo:
 - Run the checks once to verify everything is green:
   - `pnpm turbo lint typecheck build`
 
-## Use this template
-
-This repo is intended to be used via GitHub’s **Use this template** button.
-
-After creating your repo:
-
-- Rename package scope (optional): replace `@repo/*` with your own scope (e.g. `@acme/*`)
-- Update `name`, `description`, and links in `package.json`
-- Run the checks once to verify everything is green:
-  - `pnpm turbo lint typecheck build`
-
 ## What's inside
 
 - Next.js app in `apps/web` (App Router, alias `~/*`)
