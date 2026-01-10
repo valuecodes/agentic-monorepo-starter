@@ -21,20 +21,20 @@ interface RepoFolder {
 const repoStructure: RepoFolder[] = [
   {
     name: "apps",
-    icon: <Box className="text-chart-1 h-4 w-4" />,
+    icon: <Box className="h-4 w-4" />,
     children: [
-      { name: "web", description: "Next.js Product" },
-      { name: "playground", description: "Vite Experiments" },
+      { name: "web", description: "Next.js" },
+      { name: "playground", description: "Vite" },
     ],
   },
   {
     name: "packages",
-    icon: <Box className="text-chart-4 h-4 w-4" />,
-    children: [{ name: "ui", description: "Shadcn Components" }],
+    icon: <Box className="h-4 w-4" />,
+    children: [{ name: "ui", description: "Shadcn" }],
   },
   {
     name: "tooling",
-    icon: <Terminal className="text-chart-5 h-4 w-4" />,
+    icon: <Terminal className="h-4 w-4" />,
     children: [
       { name: "agents", description: "Prompts & Context" },
       { name: "typescript", description: "TS Configs" },
@@ -55,34 +55,23 @@ const faqItems = [
     answer:
       "No. It's a rock-solid monorepo template on its own. The agent tooling is just a bonus layer that stays out of your way if you don't use it.",
   },
-  {
-    question: "Why Next.js AND Vite?",
-    answer:
-      "Next.js is heavy. Vite is instant. We use Vite for a component playground (like Storybook but simpler) to iterate on UI fast, then import those components into the Next.js app.",
-  },
 ];
 
 const Home = () => {
   return (
-    <div className="bg-background text-foreground selection:bg-primary/20 min-h-screen font-sans">
-      {/* Background Ambience */}
-      <div className="pointer-events-none fixed inset-0 z-[-1] overflow-hidden">
-        <div className="bg-primary/5 absolute top-[-10%] left-[-10%] h-[40%] w-[40%] rounded-full blur-[120px]" />
-        <div className="bg-accent/5 absolute right-[-10%] bottom-[-10%] h-[40%] w-[40%] rounded-full blur-[120px]" />
-      </div>
-
+    <div className="selection:bg-primary/20 min-h-screen">
       <main className="mx-auto w-full max-w-5xl space-y-24 px-6 py-16 sm:py-24">
         {/* Hero Section */}
         <header className="animate-in fade-in slide-in-from-bottom-4 flex flex-col items-center space-y-8 text-center duration-700">
           <Badge
-            variant="outline"
-            className="border-primary/20 bg-primary/5 text-primary rounded-full px-4 py-1.5 text-sm backdrop-blur-sm"
+            variant="secondary"
+            className="rounded-full px-4 py-1.5 text-sm"
           >
             v1.0 Public Template
           </Badge>
 
           <div className="max-w-3xl space-y-4">
-            <h1 className="from-foreground to-foreground/70 bg-linear-to-b bg-clip-text text-4xl font-bold tracking-tighter text-transparent sm:text-6xl md:text-7xl">
+            <h1 className="text-4xl font-bold tracking-tighter sm:text-6xl md:text-7xl">
               Agentic Monorepo Starter
             </h1>
             <p className="text-muted-foreground mx-auto max-w-2xl text-lg leading-relaxed sm:text-xl">
@@ -92,9 +81,9 @@ const Home = () => {
           </div>
 
           <div className="flex w-full flex-col justify-center gap-4 sm:flex-row">
-            <Button asChild size="lg" className="shadow-primary/20">
+            <Button asChild size="lg">
               <a href={templateUrl} target="_blank" rel="noreferrer noopener">
-                <GitBranch className="text-accent mr-2 h-4 w-4" />
+                <GitBranch className="mr-2 h-4 w-4" />
                 Use Template
               </a>
             </Button>
@@ -107,38 +96,30 @@ const Home = () => {
           </div>
 
           {/* Quickstart Snippet */}
-          <div className="group relative mt-8 w-full max-w-md">
-            <div className="from-primary/20 to-accent/20 absolute -inset-0.5 rounded-xl bg-linear-to-r opacity-20 blur transition duration-500 group-hover:opacity-40"></div>
-            <div className="border-border/10 bg-foreground/95 text-background relative rounded-lg border p-4 text-left font-mono text-sm shadow-2xl">
+          <div className="relative mt-8 w-full max-w-md">
+            <div className="border-border bg-card text-foreground relative rounded-lg border p-4 text-left font-mono text-sm shadow-sm">
               <div className="absolute top-4 left-4 flex gap-1.5">
-                <div className="bg-destructive/30 h-2.5 w-2.5 rounded-full"></div>
-                <div className="bg-chart-4/30 h-2.5 w-2.5 rounded-full"></div>
-                <div className="bg-chart-2/30 h-2.5 w-2.5 rounded-full"></div>
+                <div className="bg-muted-foreground/30 h-2.5 w-2.5 rounded-full"></div>
+                <div className="bg-muted-foreground/30 h-2.5 w-2.5 rounded-full"></div>
+                <div className="bg-muted-foreground/30 h-2.5 w-2.5 rounded-full"></div>
               </div>
               <pre className="overflow-x-auto pt-8">
-                <code className="text-accent">git clone</code>{" "}
-                <span className="text-muted">...</span>
+                <code className="text-primary">git clone</code>{" "}
+                <span className="text-muted-foreground">...</span>
                 <br />
-                <code className="text-accent">pnpm</code> install
+                <code className="text-primary">pnpm</code> install
                 <br />
-                <code className="text-accent">pnpm</code> dev
+                <code className="text-primary">pnpm</code> dev
               </pre>
             </div>
           </div>
         </header>
 
         {/* The Philosophy / "Why" Section */}
-        <section className="bg-primary/5 border-primary/10 relative overflow-hidden rounded-3xl border p-8 sm:p-12 lg:p-16">
-          <div className="bg-primary/10 pointer-events-none absolute top-0 right-0 -mt-10 -mr-10 h-64 w-64 rounded-full blur-[80px]" />
-
+        <section className="bg-card border-border relative overflow-hidden rounded-3xl border p-8 sm:p-12 lg:p-16">
           <div className="relative z-10 grid items-center gap-12 lg:grid-cols-2">
             <div className="space-y-6">
-              <Badge
-                variant="outline"
-                className="bg-background/50 backdrop-blur"
-              >
-                The Philosophy
-              </Badge>
+              <Badge variant="outline">The Philosophy</Badge>
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
                 Agents drift. <br />
                 <span className="text-muted-foreground">
@@ -171,7 +152,7 @@ const Home = () => {
               </div>
             </div>
 
-            <div className="bg-background/80 border-border/50 rounded-xl border p-6 shadow-sm backdrop-blur-sm">
+            <div className="bg-card border-border rounded-xl border p-6 shadow-sm">
               <h3 className="mb-4 flex items-center gap-2 font-semibold">
                 <FolderTree className="text-primary h-4 w-4" />
                 Repo Structure
@@ -263,7 +244,7 @@ const Home = () => {
             {faqItems.map((item, i) => (
               <div
                 key={i}
-                className="border-border/50 bg-card/30 hover:bg-card/50 group rounded-lg border p-6 transition-colors"
+                className="border-border bg-card hover:bg-muted group rounded-lg border p-6 transition-colors"
               >
                 <h3 className="text-foreground mb-2 flex items-center justify-between font-medium">
                   {item.question}
