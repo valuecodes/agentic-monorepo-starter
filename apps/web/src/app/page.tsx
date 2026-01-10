@@ -12,6 +12,38 @@ const templateUrl =
   "https://github.com/valuecodes/agentic-monorepo-starter/generate";
 const repoUrl = "https://github.com/valuecodes/agentic-monorepo-starter";
 
+interface RepoFolder {
+  name: string;
+  icon: React.ReactNode;
+  children: { name: string; description?: string }[];
+}
+
+const repoStructure: RepoFolder[] = [
+  {
+    name: "apps",
+    icon: <Box className="text-chart-1 h-4 w-4" />,
+    children: [
+      { name: "web", description: "Next.js Product" },
+      { name: "playground", description: "Vite Experiments" },
+    ],
+  },
+  {
+    name: "packages",
+    icon: <Box className="text-chart-4 h-4 w-4" />,
+    children: [{ name: "ui", description: "Shadcn Components" }],
+  },
+  {
+    name: "tooling",
+    icon: <Terminal className="text-chart-5 h-4 w-4" />,
+    children: [
+      { name: "agents", description: "Prompts & Context" },
+      { name: "typescript", description: "TS Configs" },
+      { name: "eslint", description: "Lint Rules" },
+      { name: "prettier", description: "Code Formatting" },
+    ],
+  },
+];
+
 const faqItems = [
   {
     question: "Is this just create-turbo?",
@@ -36,7 +68,7 @@ const Home = () => {
       {/* Background Ambience */}
       <div className="pointer-events-none fixed inset-0 z-[-1] overflow-hidden">
         <div className="bg-primary/5 absolute top-[-10%] left-[-10%] h-[40%] w-[40%] rounded-full blur-[120px]" />
-        <div className="absolute right-[-10%] bottom-[-10%] h-[40%] w-[40%] rounded-full bg-blue-500/5 blur-[120px]" />
+        <div className="bg-accent/5 absolute right-[-10%] bottom-[-10%] h-[40%] w-[40%] rounded-full blur-[120px]" />
       </div>
 
       <main className="mx-auto w-full max-w-5xl space-y-24 px-6 py-16 sm:py-24">
@@ -50,7 +82,7 @@ const Home = () => {
           </Badge>
 
           <div className="max-w-3xl space-y-4">
-            <h1 className="from-foreground to-foreground/70 bg-gradient-to-b bg-clip-text text-4xl font-bold tracking-tighter text-transparent sm:text-6xl md:text-7xl">
+            <h1 className="from-foreground to-foreground/70 bg-linear-to-b bg-clip-text text-4xl font-bold tracking-tighter text-transparent sm:text-6xl md:text-7xl">
               Agentic Monorepo Starter
             </h1>
             <p className="text-muted-foreground mx-auto max-w-2xl text-lg leading-relaxed sm:text-xl">
@@ -62,7 +94,7 @@ const Home = () => {
           <div className="flex w-full flex-col justify-center gap-4 sm:flex-row">
             <Button asChild size="lg" className="shadow-primary/20">
               <a href={templateUrl} target="_blank" rel="noreferrer noopener">
-                <GitBranch className="mr-2 h-4 w-4" />
+                <GitBranch className="text-accent mr-2 h-4 w-4" />
                 Use Template
               </a>
             </Button>
@@ -76,20 +108,20 @@ const Home = () => {
 
           {/* Quickstart Snippet */}
           <div className="group relative mt-8 w-full max-w-md">
-            <div className="from-primary/20 absolute -inset-0.5 rounded-xl bg-gradient-to-r to-blue-500/20 opacity-20 blur transition duration-500 group-hover:opacity-40"></div>
-            <div className="relative rounded-lg border border-white/10 bg-black/90 p-4 text-left font-mono text-sm text-zinc-100 shadow-2xl">
+            <div className="from-primary/20 to-accent/20 absolute -inset-0.5 rounded-xl bg-linear-to-r opacity-20 blur transition duration-500 group-hover:opacity-40"></div>
+            <div className="border-border/10 bg-foreground/95 text-background relative rounded-lg border p-4 text-left font-mono text-sm shadow-2xl">
               <div className="absolute top-4 left-4 flex gap-1.5">
-                <div className="h-2.5 w-2.5 rounded-full bg-red-500/20"></div>
-                <div className="h-2.5 w-2.5 rounded-full bg-yellow-500/20"></div>
-                <div className="h-2.5 w-2.5 rounded-full bg-green-500/20"></div>
+                <div className="bg-destructive/30 h-2.5 w-2.5 rounded-full"></div>
+                <div className="bg-chart-4/30 h-2.5 w-2.5 rounded-full"></div>
+                <div className="bg-chart-2/30 h-2.5 w-2.5 rounded-full"></div>
               </div>
               <pre className="overflow-x-auto pt-8">
-                <code className="text-blue-400">git clone</code>{" "}
-                <span className="text-zinc-500">...</span>
+                <code className="text-accent">git clone</code>{" "}
+                <span className="text-muted">...</span>
                 <br />
-                <code className="text-blue-400">pnpm</code> install
+                <code className="text-accent">pnpm</code> install
                 <br />
-                <code className="text-blue-400">pnpm</code> dev
+                <code className="text-accent">pnpm</code> dev
               </pre>
             </div>
           </div>
@@ -145,58 +177,32 @@ const Home = () => {
                 Repo Structure
               </h3>
               <div className="text-muted-foreground space-y-3 font-mono text-sm">
-                <div className="text-foreground flex items-center gap-2">
-                  <Box className="h-4 w-4 text-blue-500" />
-                  <span>apps/</span>
-                </div>
-                <div className="border-border space-y-2 border-l pl-6">
-                  <div className="flex items-center gap-2">
-                    <span className="border-border w-3 border-t" />
-                    <span>web</span>
-                    <span className="text-muted-foreground ml-auto text-xs">
-                      Next.js Product
-                    </span>
+                {repoStructure.map((folder, i) => (
+                  <div key={folder.name}>
+                    <div
+                      className={`text-foreground flex items-center gap-2 ${i > 0 ? "pt-2" : ""}`}
+                    >
+                      {folder.icon}
+                      <span>{folder.name}/</span>
+                    </div>
+                    <div className="border-border mt-3 ml-1.75 space-y-2 border-l pl-6">
+                      {folder.children.map((child) => (
+                        <div
+                          key={child.name}
+                          className="flex items-center gap-2"
+                        >
+                          <span className="border-border w-3 border-t" />
+                          <span>{child.name}</span>
+                          {child.description && (
+                            <span className="text-muted-foreground ml-auto text-xs">
+                              {child.description}
+                            </span>
+                          )}
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="border-border w-3 border-t" />
-                    <span>playground</span>
-                    <span className="text-muted-foreground ml-auto text-xs">
-                      Vite Experiments
-                    </span>
-                  </div>
-                </div>
-
-                <div className="text-foreground flex items-center gap-2 pt-2">
-                  <Box className="h-4 w-4 text-orange-500" />
-                  <span>packages/</span>
-                </div>
-                <div className="border-border space-y-2 border-l pl-6">
-                  <div className="flex items-center gap-2">
-                    <span className="border-border w-3 border-t" />
-                    <span>ui</span>
-                    <span className="text-muted-foreground ml-auto text-xs">
-                      Shadcn Components
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="border-border w-3 border-t" />
-                    <span>typescript-config</span>
-                  </div>
-                </div>
-
-                <div className="text-foreground flex items-center gap-2 pt-2">
-                  <Terminal className="h-4 w-4 text-purple-500" />
-                  <span>tooling/</span>
-                </div>
-                <div className="border-border space-y-2 border-l pl-6">
-                  <div className="flex items-center gap-2">
-                    <span className="border-border w-3 border-t" />
-                    <span>agents</span>
-                    <span className="text-muted-foreground ml-auto text-xs">
-                      Prompts & Context
-                    </span>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>
@@ -213,7 +219,7 @@ const Home = () => {
 
           <div className="relative grid gap-8 md:grid-cols-3">
             {/* Connector Line */}
-            <div className="via-border absolute top-12 right-[20%] left-[20%] hidden h-[2px] bg-gradient-to-r from-transparent to-transparent md:block" />
+            <div className="via-border absolute top-12 right-[20%] left-[20%] hidden h-0.5 bg-linear-to-r from-transparent to-transparent md:block" />
 
             {[
               {
