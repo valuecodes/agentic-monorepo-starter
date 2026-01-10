@@ -1,11 +1,10 @@
 # Agentic Monorepo Starter
 
-A monorepo starter with strict rules for agentic development, consistent tooling, and clear boundaries.
-Keeps agents in check and the project clean, focused, and maintainable.
+A production-grade Turborepo template for agentic development: strict repo guardrails, consistent tooling, and clear package boundaries — so agents move fast without turning the codebase into spaghetti.
 
 ## Use this template
 
-This repo is intended to be used via GitHub’s **Use this template** button.
+Use GitHub’s Use this template button.
 
 After creating your repo:
 
