@@ -90,25 +90,25 @@ pnpm dev
 
 ## Common tasks
 
-- Lint: `pnpm lint`
-- Typecheck: `pnpm typecheck`
-- Test: `pnpm test`
-- Build: `pnpm build`
-- Format: `pnpm format`
-- Format check: `pnpm format:check`
-- Agents check: `pnpm agents:check`
-- Agents sync: `pnpm agents:sync`
+- Lint: `pnpm lint` - checks code style and common mistakes (ESLint).
+- Typecheck: `pnpm typecheck` - runs TypeScript checks across the repo.
+- Test: `pnpm test` - runs the test suite (when tests exist).
+- Build: `pnpm build` - builds apps and packages for production.
+- Format: `pnpm format` - formats files with Prettier.
+- Format check: `pnpm format:check` - checks formatting in CI (fails if changes needed).
+- Agents check: `pnpm agents:check` - verifies agent configs/skills are in sync.
+- Agents sync: `pnpm agents:sync` - syncs shared agent skills/configs to tool-specific folders.
 
 ## Recommended VS Code extensions
 
 See `.vscode/extensions.json` for the full list.
 
-- Prettier (`esbenp.prettier-vscode`)
-- ESLint (`dbaeumer.vscode-eslint`)
-- Tailwind CSS (`bradlc.vscode-tailwindcss`)
-- Claude Code (`Anthropic.claude-code`)
-- Codex (`openai.chatgpt`)
-- GitHub Pull Requests (`GitHub.vscode-pull-request-github`)
+- Prettier (`esbenp.prettier-vscode`) - auto-format on save and consistent formatting.
+- ESLint (`dbaeumer.vscode-eslint`) - inline lint feedback and auto-fixes.
+- Tailwind CSS (`bradlc.vscode-tailwindcss`) - class name autocomplete and linting.
+- Claude Code (`Anthropic.claude-code`) - Claude agent workflows inside VS Code.
+- Codex (`openai.chatgpt`) - Codex/ChatGPT coding assistance in-editor.
+- GitHub Pull Requests (`GitHub.vscode-pull-request-github`) - review PRs and issues without leaving VS Code.
 
 ## Working with Codex
 
