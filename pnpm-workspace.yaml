@@ -2,5 +2,3 @@ packages:
   - apps/*
   - packages/*
   - tooling/*
-
-# minimumReleaseAge: 1209600 # Prevent supply chain attacks by allowing to install only packages published at least 14 days ago
