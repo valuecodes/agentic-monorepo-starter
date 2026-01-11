@@ -4,7 +4,7 @@ A production-grade Turborepo template for agentic development: strict repo guard
 
 ## Use this template
 
-Use GitHub’s `Use this template` button.
+Use GitHub’s **Use this template** button.
 
 After creating your repo:
 
