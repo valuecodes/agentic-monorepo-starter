@@ -60,7 +60,5 @@ symlink to it, so edit `AGENTS.md` and never `CLAUDE.md`.
 - Claude Code: permissions in `.claude/settings.json`. No post-edit format hook — run
   `pnpm format` before committing.
 - Codex: config in `.codex/config.toml`.
-- Copilot: guidance in `.github/copilot-instructions.md`; commit and PR message
-  instructions are wired up via `.vscode/settings.json`.
 
 Recommended editor extensions are listed in `.vscode/extensions.json`.
