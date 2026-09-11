@@ -10,6 +10,7 @@ import pino from "pino";
 import type { DestinationStream, Logger as PinoLogger } from "pino";
 
 import { withStackTrace } from "./error-reporting";
+import { sanitizeBindings, sanitizeFields } from "./fields";
 import { resolveLevel } from "./level";
 import { toSeverity } from "./severity";
 import type { LogFields, LoggerLike, LogLevel } from "./types";
@@ -63,7 +64,10 @@ const buildPino = (options: LoggerOptions): PinoLogger => {
       messageKey: "message",
       errorKey: "err",
       timestamp: pino.stdTimeFunctions.isoTime,
-      base: options.bindings ?? null,
+      base:
+        options.bindings === undefined
+          ? null
+          : sanitizeBindings(options.bindings),
       formatters: { level: toSeverity, log: withStackTrace },
     },
     options.destination ?? pino.destination({ dest: 1, sync: true })
@@ -121,7 +125,7 @@ class Logger implements LoggerLike {
 
   /** A logger that prefixes `bindings` to every line it emits. */
   child(bindings: LogFields): Logger {
-    return new Logger({}, this.delegate.child(bindings));
+    return new Logger({}, this.delegate.child(sanitizeBindings(bindings)));
   }
 
   // The single place the argument order is flipped back to pino's own. Keeping
@@ -135,7 +139,7 @@ class Logger implements LoggerLike {
       this.delegate[level](message);
       return;
     }
-    this.delegate[level](fields, message);
+    this.delegate[level](sanitizeFields(fields), message);
   }
 }
 

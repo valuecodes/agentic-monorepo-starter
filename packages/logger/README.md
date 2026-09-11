@@ -124,13 +124,39 @@ state, so a plain object literal satisfies it. The concrete `Logger` class does 
 
 ## Not configured, on purpose
 
-**No `redact`.** It compiles path matchers at construction and traverses every line, and a default
-path list that matches nothing provides false assurance. The real control is "don't log raw
-headers". Revisit the moment a request-logging middleware lands, and start with
-`["req.headers.authorization", "*.authorization", "*.token"]`.
+**No `redact` — know what that costs you.** pino's default `err` serialiser copies _every own
+enumerable property_ of an `Error` onto the emitted `err` object. That is a real leak on the one
+path this README tells you to use: an `axios`/fetch-wrapper rejection carries `err.config.headers`,
+so `logger.error("http call failed", { err })` writes the outbound `Authorization` header and
+request body into Cloud Logging, readable by anyone with `roles/logging.viewer`.
 
-**No duplicate-key guard.** With `messageKey: "message"`, a field literally named `message` is
-emitted twice; the same is true of any field that repeats a `child()` binding — trace fields
-included, since those are bindings too. Bindings are written ahead of call-site fields and nothing
-de-duplicates them, so JSON parsers take the last value: the call site wins and the binding is lost.
-Don't shadow bound keys.
+There is no default `redact` because the right path list is app-specific and matchers are compiled
+at construction and walked per line. If a service handles credentials, set one in that service:
+
+```ts
+// pino redact paths, passed where the service builds its logger
+[
+  "*.authorization",
+  "*.token",
+  "err.config.headers.authorization",
+  "req.headers.authorization",
+];
+```
+
+Until then the rule is narrower than "don't log raw headers": **don't pass an `Error` you did not
+construct without knowing what it carries.**
+
+**No duplicate-key guard, except where it matters.** Bindings are written ahead of call-site fields
+and nothing de-duplicates them, so a repeated key is emitted twice and JSON parsers take the last
+value: the call site wins and the binding is lost. Don't shadow bound keys.
+
+The exception is the set Cloud Logging reads by name — `severity`, `time`, `message`,
+`stack_trace` and the three `logging.googleapis.com/*` trace keys. Those are **stripped from
+call-site fields** (`fields.ts`), because otherwise an object spread from untrusted input could file
+an ERROR as `severity: "DEBUG"` where no alert would see it, backdate `time` out of an incident
+window, or attach the line to another request's trace. `child()` bindings may still set them — that
+is how `parseTraceHeaders` works.
+
+Field names colliding with `Object.prototype` (`hasOwnProperty`, `toString`, `constructor`, …) are
+dropped for a different reason: pino resolves its per-key handlers with bracket access, so those
+keys would throw out of the log call or emit an unparseable line.

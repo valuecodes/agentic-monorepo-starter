@@ -25,7 +25,13 @@ const SEVERITY_BY_LABEL: Readonly<Partial<Record<string, Severity>>> = {
 const toSeverity = (label: string): { readonly severity: Severity } => ({
   // DEFAULT rather than a throw: an unmapped custom level should still be
   // visible in the Logs Explorer, just unranked.
-  severity: SEVERITY_BY_LABEL[label] ?? "DEFAULT",
+  //
+  // `Object.hasOwn` rather than a bare lookup: a label like `constructor` or
+  // `toString` would otherwise resolve to the inherited Object.prototype
+  // member and emit a function as the severity.
+  severity: Object.hasOwn(SEVERITY_BY_LABEL, label)
+    ? (SEVERITY_BY_LABEL[label] ?? "DEFAULT")
+    : "DEFAULT",
 });
 
 export type { Severity };
