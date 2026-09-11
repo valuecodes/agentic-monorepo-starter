@@ -1,40 +1,15 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
-  "description": "Settings for Claude code agents",
-  "hooks": {
-    "PostToolUse": [
-      {
-        "matcher": "Edit|Write|MultiEdit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "pnpm format:changed-files",
-            "timeout": 120
-          }
-        ]
-      }
-    ]
-  },
   "permissions": {
-    "defaultMode": "default",
     "allow": [
       "Bash(pnpm lint:*)",
       "Bash(pnpm typecheck:*)",
       "Bash(pnpm build:*)",
       "Bash(pnpm format:*)",
       "Bash(pnpm format:check:*)",
-      "Bash(pnpm format:changed-files:*)",
       "Bash(pnpm test:*)",
       "Bash(pnpm --filter:*)",
-      "Bash(bash .claude/hooks/:*)",
-      "Bash(pnpm agents:check:*)",
-      "Bash(pnpm agents:sync:*)"
-    ],
-    "ask": [
-      "Bash(pnpm install:*)",
-      "Bash(pnpm add:*)",
-      "Bash(pnpm remove:*)",
-      "Bash(git commit:*)"
+      "Bash(pnpm typecheck *)"
     ],
     "deny": [
       "Bash(curl:*)",
@@ -47,6 +22,14 @@
       "Read(**/secrets/**)",
       "Bash(git push:*)",
       "Bash(gh pr create:*)"
-    ]
-  }
+    ],
+    "ask": [
+      "Bash(pnpm install:*)",
+      "Bash(pnpm add:*)",
+      "Bash(pnpm remove:*)",
+      "Bash(git commit:*)"
+    ],
+    "defaultMode": "default"
+  },
+  "description": "Settings for Claude code agents"
 }

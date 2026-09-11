@@ -15,12 +15,12 @@ Only these `<type>` values: chore, docs, feat, fix, refactor, style, test.
 - Present tense, start with a verb
 - Keep it concise (<= 72 chars)
 - No trailing period
-- Mention the area touched (web, playground, docs, ui, lint, typecheck, agents) in the subject when helpful
+- Mention the area touched (playground, docs, lint, typecheck, tooling, deps) in the subject when helpful
 
 Examples:
 
-- `docs: update turbo commands for docs app`
-- `feat: add button variants to ui`
+- `docs: update lint commands for oxlint`
+- `chore: bump typescript in the catalog`
 - `chore: align tooling configs across repo`
 
 ## PR Description (Required Sections)
@@ -30,14 +30,15 @@ Use exactly these headings, in this order:
 ## What
 
 - 2–6 bullet points describing what changed and why
-- Mention affected apps/packages when relevant (apps/web, apps/playground, packages/ui, tooling/\*)
+- Mention affected apps/packages when relevant (apps/playground, packages/\*, tooling/\*)
 
 ## How to test
 
 Provide concrete, reproducible steps. Prefer commands like:
 
-- `pnpm turbo lint typecheck`
-- `pnpm turbo build`
+- `pnpm lint`
+- `pnpm typecheck`
+- `pnpm build`
 - `pnpm --filter <app> dev`
 
 Include expected results (what “good” looks like).

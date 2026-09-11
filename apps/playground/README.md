@@ -4,8 +4,8 @@ Vite + React playground for experimenting with UI and agent workflows in this mo
 
 ## Stack
 
-- Vite 7 + React 19
-- Tailwind CSS 4 with `@repo/ui` theme
+- Vite 8 + React 19
+- Tailwind CSS 4
 - Vitest for unit tests
 
 ## Getting started
@@ -27,16 +27,13 @@ Open http://localhost:3001 to view the app.
 | Build     | `pnpm --filter playground build`     |
 | Preview   | `pnpm --filter playground preview`   |
 | Typecheck | `pnpm --filter playground typecheck` |
-| Lint      | `pnpm --filter playground lint`      |
 | Test      | `pnpm --filter playground test`      |
 | Format    | `pnpm --filter playground format`    |
 | Clean     | `pnpm --filter playground clean`     |
 
-## UI imports
+Linting is repo-wide: run `pnpm lint` from the root.
 
-Use subpath exports from the UI package:
+## Styling
 
-```ts
-import { Button } from "@repo/ui/components/button";
-import { cn } from "@repo/ui/lib/utils";
-```
+`src/globals.css` imports Tailwind and sets `@source` scanning. There is no shared
+theme package, so use plain Tailwind utilities.

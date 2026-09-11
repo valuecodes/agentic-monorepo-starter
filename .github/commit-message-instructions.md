@@ -14,12 +14,12 @@ Only these `<type>` values: chore, docs, feat, fix, refactor, style, test.
 
 ## Monorepo Context
 
-Mention the area touched (web, playground, docs, ui, lint, typecheck, agents) in the subject when helpful.
+Mention the area touched (playground, docs, lint, typecheck, tooling, deps) in the subject when helpful.
 
 Examples:
 
-- `docs: update turbo commands for docs app`
-- `feat: add button variants to ui`
+- `docs: update lint commands for oxlint`
+- `chore: bump typescript in the catalog`
 
 If changes span multiple areas, prefer a higher-level subject (e.g., `chore: align tooling configs across repo`) instead of listing everything.
 
