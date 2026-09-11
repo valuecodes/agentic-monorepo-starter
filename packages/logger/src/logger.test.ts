@@ -179,13 +179,55 @@ describe("Logger", () => {
   // — is what a JSON parser and Cloud Logging keep.
   it("lets a call-site field win over a binding of the same name", () => {
     const { logger, lines } = createTestLogger();
+    const scoped = logger.child({ region: "ambient" });
+
+    scoped.info("override", { region: "explicit" });
+
+    expect(lines[0]?.region).toBe("explicit");
+  });
+
+  // ...but NOT for the keys Cloud Logging reads by name. Without this, an
+  // object spread from untrusted input could file an ERROR as DEBUG, where no
+  // `severity >= ERROR` alert would ever see it.
+  it("refuses to let a call-site field forge severity, time or the trace", () => {
+    const { logger, lines } = createTestLogger();
     const traced = logger.child({
       "logging.googleapis.com/trace": "ambient",
     });
 
-    traced.info("override", { "logging.googleapis.com/trace": "explicit" });
+    traced.error("auth bypass attempt", {
+      severity: "DEBUG",
+      time: "1999-01-01T00:00:00.000Z",
+      "logging.googleapis.com/trace": "attacker",
+      requestId: "a",
+    });
 
-    expect(lines[0]?.["logging.googleapis.com/trace"]).toBe("explicit");
+    expect(lines[0]).toMatchObject({
+      severity: "ERROR",
+      "logging.googleapis.com/trace": "ambient",
+      requestId: "a",
+    });
+    expect(lines[0]?.time).not.toBe("1999-01-01T00:00:00.000Z");
+  });
+
+  // pino resolves its per-key handlers with bracket access, so these keys would
+  // otherwise throw (`hasOwnProperty`) or emit an unparseable line (`toString`).
+  it("survives field names that collide with Object.prototype", () => {
+    const { logger, lines } = createTestLogger();
+
+    expect(() => {
+      logger.info(
+        "req",
+        JSON.parse('{"hasOwnProperty":"x","toString":"y","ok":1}') as Record<
+          string,
+          unknown
+        >
+      );
+    }).not.toThrow();
+
+    expect(lines).toHaveLength(1);
+    expect(lines[0]).toMatchObject({ message: "req", ok: 1 });
+    expect(lines[0]).not.toHaveProperty("hasOwnProperty", "x");
   });
 
   it("emits nothing at all when silent", () => {
