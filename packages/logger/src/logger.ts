@@ -7,7 +7,11 @@
 // namespace (`destination`, `stdSerializers`, `stdTimeFunctions`) as well as
 // the callable.
 import pino from "pino";
-import type { DestinationStream, Logger as PinoLogger } from "pino";
+import type {
+  DestinationStream,
+  Logger as PinoLogger,
+  LoggerOptions as PinoLoggerOptions,
+} from "pino";
 
 import { withStackTrace } from "./error-reporting";
 import { sanitizeBindings, sanitizeFields } from "./fields";
@@ -23,6 +27,21 @@ type LoggerOptions = {
    * service name and revision here rather than repeating them at call sites.
    */
   readonly bindings?: LogFields;
+  /**
+   * pino redact paths. There is no default: the right list is app-specific and
+   * matchers are compiled at construction and walked per line.
+   *
+   * Set this in any service that handles credentials. pino's `err` serialiser
+   * copies an Error's own enumerable properties, so a third-party rejection
+   * (an axios error, say) carries `err.config.headers.authorization` straight
+   * into the log — and passing an `Error` as `err` is exactly what this package
+   * tells you to do. A reasonable starting list:
+   *
+   * ```ts
+   * ["*.authorization", "*.token", "err.config.headers.authorization"]
+   * ```
+   */
+  readonly redact?: PinoLoggerOptions["redact"];
   /** Test seam. Production always writes to fd 1. */
   readonly destination?: DestinationStream;
 };
@@ -69,6 +88,9 @@ const buildPino = (options: LoggerOptions): PinoLogger => {
           ? null
           : sanitizeBindings(options.bindings),
       formatters: { level: toSeverity, log: withStackTrace },
+      // Omitted rather than passed as undefined: pino validates the shape of
+      // `redact` when the key is present.
+      ...(options.redact === undefined ? {} : { redact: options.redact }),
     },
     options.destination ?? pino.destination({ dest: 1, sync: true })
   );

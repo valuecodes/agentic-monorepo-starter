@@ -230,6 +230,30 @@ describe("Logger", () => {
     expect(lines[0]).not.toHaveProperty("hasOwnProperty", "x");
   });
 
+  // pino's err serialiser copies an Error's own properties, so a third-party
+  // rejection can carry an Authorization header into the log. LoggerOptions
+  // must expose redact, or the README's mitigation is impossible to apply.
+  it("forwards redact paths to pino", () => {
+    const lines: Record<string, unknown>[] = [];
+    const logger = new Logger({
+      level: "debug",
+      redact: ["err.config.headers.authorization"],
+      destination: {
+        write: (line: string) => {
+          lines.push(JSON.parse(line) as Record<string, unknown>);
+        },
+      },
+    });
+
+    logger.error("http call failed", {
+      err: Object.assign(new Error("401"), {
+        config: { headers: { authorization: "Bearer SUPER_SECRET" } },
+      }),
+    });
+
+    expect(JSON.stringify(lines[0])).not.toContain("SUPER_SECRET");
+  });
+
   it("emits nothing at all when silent", () => {
     const { logger, lines } = createTestLogger("silent");
 

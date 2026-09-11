@@ -13,17 +13,17 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "react": "catalog:",
-    "react-dom": "catalog:"
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
   },
   "devDependencies": {
     "@repo/prettier": "workspace:*",
     "@repo/typescript": "workspace:*",
-    "@tailwindcss/postcss": "catalog:",
-    "@types/react": "catalog:",
-    "@types/react-dom": "catalog:",
+    "@tailwindcss/postcss": "4.3.3",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.5",
     "@vitejs/plugin-react": "6.1.1",
-    "tailwindcss": "catalog:",
+    "tailwindcss": "4.3.3",
     "typescript": "catalog:",
     "vite": "8.2.2",
     "vitest": "catalog:"

@@ -34,12 +34,26 @@ const PROTOTYPE_KEYS: ReadonlySet<string> = new Set(
  * Only call-site fields are restricted.
  */
 const RESERVED_KEYS: ReadonlySet<string> = new Set([
+  // Read by name and promoted out of the payload.
   "severity",
-  "time",
   "message",
+  "httpRequest",
   "stack_trace",
-  "logging.googleapis.com/trace",
+  // Every timestamp form Cloud Logging accepts, not just the one we emit —
+  // forging any of them backdates the entry out of an incident window.
+  "time",
+  "timestamp",
+  "timestampSeconds",
+  "timestampNanos",
+  // `insertId` is the deduplication key: a forged repeat can suppress a later
+  // genuine entry. `labels` and `operation` drive filtering and request
+  // grouping, `sourceLocation` the reported call site.
+  "logging.googleapis.com/insertId",
+  "logging.googleapis.com/labels",
+  "logging.googleapis.com/operation",
+  "logging.googleapis.com/sourceLocation",
   "logging.googleapis.com/spanId",
+  "logging.googleapis.com/trace",
   "logging.googleapis.com/trace_sampled",
 ]);
 

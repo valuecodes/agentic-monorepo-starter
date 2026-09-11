@@ -19,6 +19,20 @@ type TraceHeaders = {
   readonly cloudTraceContext?: string | undefined;
 };
 
+type TraceOptions = {
+  /**
+   * Emit the fully qualified `projects/<projectId>/traces/<TRACE_ID>` resource
+   * name instead of the bare trace id.
+   *
+   * Google documents the qualified form as the value of
+   * `logging.googleapis.com/trace`, and it is what reliably links an entry to
+   * Cloud Trace. The bare id is kept as the default because it needs no project
+   * id — but if correlation does not show up in the Logs Explorer, pass
+   * `process.env.GOOGLE_CLOUD_PROJECT` here.
+   */
+  readonly projectId?: string | undefined;
+};
+
 const TRACEPARENT = /^00-([0-9a-f]{32})-([0-9a-f]{16})-([0-9a-f]{2})$/;
 
 const CLOUD_TRACE = /^([0-9a-f]{32})(?:\/(\d{1,20}))?(?:;o=([01]))?$/;
@@ -99,28 +113,44 @@ const fromCloudTraceContext = (header: string): TraceFields | undefined => {
   };
 };
 
+/** Applies the project qualification to whichever parser produced the fields. */
+const qualify = (
+  fields: TraceFields,
+  projectId: string | undefined
+): TraceFields =>
+  projectId === undefined || projectId === ""
+    ? fields
+    : {
+        ...fields,
+        "logging.googleapis.com/trace": `projects/${projectId}/traces/${fields["logging.googleapis.com/trace"]}`,
+      };
+
 /**
- * The bare TRACE_ID form is used rather than
- * `projects/<PROJECT_ID>/traces/<TRACE_ID>`. Both are accepted by the Logs
- * Explorer and Trace Explorer, and the bare form needs no project id — which
- * matters when the platform injects no environment variables.
- *
  * `traceparent` wins when both are present: it is the standard, and a caller
  * that sends it is the more likely source of a trace we can actually join.
+ *
+ * Pass `projectId` to emit the fully qualified resource name Google documents
+ * for `logging.googleapis.com/trace` — see `TraceOptions`.
  */
-const parseTraceHeaders = (headers: TraceHeaders): TraceFields | undefined => {
+const parseTraceHeaders = (
+  headers: TraceHeaders,
+  options: TraceOptions = {}
+): TraceFields | undefined => {
   const { traceparent, cloudTraceContext } = headers;
 
   const w3c =
     traceparent === undefined ? undefined : fromTraceparent(traceparent);
   if (w3c !== undefined) {
-    return w3c;
+    return qualify(w3c, options.projectId);
   }
 
-  return cloudTraceContext === undefined
-    ? undefined
-    : fromCloudTraceContext(cloudTraceContext);
+  const cloud =
+    cloudTraceContext === undefined
+      ? undefined
+      : fromCloudTraceContext(cloudTraceContext);
+
+  return cloud === undefined ? undefined : qualify(cloud, options.projectId);
 };
 
-export type { TraceFields, TraceHeaders };
+export type { TraceFields, TraceHeaders, TraceOptions };
 export { parseTraceHeaders };

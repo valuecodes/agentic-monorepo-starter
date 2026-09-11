@@ -4,6 +4,6 @@
 // place it owns.
 export type { LoggerOptions } from "./logger";
 export { Logger } from "./logger";
-export type { TraceFields, TraceHeaders } from "./trace";
+export type { TraceFields, TraceHeaders, TraceOptions } from "./trace";
 export { parseTraceHeaders } from "./trace";
 export type { LogFields, LoggerLike, LogLevel, LogMethod } from "./types";

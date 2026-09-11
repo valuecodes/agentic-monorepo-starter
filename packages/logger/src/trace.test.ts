@@ -76,6 +76,37 @@ describe("parseTraceHeaders", () => {
     ).toBeUndefined();
   });
 
+  // Google documents `logging.googleapis.com/trace` as the qualified resource
+  // name; the bare id is only the default because it needs no project id.
+  it("qualifies the trace with a project id when one is given", () => {
+    expect(
+      parseTraceHeaders(
+        { traceparent: `00-${TRACE}-00f067aa0ba902b7-01` },
+        { projectId: "my-project" }
+      )
+    ).toMatchObject({
+      "logging.googleapis.com/trace": `projects/my-project/traces/${TRACE}`,
+      "logging.googleapis.com/spanId": "00f067aa0ba902b7",
+    });
+  });
+
+  it("qualifies the Cloud Trace path too", () => {
+    expect(
+      parseTraceHeaders(
+        { cloudTraceContext: `${TRACE}/1234567890;o=1` },
+        { projectId: "my-project" }
+      )
+    ).toMatchObject({
+      "logging.googleapis.com/trace": `projects/my-project/traces/${TRACE}`,
+    });
+  });
+
+  it("leaves the id bare when no project id is given", () => {
+    expect(
+      parseTraceHeaders({ traceparent: `00-${TRACE}-00f067aa0ba902b7-01` }, {})
+    ).toMatchObject({ "logging.googleapis.com/trace": TRACE });
+  });
+
   it("drops a span that cannot be a uint64", () => {
     const parsed = parseTraceHeaders({
       cloudTraceContext: `${TRACE}/99999999999999999999`,

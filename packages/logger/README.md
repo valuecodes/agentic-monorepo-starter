@@ -97,10 +97,18 @@ The consequence to know: **only loggers descended from that child are traced.** 
 module-level logger directly and logs during a request produces an untraced line, and nothing in the
 type system will tell you. Pass the logger down.
 
-W3C `traceparent` wins over `X-Cloud-Trace-Context` when both are present. The bare `TRACE_ID` form
-is emitted rather than `projects/<PROJECT_ID>/traces/<TRACE_ID>`; both correlate, and the bare form
-needs no project id. If correlation ever fails to appear in the Logs Explorer, set
-`GOOGLE_CLOUD_PROJECT` and prefix.
+W3C `traceparent` wins over `X-Cloud-Trace-Context` when both are present.
+
+By default the bare `TRACE_ID` is emitted, because it needs no project id. But Google documents the
+value of `logging.googleapis.com/trace` as the **qualified** resource name
+`projects/<PROJECT_ID>/traces/<TRACE_ID>`, and that is the form that reliably links an entry to
+Cloud Trace — so pass a project id when you have one:
+
+```ts
+parseTraceHeaders(headers, { projectId: process.env.GOOGLE_CLOUD_PROJECT });
+```
+
+If trace correlation does not appear in the Logs Explorer, this is the first thing to set.
 
 Because a child is an ordinary value captured lexically, **work that outlives its request keeps the
 trace it started under**, and it does not depend on async-context propagation surviving an abandoned
@@ -130,32 +138,32 @@ path this README tells you to use: an `axios`/fetch-wrapper rejection carries `e
 so `logger.error("http call failed", { err })` writes the outbound `Authorization` header and
 request body into Cloud Logging, readable by anyone with `roles/logging.viewer`.
 
-There is no default `redact` because the right path list is app-specific and matchers are compiled
-at construction and walked per line. If a service handles credentials, set one in that service:
+There is no _default_ `redact` because the right path list is app-specific and matchers are compiled
+at construction and walked per line. Pass one via `LoggerOptions` in any service that handles
+credentials:
 
 ```ts
-// pino redact paths, passed where the service builds its logger
-[
-  "*.authorization",
-  "*.token",
-  "err.config.headers.authorization",
-  "req.headers.authorization",
-];
+const logger = new Logger({
+  bindings: { service: "api" },
+  redact: ["*.authorization", "*.token", "err.config.headers.authorization"],
+});
 ```
 
-Until then the rule is narrower than "don't log raw headers": **don't pass an `Error` you did not
+Until you do, the rule is narrower than "don't log raw headers": **don't pass an `Error` you did not
 construct without knowing what it carries.**
 
 **No duplicate-key guard, except where it matters.** Bindings are written ahead of call-site fields
 and nothing de-duplicates them, so a repeated key is emitted twice and JSON parsers take the last
 value: the call site wins and the binding is lost. Don't shadow bound keys.
 
-The exception is the set Cloud Logging reads by name — `severity`, `time`, `message`,
-`stack_trace` and the three `logging.googleapis.com/*` trace keys. Those are **stripped from
-call-site fields** (`fields.ts`), because otherwise an object spread from untrusted input could file
-an ERROR as `severity: "DEBUG"` where no alert would see it, backdate `time` out of an incident
-window, or attach the line to another request's trace. `child()` bindings may still set them — that
-is how `parseTraceHeaders` works.
+The exception is the set Cloud Logging promotes out of the payload — `severity`, `message`,
+`httpRequest`, `stack_trace`, every timestamp form (`time`, `timestamp`, `timestampSeconds`,
+`timestampNanos`) and the `logging.googleapis.com/*` keys (`insertId`, `labels`, `operation`,
+`sourceLocation`, `trace`, `spanId`, `trace_sampled`). Those are **stripped from call-site fields**
+(`fields.ts`), because otherwise an object spread from untrusted input could file an ERROR as
+`severity: "DEBUG"` where no alert would see it, backdate `time` out of an incident window, forge an
+`insertId` so a later genuine entry is deduplicated away, or attach the line to another request's
+trace. `child()` bindings may still set them — that is how `parseTraceHeaders` works.
 
 Field names colliding with `Object.prototype` (`hasOwnProperty`, `toString`, `constructor`, …) are
 dropped for a different reason: pino resolves its per-key handlers with bracket access, so those
