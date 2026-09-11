@@ -2,32 +2,20 @@
   "$schema": "https://turborepo.com/schema.json",
   "tasks": {
     "build": {
-      "dependsOn": ["prebuild", "^build"],
-      "outputs": ["output-file.txt", "dist/**"]
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
     },
     "typecheck": {
       "dependsOn": ["^typecheck"]
     },
-    "prebuild": {},
-    "lint": {
-      "dependsOn": ["^build"],
-      "outputs": [".cache/.eslintcache"]
-    },
-    "check-types": {},
-    "format": {
-      "dependsOn": ["^format"]
-    },
     "test": {
       "dependsOn": ["^test"]
     },
+    "format": {
+      "dependsOn": ["^format"]
+    },
     "clean": {
       "dependsOn": ["^clean"]
-    },
-    "agents:check": {
-      "dependsOn": ["^agents:check"]
-    },
-    "agents:sync": {
-      "dependsOn": ["^agents:sync"]
     },
     "dev": {
       "dependsOn": ["^dev"],

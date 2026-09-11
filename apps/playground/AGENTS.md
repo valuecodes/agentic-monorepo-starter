@@ -6,8 +6,8 @@ This directory inherits `/AGENTS.md`. This file lists only additions and overrid
 
 ## What This Workspace Is
 
-- Vite 7 + React 19 playground for fast UI experiments.
-- Tailwind CSS 4 with shared `@repo/ui` components and theme.
+- Vite 8 + React 19 app for fast experiments.
+- Tailwind CSS 4.
 - Single-page app rendered from `src/home.tsx`.
 
 ---
@@ -20,12 +20,14 @@ This directory inherits `/AGENTS.md`. This file lists only additions and overrid
 | Build     | `pnpm --filter playground build`     |
 | Preview   | `pnpm --filter playground preview`   |
 | Typecheck | `pnpm --filter playground typecheck` |
-| Lint      | `pnpm --filter playground lint`      |
 | Test      | `pnpm --filter playground test`      |
 | Format    | `pnpm --filter playground format`    |
 | Clean     | `pnpm --filter playground clean`     |
 
-Or run repo-wide via root `pnpm typecheck` / `pnpm lint` / `pnpm test` / `pnpm build`.
+Or run repo-wide via root `pnpm typecheck` / `pnpm test` / `pnpm build`.
+
+There is no per-workspace `lint` script: linting is a single root `pnpm lint`
+(oxlint) covering the whole repo.
 
 ---
 
@@ -37,21 +39,18 @@ Or run repo-wide via root `pnpm typecheck` / `pnpm lint` / `pnpm test` / `pnpm b
 
 ### Styling
 
-- `src/globals.css` already imports Tailwind and the UI theme.
-- Tailwind source scanning uses `@source` directives for local and UI package files.
+- `src/globals.css` imports Tailwind and declares its `@source` scanning.
+- Plain Tailwind utilities — there is no shared theme package, so semantic
+  tokens like `text-muted-foreground` are not available.
 
-### UI Package Imports
+### TypeScript
 
-Import UI components using subpath exports:
-
-```ts
-import { Button } from "@repo/ui/components/button";
-import { cn } from "@repo/ui/lib/utils";
-```
+- `tsconfig.json` sets `"types": ["vite/client"]`. This is load-bearing:
+  without it, TypeScript 7 rejects `import "./globals.css"` with TS2882.
 
 ### Vite Notes
 
-- No Next.js routing or `~/` alias; use relative imports.
+- No path alias; use relative imports.
 
 ---
 
@@ -61,3 +60,4 @@ import { cn } from "@repo/ui/lib/utils";
 2. **Tests run once** - `pnpm --filter playground test` uses `vitest run` (no watch mode).
 3. **Typecheck is separate** - run `pnpm --filter playground typecheck` to catch TS errors early.
 4. **Tailwind scanning** - if you add new directories, update `@source` entries in `src/globals.css`.
+5. **`build` runs `tsc && vite build`** - a type error fails the build even though Vite itself would not catch it.
