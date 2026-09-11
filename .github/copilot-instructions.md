@@ -6,7 +6,7 @@
 - Apps may import packages; packages must never import apps.
 - Keep diffs focused (no drive-by refactors); do not introduce new tooling without discussion.
 - No secrets or `.env*` files; code must be public-safe.
-- Git operations are human-only: never commit, push, or change branches.
+- Do not commit, push, or change branches as part of a suggestion; leave git operations to the human driving the change.
 
 ## Tooling & commands
 

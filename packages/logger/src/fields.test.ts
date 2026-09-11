@@ -29,6 +29,24 @@ describe("sanitizeFields", () => {
     ).toEqual({ requestId: "a" });
   });
 
+  // insertId is the deduplication key, labels/operation drive filtering and
+  // request grouping, httpRequest is promoted whole.
+  it("drops the other promoted Cloud Logging metadata fields", () => {
+    expect(
+      sanitizeFields({
+        httpRequest: { requestMethod: "DELETE" },
+        timestamp: "1999-01-01T00:00:00.000Z",
+        timestampSeconds: 0,
+        timestampNanos: 0,
+        "logging.googleapis.com/insertId": "dedupe-me",
+        "logging.googleapis.com/labels": { env: "spoofed" },
+        "logging.googleapis.com/operation": { id: "spoofed" },
+        "logging.googleapis.com/sourceLocation": { file: "spoofed" },
+        requestId: "a",
+      })
+    ).toEqual({ requestId: "a" });
+  });
+
   it("leaves an ordinary field object untouched", () => {
     const fields = { requestId: "a", durationMs: 3, err: new Error("x") };
 
