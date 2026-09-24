@@ -26,7 +26,7 @@ Guidelines for AI agents and contributors working in this Turborepo monorepo.
 | ---------- | ------------------ | ---------------------------------------------------------------- |
 | prettier   | `@repo/prettier`   | Shared Prettier config                                           |
 | typescript | `@repo/typescript` | Shared tsconfig presets (`base.json`, `node.json`, `react.json`) |
-| github     | `@repo/github`     | GitHub Actions composite setup action                            |
+| github     | `@repo/github`     | GitHub Actions composite setup action, gitleaks `secrets-check`  |
 
 Apps may import packages; packages must never import apps.
 
@@ -46,6 +46,7 @@ pnpm test                        # turbo run test
 pnpm build                       # turbo run build
 pnpm format                      # prettier --write .
 pnpm format:check                # prettier --check . (no writes)
+pnpm secrets:check               # gitleaks over the full git history
 pnpm clean                       # turbo run clean
 ```
 
@@ -55,8 +56,12 @@ there are no findings, so silent output means clean.
 
 There is no post-edit formatting hook: run `pnpm format` yourself before committing.
 
-CI (`.github/workflows/`) runs typecheck, lint, format-check and test on push to `main`
-and on PRs.
+`secrets:check` runs gitleaks (`tooling/github/scripts/secrets-check.sh`, version pinned
+there) using a local `gitleaks` binary if one is on PATH, otherwise the pinned Docker image.
+It exits 0 when clean and 1 when it finds a leak.
+
+CI (`.github/workflows/`) runs typecheck, lint, format-check, test, build and secrets on
+push to `main` and on PRs.
 
 ---
 
