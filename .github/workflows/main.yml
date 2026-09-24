@@ -101,8 +101,8 @@ jobs:
       - name: Build
         run: pnpm build
 
-  secrets:
-    name: secrets
+  secrets-scan:
+    name: secrets-scan
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -114,7 +114,7 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
 
-      # Same script as `pnpm secrets:check`; runs the pinned gitleaks Docker
+      # Same script as `pnpm secrets:scan`; runs the pinned gitleaks Docker
       # image, so no pnpm/Node setup is needed.
       - name: Scan for secrets
-        run: sh tooling/github/scripts/secrets-check.sh
+        run: sh tooling/github/scripts/secrets-scan.sh

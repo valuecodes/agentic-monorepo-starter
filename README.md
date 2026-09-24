@@ -16,7 +16,7 @@ apps/playground        Vite 8 + React 19 sandbox
 packages/logger        pino logger, Cloud Logging shaped JSON
 tooling/prettier       shared Prettier config
 tooling/typescript     shared tsconfig presets (base, node, react)
-tooling/github         composite action: pnpm + Node + install; secrets-check script
+tooling/github         composite action: pnpm + Node + install; secrets-scan script
 .oxlintrc.json         single root lint config for the whole repo
 ```
 
@@ -38,13 +38,14 @@ pnpm test           # test suite
 pnpm build          # production builds
 pnpm format         # Prettier write
 pnpm format:check   # Prettier check (CI gate)
-pnpm secrets:check  # gitleaks secret scan over git history
+pnpm secrets:scan   # gitleaks secret scan over git history
 ```
 
 oxlint prints nothing when there are no findings, so silent output means clean.
 
 CI runs typecheck, lint, format-check, test, build and a gitleaks secret scan on push to
-`main` and on PRs. `secrets:check` needs either `gitleaks` on PATH or a running Docker daemon.
+`main` and on PRs. `secrets:scan` needs either `gitleaks` v8.19+ on PATH or a running
+Docker daemon.
 
 ## Use this template
 
