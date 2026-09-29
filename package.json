@@ -20,12 +20,14 @@
     "clean": "turbo run clean"
   },
   "devDependencies": {
+    "@ianvs/prettier-plugin-sort-imports": "catalog:",
     "@repo/prettier": "workspace:*",
     "@types/node": "catalog:",
     "knip": "6.35.1",
     "oxlint": "1.83.0",
     "oxlint-tsgolint": "7.0.2001",
     "prettier": "catalog:",
+    "prettier-plugin-tailwindcss": "catalog:",
     "turbo": "2.10.13",
     "typescript": "catalog:"
   },

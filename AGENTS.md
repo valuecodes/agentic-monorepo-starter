@@ -53,8 +53,8 @@ pnpm clean                       # turbo run clean
 
 `lint` and `knip` do not go through Turbo — each is a single process over the whole
 repo. oxlint is configured by the root `.oxlintrc.json` (including `import/no-cycle`)
-and prints nothing when there are no findings, so silent output means clean. Knip runs
-on its defaults (no config file) and exits 0 when clean.
+and prints nothing when there are no findings, so silent output means clean. Knip is
+configured by the root `knip.jsonc` and exits 0 when clean.
 
 There is no post-edit formatting hook: run `pnpm format` yourself before committing.
 
