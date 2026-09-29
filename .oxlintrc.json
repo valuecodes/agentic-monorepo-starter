@@ -34,7 +34,7 @@
   // `.gitignore` is read natively by oxlint, which is what keeps `dist/`,
   // `.turbo/` and `.cache/` out -- the old config had to feed it in through
   // `includeIgnoreFile`. Only the config-file glob has to be repeated here:
-  // `postcss.config.mjs`, `vite.config.ts` and `vitest.config.ts` sit outside
+  // `vite.config.ts` and `vitest.config.ts` sit outside
   // every tsconfig `include`, so type-aware rules cannot resolve them.
   "ignorePatterns": ["**/*.config.*"],
 
@@ -172,6 +172,9 @@
 
     // eslint-plugin-import
     "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
+    // Circular imports are a guardrail, not a style choice: they break module
+    // init order silently. Checked here so it rides the existing lint pass.
+    "import/no-cycle": "error",
 
     // eslint-plugin-react `recommended`. These were dead under the old config:
     // `tooling/eslint/react.ts` spread `configs.flat["jsx-runtime"]` after

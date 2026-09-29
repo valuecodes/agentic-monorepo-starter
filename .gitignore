@@ -9,14 +9,14 @@ node_modules
 .turbo
 .cache
 
+# Local git worktrees
+.worktrees/
+
 # Build Outputs
 .next
 dist
 build
 out
-
-# Lock files (for prettier)
-pnpm-lock.yaml
 
 # Debug
 npm-debug.log*

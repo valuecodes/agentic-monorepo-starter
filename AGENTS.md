@@ -34,13 +34,14 @@ Apps may import packages; packages must never import apps.
 
 ## Commands
 
-**Prerequisites:** Node.js 24.12.0 (`.nvmrc`), pnpm 11.24.0 (`packageManager` in root `package.json`).
+**Prerequisites:** Node.js 24.21.0 (`.nvmrc`), pnpm 12.4.2 (`packageManager` in root `package.json`).
 
 ```bash
 pnpm install                     # Install all dependencies
 pnpm --filter playground dev     # Vite dev server (port 3001)
 
 pnpm lint                        # oxlint, one process over the whole repo
+pnpm knip                        # unused files, exports and dependencies
 pnpm typecheck                   # turbo run typecheck
 pnpm test                        # turbo run test
 pnpm build                       # turbo run build
@@ -50,9 +51,10 @@ pnpm secrets:scan                # gitleaks over the full git history
 pnpm clean                       # turbo run clean
 ```
 
-`lint` is the one task that does not go through Turbo — oxlint is a single fast process
-over the whole repo, configured by the root `.oxlintrc.json`. It prints nothing when
-there are no findings, so silent output means clean.
+`lint` and `knip` do not go through Turbo — each is a single process over the whole
+repo. oxlint is configured by the root `.oxlintrc.json` (including `import/no-cycle`)
+and prints nothing when there are no findings, so silent output means clean. Knip runs
+on its defaults (no config file) and exits 0 when clean.
 
 There is no post-edit formatting hook: run `pnpm format` yourself before committing.
 
@@ -60,8 +62,9 @@ There is no post-edit formatting hook: run `pnpm format` yourself before committ
 there) using a local `gitleaks` v8.19+ if one is on PATH, otherwise the pinned Docker image.
 It exits 0 when clean and 1 when it finds a leak.
 
-CI (`.github/workflows/`) runs typecheck, lint, format-check, test, build and
-secrets-scan on push to `main` and on PRs.
+CI (`.github/workflows/`) runs typecheck, lint, knip, format-check, test, build,
+secrets-scan and CodeQL code scanning (`javascript-typescript` and `actions`) on push
+to `main` and on PRs.
 
 ---
 

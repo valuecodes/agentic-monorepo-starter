@@ -9,16 +9,14 @@
       "Bash(pnpm format:check:*)",
       "Bash(pnpm test:*)",
       "Bash(pnpm secrets:scan:*)",
-      "Bash(pnpm --filter:*)",
-      "Bash(pnpm typecheck *)"
+      "Bash(pnpm knip:*)",
+      "Bash(pnpm --filter:*)"
     ],
     "deny": [
       "Bash(curl:*)",
       "Bash(wget:*)",
       "Bash(nc:*)",
       "Bash(ssh:*)",
-      "Read(**/.env)",
-      "Read(**/.env.*)",
       "Read(**/.env*)",
       "Read(**/secrets/**)"
     ],
@@ -29,6 +27,5 @@
       "Bash(git commit:*)"
     ],
     "defaultMode": "default"
-  },
-  "description": "Settings for Claude code agents"
+  }
 }
