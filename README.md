@@ -46,9 +46,8 @@ pnpm secrets:scan   # gitleaks secret scan over git history
 oxlint prints nothing when there are no findings, so silent output means clean.
 
 CI runs typecheck, lint, knip, format-check, test, build and a gitleaks secret scan on
-push to `main` and on PRs, plus CodeQL code scanning. PRs also run `dependency-review`,
-which blocks newly added dependencies with known vulnerabilities. `secrets:scan` needs
-either `gitleaks` v8.19+ on PATH or a running Docker daemon.
+push to `main` and on PRs, plus CodeQL code scanning. `secrets:scan` needs either
+`gitleaks` v8.19+ on PATH or a running Docker daemon.
 
 ## Use this template
 
@@ -63,5 +62,4 @@ Use GitHub's **Use this template** button, then:
 - Under Settings → Code security, turn on **Dependabot alerts** and leave **Dependabot
   security updates** off: you get notified about vulnerable dependencies without
   automatic PRs. There is deliberately no `.github/dependabot.yml`, so no version-update
-  PRs either. The `dependency-review` PR job relies on the dependency graph, which is on
-  by default for public repos.
+  PRs either.
