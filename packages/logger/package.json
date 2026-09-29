@@ -9,7 +9,6 @@
   "scripts": {
     "typecheck": "tsc",
     "test": "vitest run",
-    "format": "prettier --write .",
     "clean": "rm -rf .turbo node_modules .cache"
   },
   "dependencies": {
@@ -19,7 +18,6 @@
     "@repo/prettier": "workspace:*",
     "@repo/typescript": "workspace:*",
     "@types/node": "catalog:",
-    "prettier": "catalog:",
     "typescript": "catalog:",
     "vitest": "catalog:"
   },

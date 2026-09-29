@@ -1,41 +1,23 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
 
-  // Every rule below is listed explicitly and every category is off, because
-  // oxlint's categories are not the same set as the ESLint presets this
-  // replaced (`eslint:recommended` + typescript-eslint `recommended` +
-  // `recommendedTypeChecked` + `stylisticTypeChecked` + react-hooks
-  // `recommended-latest`). Turning on `correctness` instead would both drop
-  // rules we had and add ones we never ran.
+  // Every rule is listed explicitly with every category off, mirroring
+  // eslint:recommended + typescript-eslint recommended/recommendedTypeChecked/
+  // stylisticTypeChecked + react-hooks recommended-latest.
   //
-  // Generated from the old flat config with `@oxlint/migrate --type-aware`,
-  // then flattened by hand: the tool mirrors ESLint's config-array shape, which
-  // meant eight `overrides` entries repeating the same rules four times.
-  //
-  // `unicorn` and `oxc` are ON by default, so `plugins` has to be explicit to
-  // keep them off -- an empty/absent `plugins` is not the same as "none".
-  //
-  // `correctness` has to be turned off by NAME, not by an empty `categories`
-  // object: `{}` leaves oxlint's default category on, which silently adds ~57
-  // rules at `warn` -- including the ones typescript-eslint deliberately
-  // disables for TS because tsc already reports them (`no-const-assign`,
-  // `constructor-super`, `no-unreachable`, ...). Those are omitted below for
-  // the same reason: every source file in this repo is TypeScript.
+  // `unicorn` and `oxc` are ON by default, so `plugins` must be explicit.
+  // `correctness` must be turned off by name: an empty `categories` leaves it
+  // on and silently adds ~57 rules, including ones tsc already reports.
   "plugins": ["typescript", "import", "react"],
   "categories": { "correctness": "off" },
 
-  // Type-aware rules (the no-unsafe-* family, no-floating-promises,
-  // unbound-method, ...) need the `oxlint-tsgolint` binary. Without it
-  // `oxlint` exits 0 having silently skipped all of them, so the root `lint`
-  // script also passes `--type-aware` to fail loudly.
+  // Type-aware rules need `oxlint-tsgolint`; without it oxlint silently skips
+  // them, so the root `lint` script also passes `--type-aware` to fail loudly.
   "options": { "typeAware": true },
   "env": { "builtin": true },
 
-  // `.gitignore` is read natively by oxlint, which is what keeps `dist/`,
-  // `.turbo/` and `.cache/` out -- the old config had to feed it in through
-  // `includeIgnoreFile`. Only the config-file glob has to be repeated here:
-  // `vite.config.ts` and `vitest.config.ts` sit outside
-  // every tsconfig `include`, so type-aware rules cannot resolve them.
+  // `.gitignore` is read natively. Config files sit outside every tsconfig
+  // `include`, so type-aware rules cannot resolve them.
   "ignorePatterns": ["**/*.config.*"],
 
   "rules": {
@@ -138,9 +120,8 @@
     "typescript/consistent-generic-constructors": "error",
     "typescript/consistent-indexed-object-style": "error",
     "typescript/consistent-type-assertions": "error",
-    // `type` rather than the rule's `interface` default: the shared packages
-    // are written with type aliases, and unions like `LogLevel` cannot be
-    // interfaces anyway, so the alias form is the only one that spans both.
+    // `type` over the `interface` default: unions cannot be interfaces, so
+    // aliases are the one form that covers both.
     "typescript/consistent-type-definitions": ["error", "type"],
     "typescript/dot-notation": "error",
     "typescript/no-confusing-non-null-assertion": "error",
@@ -155,7 +136,7 @@
     "typescript/prefer-regexp-exec": "error",
     "typescript/prefer-string-starts-ends-with": "error",
 
-    // Explicit overrides the old base config set on top of those presets.
+    // Repo-specific additions on top of the presets.
     "typescript/no-non-null-assertion": "error",
     "typescript/no-unused-vars": [
       "error",
@@ -172,17 +153,11 @@
 
     // eslint-plugin-import
     "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
-    // Circular imports are a guardrail, not a style choice: they break module
-    // init order silently. Checked here so it rides the existing lint pass.
+    // Circular imports silently break module init order.
     "import/no-cycle": "error",
 
-    // eslint-plugin-react `recommended`. These were dead under the old config:
-    // `tooling/eslint/react.ts` spread `configs.flat["jsx-runtime"]` after
-    // `configs.flat.recommended`, and since both objects carry a `rules` key the
-    // second spread replaced the first -- collapsing 22 rules down to the two
-    // "off" entries jsx-runtime declares. Enabling them here is a fix, not a
-    // new gate. `react-in-jsx-scope` and `jsx-uses-react` stay off, which is
-    // what jsx-runtime was there to do in the first place.
+    // eslint-plugin-react `recommended`, minus `react-in-jsx-scope` and
+    // `jsx-uses-react` (unneeded with the automatic JSX runtime).
     "react/display-name": "error",
     "react/jsx-key": "error",
     "react/jsx-no-comment-textnodes": "error",
@@ -216,9 +191,5 @@
     "react/unsupported-syntax": "warn",
     "react/use-memo": "error",
     "react/void-use-memo": "error"
-  },
-
-  "globals": {
-    "React": "writable"
   }
 }

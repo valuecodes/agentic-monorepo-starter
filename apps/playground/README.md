@@ -28,10 +28,9 @@ Open http://localhost:3001 to view the app.
 | Preview   | `pnpm --filter playground preview`   |
 | Typecheck | `pnpm --filter playground typecheck` |
 | Test      | `pnpm --filter playground test`      |
-| Format    | `pnpm --filter playground format`    |
 | Clean     | `pnpm --filter playground clean`     |
 
-Linting is repo-wide: run `pnpm lint` from the root.
+Linting and formatting are repo-wide: run `pnpm lint` / `pnpm format` from the root.
 
 ## Styling
 
