@@ -54,3 +54,14 @@ allowBuilds:
 # up on a later run. Use `minimumReleaseAgeExclude` if one package genuinely
 # needs to move faster.
 minimumReleaseAge: 20160
+
+# Fails resolution when a version was published with weaker trust evidence than
+# an earlier version of the same package — e.g. trusted publishing or
+# provenance that suddenly disappears, the usual sign of a hijacked maintainer
+# account. pnpm 12 also re-checks lockfile entries, so this runs on
+# `--frozen-lockfile` installs in CI too.
+#
+# A failure means stop and investigate, not work around. If a downgrade turns
+# out to be legitimate, add that exact version to `trustPolicyExclude` with a
+# comment saying why — never a bare package name, which exempts every version.
+trustPolicy: no-downgrade

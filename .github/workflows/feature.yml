@@ -137,6 +137,21 @@ jobs:
       - name: Scan for secrets
         run: sh tooling/github/scripts/secrets-scan.sh
 
+  # PR-only (not in main.yml): it diffs the dependency graph between the PR's
+  # base and head, and fails if the PR introduces a package with a known
+  # vulnerability. `fail-on-severity` is left at its default, `low`, so any
+  # severity blocks. It reads GitHub's dependency graph through the API, so no
+  # checkout is needed.
+  dependency-review:
+    name: dependency-review
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Dependency review
+        uses: actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294 # v5.0.0
+
   codeql:
     name: codeql (${{ matrix.language }})
     runs-on: ubuntu-latest

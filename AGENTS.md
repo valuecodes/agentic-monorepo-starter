@@ -64,7 +64,8 @@ It exits 0 when clean and 1 when it finds a leak.
 
 CI (`.github/workflows/`) runs typecheck, lint, knip, format-check, test, build,
 secrets-scan and CodeQL code scanning (`javascript-typescript` and `actions`) on push
-to `main` and on PRs.
+to `main` and on PRs. PRs also run `dependency-review`, which fails when a PR adds a
+dependency with a known vulnerability of any severity.
 
 ---
 
@@ -75,3 +76,7 @@ to `main` and on PRs.
 - Add dependencies to the correct workspace with `pnpm --filter <package> add <dep>`.
   Versions shared by more than one package go in the `catalog:` block of
   `pnpm-workspace.yaml`; single-consumer deps are pinned inline.
+- Every install enforces the supply-chain settings in `pnpm-workspace.yaml`
+  (`minimumReleaseAge`, `trustPolicy: no-downgrade`) plus pnpm 12's default
+  `blockExoticSubdeps`. When one fails, investigate: never disable it, and never
+  exclude a whole package to get past it.
