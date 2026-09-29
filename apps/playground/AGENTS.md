@@ -21,13 +21,12 @@ This directory inherits `/AGENTS.md`. This file lists only additions and overrid
 | Preview   | `pnpm --filter playground preview`   |
 | Typecheck | `pnpm --filter playground typecheck` |
 | Test      | `pnpm --filter playground test`      |
-| Format    | `pnpm --filter playground format`    |
 | Clean     | `pnpm --filter playground clean`     |
 
 Or run repo-wide via root `pnpm typecheck` / `pnpm test` / `pnpm build`.
 
-There is no per-workspace `lint` script: linting is a single root `pnpm lint`
-(oxlint) covering the whole repo.
+There are no per-workspace `lint` or `format` scripts: root `pnpm lint` (oxlint) and
+`pnpm format` (Prettier) each cover the whole repo.
 
 ---
 
@@ -58,8 +57,7 @@ There is no per-workspace `lint` script: linting is a single root `pnpm lint`
 
 ## Footguns / Gotchas
 
-1. **Clean uses `rm -rf`** - Unix command. On Windows, run via pnpm for cross-platform handling.
-2. **Tests run once** - `pnpm --filter playground test` uses `vitest run` (no watch mode).
-3. **Typecheck is separate** - run `pnpm --filter playground typecheck` to catch TS errors early.
-4. **Tailwind scanning** - if you add new directories, update `@source` entries in `src/globals.css`.
-5. **`build` runs `tsc && vite build`** - a type error fails the build even though Vite itself would not catch it.
+1. **`build` does not typecheck** - Vite strips types without checking them. Run
+   `pnpm --filter playground typecheck` (CI runs it as its own job).
+2. **Tailwind scanning** - `@source` in `src/globals.css` covers `src/` only; add an entry
+   for any class-bearing files outside it.
