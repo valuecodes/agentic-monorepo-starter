@@ -64,8 +64,7 @@ It exits 0 when clean and 1 when it finds a leak.
 
 CI (`.github/workflows/`) runs typecheck, lint, knip, format-check, test, build,
 secrets-scan and CodeQL code scanning (`javascript-typescript` and `actions`) on push
-to `main` and on PRs. PRs also run `dependency-review`, which fails when a PR adds a
-dependency with a known vulnerability of any severity.
+to `main` and on PRs.
 
 ---
 
