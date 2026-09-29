@@ -40,6 +40,8 @@ There is no per-workspace `lint` script: linting is a single root `pnpm lint`
 ### Styling
 
 - `src/globals.css` imports Tailwind and declares its `@source` scanning.
+- PostCSS config is `.postcssrc.json`. Keep that name: Vite does not look for
+  `postcss.config.json`, and a missing config makes Tailwind emit no utilities.
 - Plain Tailwind utilities — there is no shared theme package, so semantic
   tokens like `text-muted-foreground` are not available.
 
