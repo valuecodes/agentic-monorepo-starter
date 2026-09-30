@@ -51,12 +51,22 @@ pnpm format                      # prettier --write .
 pnpm format:check                # prettier --check . (no writes)
 pnpm secrets:scan                # gitleaks over the full git history
 pnpm clean                       # turbo run clean
+pnpm gen:package                 # scaffold a new package in packages/
 ```
 
 `lint` and `knip` do not go through Turbo — each is a single process over the whole
 repo. oxlint is configured by the root `.oxlintrc.json` (including `import/no-cycle`)
 and prints nothing when there are no findings, so silent output means clean. Knip is
 configured by the root `knip.jsonc` and exits 0 when clean.
+
+Create new packages with the generator rather than by copying one:
+`pnpm gen:package --args <name> "<one-line description>"` (non-interactive), then
+`pnpm install`. It writes `packages/<name>` as `@repo/<name>` with the shared tsconfig,
+prettier and vitest setup, exposes `src/<name>.ts` directly through `exports` (no
+barrel `index.ts`) and adds the row to the Packages table above. Templates live in
+`turbo/generators/templates/package/`. The script runs the lockfile-pinned
+`@turbo/gen` binary (`gen run`) rather than `turbo gen`, which downloads `@turbo/gen`
+with `pnpm dlx`, outside the lockfile and the supply-chain checks.
 
 There is no post-edit formatting hook: run `pnpm format` yourself before committing.
 

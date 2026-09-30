@@ -41,6 +41,7 @@ pnpm build          # production builds
 pnpm format         # Prettier write
 pnpm format:check   # Prettier check (CI gate)
 pnpm secrets:scan   # gitleaks secret scan over git history
+pnpm gen:package    # scaffold a new package in packages/ (@turbo/gen)
 ```
 
 oxlint prints nothing when there are no findings, so silent output means clean.
