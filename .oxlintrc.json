@@ -4,7 +4,7 @@
   // Every rule is listed explicitly with every category off, mirroring
   // eslint:recommended + typescript-eslint recommended/recommendedTypeChecked/
   // stylisticTypeChecked + react-hooks recommended-latest + jsx-a11y
-  // recommended, plus a few repo-specific additions.
+  // recommended, plus repo-specific boundary, strictness and style rules.
   //
   // `plugins` is explicit so only the listed ones load. Enabling a plugin adds
   // no rules by itself: `correctness` must be turned off by name, since an
@@ -174,6 +174,41 @@
       "error",
       { "max": 400, "skipBlankLines": true, "skipComments": true }
     ],
+
+    // Style: one way to write functions, and the cleanups below.
+    "func-style": ["error", "expression"],
+    "arrow-body-style": ["error", "as-needed"],
+    "typescript/method-signature-style": ["error", "property"],
+    "eqeqeq": "error",
+    "curly": "error",
+    "object-shorthand": "error",
+    "prefer-template": "error",
+    "no-else-return": "error",
+    "no-lonely-if": "error",
+    "no-useless-return": "error",
+    "no-unneeded-ternary": "error",
+    "no-useless-concat": "error",
+    "no-useless-computed-key": "error",
+    "no-useless-constructor": "error",
+    "logical-assignment-operators": "error",
+    "prefer-arrow-callback": "error",
+    "prefer-object-spread": "error",
+    "yoda": "error",
+    "no-implicit-coercion": "error",
+    "default-param-last": "error",
+    "default-case-last": "error",
+    "no-return-assign": "error",
+    "no-multi-assign": "error",
+    "radix": "error",
+    "array-callback-return": "error",
+    "typescript/no-unnecessary-template-expression": "error",
+    "typescript/no-unnecessary-boolean-literal-compare": "error",
+    "typescript/no-unnecessary-type-arguments": "error",
+    "typescript/no-unnecessary-type-conversion": "error",
+    "typescript/prefer-reduce-type-parameter": "error",
+    "typescript/consistent-return": "error",
+    // `await` inside try/catch so the catch sees the rejection; not elsewhere.
+    "typescript/return-await": ["error", "in-try-catch"],
     "typescript/no-misused-promises": [
       "error",
       { "checksVoidReturn": { "attributes": false } }
@@ -191,6 +226,9 @@
     // Declarations first, one export list at the bottom, as in `@repo/logger`.
     "import/exports-last": "error",
     "import/group-exports": "error",
+    "import/first": "error",
+    "import/newline-after-import": "error",
+    "import/no-mutable-exports": "error",
 
     // Workspace boundaries. `../` is banned outright: it is the only way a
     // relative path can reach another workspace (including packages reaching
@@ -219,10 +257,42 @@
     "unicorn/filename-case": ["error", { "case": "kebabCase" }],
     // Every disable directive must name the rule it silences.
     "unicorn/no-abusive-eslint-disable": "error",
+    "unicorn/catch-error-name": "error",
+    "unicorn/throw-new-error": "error",
+    "unicorn/error-message": "error",
+    "unicorn/prefer-optional-catch-binding": "error",
+    "unicorn/switch-case-braces": "error",
+    "unicorn/prefer-at": "error",
+    "unicorn/prefer-string-slice": "error",
+    "unicorn/prefer-string-replace-all": "error",
+    "unicorn/no-typeof-undefined": "error",
+    "unicorn/prefer-array-some": "error",
+    "unicorn/prefer-date-now": "error",
+    "unicorn/prefer-node-protocol": "error",
+    "unicorn/prefer-export-from": "error",
+    "unicorn/prefer-structured-clone": "error",
+    "unicorn/prefer-global-this": "error",
+    "unicorn/prefer-spread": "error",
+    "unicorn/consistent-function-scoping": "error",
+    "unicorn/numeric-separators-style": "error",
 
     // vitest
     "vitest/no-focused-tests": "error",
     "vitest/no-disabled-tests": "warn",
+    "vitest/consistent-test-it": ["error", { "fn": "it" }],
+    "vitest/valid-title": "error",
+    "vitest/valid-expect": "error",
+    "vitest/expect-expect": "error",
+    "vitest/no-identical-title": "error",
+    "vitest/no-standalone-expect": "error",
+    "vitest/no-conditional-expect": "error",
+    "vitest/no-duplicate-hooks": "error",
+    "vitest/prefer-hooks-on-top": "error",
+    "vitest/no-commented-out-tests": "error",
+    "vitest/prefer-to-be": "error",
+    "vitest/prefer-to-have-length": "error",
+    "vitest/prefer-to-contain": "error",
+    "vitest/require-top-level-describe": "error",
 
     // eslint-plugin-react `recommended`, minus `react-in-jsx-scope` and
     // `jsx-uses-react` (unneeded with the automatic JSX runtime).
@@ -260,6 +330,23 @@
     "react/unsupported-syntax": "warn",
     "react/use-memo": "error",
     "react/void-use-memo": "error",
+
+    // JSX conventions. Components are arrow functions, matching `func-style`.
+    "react/function-component-definition": [
+      "error",
+      {
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function"
+      }
+    ],
+    "react/self-closing-comp": "error",
+    "react/jsx-boolean-value": "error",
+    "react/jsx-curly-brace-presence": "error",
+    "react/jsx-fragments": "error",
+    "react/jsx-no-useless-fragment": "error",
+    "react/jsx-pascal-case": "error",
+    "react/hook-use-state": "error",
+    "react/no-unstable-nested-components": "error",
 
     // eslint-plugin-jsx-a11y `recommended`. Options are spelled out where
     // oxlint's defaults differ from the preset's.
