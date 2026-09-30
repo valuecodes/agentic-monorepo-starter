@@ -188,6 +188,9 @@
     // Named exports only. Config files that need a default export are
     // already excluded by `ignorePatterns`.
     "import/no-default-export": "error",
+    // Declarations first, one export list at the bottom, as in `@repo/logger`.
+    "import/exports-last": "error",
+    "import/group-exports": "error",
 
     // Workspace boundaries. `../` is banned outright: it is the only way a
     // relative path can reach another workspace (including packages reaching
