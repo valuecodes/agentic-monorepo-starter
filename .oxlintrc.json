@@ -169,6 +169,11 @@
     "typescript/strict-boolean-expressions": "error",
     "no-param-reassign": "error",
     "no-nested-ternary": "error",
+    // Code lines only, so comments and spacing are never what trips it.
+    "max-lines": [
+      "error",
+      { "max": 400, "skipBlankLines": true, "skipComments": true }
+    ],
     "typescript/no-misused-promises": [
       "error",
       { "checksVoidReturn": { "attributes": false } }
