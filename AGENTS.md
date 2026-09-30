@@ -28,7 +28,9 @@ Guidelines for AI agents and contributors working in this Turborepo monorepo.
 | typescript | `@repo/typescript` | Shared tsconfig presets (`base.json`, `node.json`, `react.json`) |
 | github     | `@repo/github`     | GitHub Actions composite setup action, gitleaks `secrets-scan`   |
 
-Apps may import packages; packages must never import apps.
+Apps may import packages; packages must never import apps. oxlint bans `../`
+imports and deep `@repo/*/src` imports: import other workspaces by package name,
+and inside an app use the `~/` alias (`src/*`) to go up the tree.
 
 ---
 
