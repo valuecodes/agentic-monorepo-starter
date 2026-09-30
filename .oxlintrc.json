@@ -185,11 +185,11 @@
       {
         "patterns": [
           {
-            "group": ["@repo/*/src/*"],
+            "group": ["@repo/*/src", "@repo/*/src/**"],
             "message": "Import the package entry, not its internals."
           },
           {
-            "group": ["**/apps/**", "**/packages/**", "**/tooling/**"],
+            "group": ["../**/apps/**", "../**/packages/**", "../**/tooling/**"],
             "message": "Import workspaces by package name, not relative path."
           }
         ]
