@@ -6,10 +6,9 @@ const config: Config = {
     "@ianvs/prettier-plugin-sort-imports",
     "prettier-plugin-tailwindcss",
   ],
-  // Third-party imports, a blank line, then relative imports. No workspace
-  // defines a path alias right now; add a group here (e.g. `^~/(.*)$`)
-  // alongside the alias if one is introduced.
-  importOrder: ["<THIRD_PARTY_MODULES>", "", "^[./]"],
+  // Third-party imports, then the apps' `~/` alias, then relative imports,
+  // each group separated by a blank line.
+  importOrder: ["<THIRD_PARTY_MODULES>", "", "^~/(.*)$", "", "^[./]"],
 };
 
 export default config;

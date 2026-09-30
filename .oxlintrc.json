@@ -184,10 +184,14 @@
     // already excluded by `ignorePatterns`.
     "import/no-default-export": "error",
 
-    // Workspace boundaries. Deep imports must go through a package's
-    // `exports`, and relative paths must not cross into another workspace --
-    // which is also what stops packages reaching into apps (importing an app
-    // by name already fails: apps are never package dependencies).
+    // Workspace boundaries. `../` is banned outright: it is the only way a
+    // relative path can reach another workspace (including packages reaching
+    // into apps -- importing an app by name already fails, since apps are
+    // never package dependencies). Apps go up the tree with the `~/` alias;
+    // packages stay flat or use package.json `imports` (`#...`), because
+    // tsconfig `paths` would resolve against the consuming app's program.
+    "import/no-relative-parent-imports": "error",
+    // Deep imports must go through a package's `exports`.
     "no-restricted-imports": [
       "error",
       {
@@ -195,10 +199,6 @@
           {
             "group": ["@repo/*/src", "@repo/*/src/**"],
             "message": "Import the package entry, not its internals."
-          },
-          {
-            "group": ["../**/apps/**", "../**/packages/**", "../**/tooling/**"],
-            "message": "Import workspaces by package name, not relative path."
           }
         ]
       }

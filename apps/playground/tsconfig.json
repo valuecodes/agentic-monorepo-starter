@@ -6,6 +6,9 @@
     // `vite/client` declares the `*.css` (and other asset) modules that
     // `import "./globals.css"` relies on. Without it TypeScript 7 rejects the
     // side-effect import with TS2882.
-    "types": ["vite/client"]
+    "types": ["vite/client"],
+    // `~/` is the only way up the tree: oxlint bans `../` imports. Vite and
+    // Vitest read this via `resolve.tsconfigPaths`.
+    "paths": { "~/*": ["./src/*"] }
   }
 }

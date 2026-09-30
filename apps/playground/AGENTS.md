@@ -51,7 +51,8 @@ There are no per-workspace `lint` or `format` scripts: root `pnpm lint` (oxlint)
 
 ### Vite Notes
 
-- No path alias; use relative imports.
+- `~/*` maps to `src/*` (tsconfig `paths`, read by Vite and Vitest through
+  `resolve.tsconfigPaths`). Use it instead of `../`, which oxlint bans.
 
 ---
 
