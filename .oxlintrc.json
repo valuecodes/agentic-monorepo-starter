@@ -164,6 +164,11 @@
     "typescript/no-deprecated": "error",
     // Nursery rule, so warn only.
     "typescript/no-unnecessary-condition": "warn",
+    "typescript/no-unnecessary-type-parameters": "error",
+    "typescript/prefer-readonly": "error",
+    "typescript/strict-boolean-expressions": "error",
+    "no-param-reassign": "error",
+    "no-nested-ternary": "error",
     "typescript/no-misused-promises": [
       "error",
       { "checksVoidReturn": { "attributes": false } }
@@ -175,6 +180,9 @@
     "import/no-cycle": "error",
     "import/no-duplicates": "error",
     "import/no-self-import": "error",
+    // Named exports only. Config files that need a default export are
+    // already excluded by `ignorePatterns`.
+    "import/no-default-export": "error",
 
     // Workspace boundaries. Deep imports must go through a package's
     // `exports`, and relative paths must not cross into another workspace --
@@ -201,6 +209,8 @@
     "oxc/no-barrel-file": ["error", { "threshold": 0 }],
 
     "unicorn/filename-case": ["error", { "case": "kebabCase" }],
+    // Every disable directive must name the rule it silences.
+    "unicorn/no-abusive-eslint-disable": "error",
 
     // vitest
     "vitest/no-focused-tests": "error",
