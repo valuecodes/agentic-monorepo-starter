@@ -3,7 +3,9 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.ts",
+    ".": "./src/logger.ts",
+    "./trace": "./src/trace.ts",
+    "./types": "./src/types.ts",
     "./testing": "./src/testing.ts"
   },
   "scripts": {
