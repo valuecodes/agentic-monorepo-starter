@@ -84,7 +84,7 @@ Trace fields are ordinary `child()` bindings. Parse the incoming headers once pe
 traced child, and pass it down — there is no ambient context:
 
 ```ts
-import { parseTraceHeaders } from "@repo/logger";
+import { parseTraceHeaders } from "@repo/logger/trace";
 
 const trace = parseTraceHeaders({
   traceparent: req.header("traceparent"),
@@ -127,8 +127,9 @@ logger.info("heartbeat", { taskId: "a" });
 expect(lines[0]).toMatchObject({ severity: "INFO", message: "heartbeat" });
 ```
 
-To fake a logger rather than capture from one, depend on the `LoggerLike` type: it names no private
-state, so a plain object literal satisfies it. The concrete `Logger` class does not, by design.
+To fake a logger rather than capture from one, depend on the `LoggerLike` type from
+`@repo/logger/types`: it names no private state, so a plain object literal satisfies it. The
+concrete `Logger` class does not, by design.
 
 ## Not configured, on purpose
 

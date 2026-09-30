@@ -252,7 +252,8 @@
     ],
 
     // Barrels built on `export *` hide the public API and defeat
-    // tree-shaking. Explicit named re-exports (as in `@repo/logger`) are fine.
+    // tree-shaking. Packages expose modules directly through package.json
+    // `exports` subpaths instead (see `@repo/logger`).
     "oxc/no-barrel-file": ["error", { "threshold": 0 }],
 
     "unicorn/filename-case": ["error", { "case": "kebabCase" }],
