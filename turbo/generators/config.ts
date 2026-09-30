@@ -76,11 +76,16 @@ const withPackageRow = (
       "Could not find exactly one Packages table in AGENTS.md; add the row by hand."
     );
   }
+  const row = `| ${name} | \`@repo/${name}\` | ${description.trim()} |\n`;
   let end = match.index + match[0].length;
   while (content.startsWith("|", end)) {
-    end = content.indexOf("\n", end) + 1;
+    const newline = content.indexOf("\n", end);
+    if (newline === -1) {
+      // The table ends the file without a trailing newline.
+      return `${content}\n${row}`;
+    }
+    end = newline + 1;
   }
-  const row = `| ${name} | \`@repo/${name}\` | ${description.trim()} |\n`;
   return content.slice(0, end) + row + content.slice(end);
 };
 
