@@ -27,7 +27,7 @@ Requires Node.js 24.21.0 (`.nvmrc`) and pnpm 12.4.2 (`packageManager` in `packag
 
 ```bash
 pnpm install
-pnpm dev          # playground at http://localhost:3001
+pnpm dev          # playground at http://localhost:3000
 ```
 
 ## Commands

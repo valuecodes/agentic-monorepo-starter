@@ -40,7 +40,7 @@ and inside an app use the `~/` alias (`src/*`) to go up the tree.
 
 ```bash
 pnpm install                     # Install all dependencies
-pnpm --filter playground dev     # Vite dev server (port 3001)
+pnpm --filter playground dev     # Vite dev server (port 3000)
 
 pnpm lint                        # oxlint, one process over the whole repo
 pnpm knip                        # unused files, exports and dependencies
