@@ -17,7 +17,7 @@ pnpm install
 pnpm --filter playground dev
 ```
 
-Open http://localhost:3001 to view the app.
+Open http://localhost:3000 to view the app.
 
 ## Common commands
 
