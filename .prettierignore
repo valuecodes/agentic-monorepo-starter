@@ -4,5 +4,6 @@ pnpm-lock.yaml
 **/dist/
 **/.turbo/
 **/.cache/
+**/.wrangler/
 # Handlebars templates for `pnpm gen:package`: Prettier would parse them as Glimmer.
 turbo/generators/templates/

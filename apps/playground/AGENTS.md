@@ -22,6 +22,7 @@ This directory inherits `/AGENTS.md`. This file lists only additions and overrid
 | Typecheck | `pnpm --filter playground typecheck` |
 | Test      | `pnpm --filter playground test`      |
 | Clean     | `pnpm --filter playground clean`     |
+| Deploy    | `pnpm --filter playground deploy`    |
 
 Or run repo-wide via root `pnpm typecheck` / `pnpm test` / `pnpm build`.
 
@@ -54,6 +55,14 @@ There are no per-workspace `lint` or `format` scripts: root `pnpm lint` (oxlint)
 - `~/*` maps to `src/*` (tsconfig `paths`, read by Vite and Vitest through
   `resolve.tsconfigPaths`). Use it instead of `../`, which oxlint bans.
 
+### Deploy
+
+- Cloudflare static assets: `wrangler.jsonc` serves `dist/`; `public/_headers`
+  sets the CSP and cache headers. Deploys are connected in the Cloudflare
+  dashboard, not CI (settings in `README.md`).
+- `compatibility_date` cannot be newer than the pinned workerd's date
+  (`1.YYYYMMDD.x`); bump the two together.
+
 ---
 
 ## Footguns / Gotchas
@@ -62,3 +71,6 @@ There are no per-workspace `lint` or `format` scripts: root `pnpm lint` (oxlint)
    `pnpm --filter playground typecheck` (CI runs it as its own job).
 2. **Tailwind scanning** - `@source` in `src/globals.css` covers `src/` only; add an entry
    for any class-bearing files outside it.
+3. **CSP is production-only** - `public/_headers` allows only `'self'` plus
+   Cloudflare Web Analytics. Anything from another origin works under `vite dev`
+   and breaks once deployed, until `_headers` allows it.

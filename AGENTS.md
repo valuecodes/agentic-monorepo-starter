@@ -10,9 +10,9 @@ Guidelines for AI agents and contributors working in this Turborepo monorepo.
 
 ### Apps (`apps/`)
 
-| Name       | Filter       | Description                           |
-| ---------- | ------------ | ------------------------------------- |
-| playground | `playground` | Vite 8 + React 19 app for experiments |
+| Name       | Filter       | Description                                                     |
+| ---------- | ------------ | --------------------------------------------------------------- |
+| playground | `playground` | Vite 8 + React 19 app for experiments, deployable to Cloudflare |
 
 ### Packages (`packages/`)
 
