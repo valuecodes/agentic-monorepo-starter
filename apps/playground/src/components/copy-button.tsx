@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type CopyButtonProps = {
   readonly text: string;
@@ -16,6 +16,11 @@ const labels: Record<CopyStatus, string> = {
 
 const CopyButton = ({ text }: CopyButtonProps) => {
   const [status, setStatus] = useState<CopyStatus>("idle");
+  // One pending reset at a time, so a quick second click is not cut short by
+  // the first click's timer.
+  const resetTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
+
+  useEffect(() => () => clearTimeout(resetTimer.current), []);
 
   const copy = () => {
     // Inside the promise chain so a missing Clipboard API (non-secure context)
@@ -25,7 +30,10 @@ const CopyButton = ({ text }: CopyButtonProps) => {
       .then(() => setStatus("copied"))
       // Clipboard access can be denied; the command text stays selectable.
       .catch(() => setStatus("failed"))
-      .finally(() => setTimeout(() => setStatus("idle"), resetDelayMs));
+      .finally(() => {
+        clearTimeout(resetTimer.current);
+        resetTimer.current = setTimeout(() => setStatus("idle"), resetDelayMs);
+      });
   };
 
   return (
