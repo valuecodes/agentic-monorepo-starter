@@ -65,7 +65,7 @@ so pinning versions there would be too late:
 
 Keep them in step with `.nvmrc` and the root `packageManager` field.
 
-To deploy from your machine instead, run `pnpm exec wrangler login` once, then
+To deploy from your machine instead, run `pnpm --filter playground exec wrangler login` once, then
 `pnpm --filter playground deploy`.
 
 The Content-Security-Policy in `public/_headers` allows only this origin plus

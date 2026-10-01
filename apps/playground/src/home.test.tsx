@@ -21,4 +21,8 @@ describe("Home", () => {
   it("renders a copy button per quick-start command", () => {
     expect(html.match(/<button/g)).toHaveLength(commands.length);
   });
+
+  it("gives every copy button a status region for its result", () => {
+    expect(html.match(/role="status"/g)).toHaveLength(commands.length);
+  });
 });

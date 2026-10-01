@@ -69,7 +69,7 @@ const guardrails: readonly Guardrail[] = [
   {
     title: "Agent context",
     detail:
-      "AGENTS.md at the root and in each workspace tells coding agents the rules and footguns.",
+      "A root AGENTS.md, plus per-workspace additions where needed, tells coding agents the rules and footguns.",
   },
 ];
 
