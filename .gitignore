@@ -3,9 +3,10 @@ node_modules
 .pnp
 .pnp.js
 
-# Turbo
+# Turbo / Wrangler
 .turbo
 .cache
+.wrangler
 
 # Local git worktrees
 .worktrees/
