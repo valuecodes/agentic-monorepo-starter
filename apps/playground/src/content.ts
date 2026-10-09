@@ -17,13 +17,13 @@ type Guardrail = {
 const repoUrl = "https://github.com/valuecodes/agentic-monorepo-starter";
 
 const stack: readonly StackItem[] = [
-  { name: "Turborepo", version: "2.10", note: "Cached task graph" },
+  { name: "Turborepo", version: "2.11", note: "Cached task graph" },
   { name: "pnpm", version: "12", note: "Workspaces and catalogs" },
   { name: "TypeScript", version: "7", note: "Native Go compiler" },
   { name: "Vite", version: "8", note: "Rolldown-powered builds" },
   { name: "React", version: "19", note: "This page" },
   { name: "Tailwind CSS", version: "4", note: "Utility styling" },
-  { name: "oxlint", version: "1.83", note: "Type-aware linting" },
+  { name: "oxlint", version: "1.85", note: "Type-aware linting" },
   { name: "Knip", version: "6", note: "Unused code and deps" },
   { name: "Vitest", version: "5", note: "Unit tests" },
   { name: "Prettier", version: "3.9", note: "Shared formatting" },
@@ -32,10 +32,6 @@ const stack: readonly StackItem[] = [
 const commands: readonly Command[] = [
   { label: "Install", command: "pnpm install" },
   { label: "Run this app", command: "pnpm --filter playground dev" },
-  {
-    label: "Scaffold a package",
-    command: 'pnpm gen:package --args my-lib "What it does"',
-  },
   {
     label: "Check everything",
     command: "pnpm typecheck && pnpm lint && pnpm knip && pnpm test",
@@ -80,7 +76,6 @@ packages/
 tooling/
   prettier/          shared Prettier config
   typescript/        shared tsconfig presets
-  github/            CI setup action, secrets scan
-turbo/generators/    pnpm gen:package templates`;
+  github/            CI setup action, secrets scan`;
 
 export { commands, guardrails, layout, repoUrl, stack };

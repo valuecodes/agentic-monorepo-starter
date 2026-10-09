@@ -61,7 +61,7 @@ so pinning versions there would be too late:
 | Variable       | Value     |
 | -------------- | --------- |
 | `NODE_VERSION` | `24.21.0` |
-| `PNPM_VERSION` | `12.4.2`  |
+| `PNPM_VERSION` | `12.6.0`  |
 
 Keep them in step with `.nvmrc` and the root `packageManager` field.
 

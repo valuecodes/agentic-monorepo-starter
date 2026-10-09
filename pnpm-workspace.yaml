@@ -10,8 +10,8 @@ packages:
 # inline in that manifest). Scoped keys must be double-quoted.
 catalog:
   # `typescript` is the native (Go) compiler; its binary is still `tsc`.
-  "@types/node": 26.5.1
-  prettier: 3.9.6
+  "@types/node": 26.6.2
+  prettier: 3.9.9
   typescript: 7.0.2
   vitest: 5.0.1
 
