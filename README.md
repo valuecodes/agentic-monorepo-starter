@@ -23,7 +23,7 @@ tooling/github         composite action: pnpm + Node + install; secrets-scan scr
 
 ## Getting started
 
-Requires Node.js 24.21.0 (`.nvmrc`) and pnpm 12.4.2 (`packageManager` in `package.json`).
+Requires Node.js 24.21.0 (`.nvmrc`) and pnpm 12.6.0 (`packageManager` in `package.json`).
 
 ```bash
 pnpm install
@@ -41,7 +41,6 @@ pnpm build          # production builds
 pnpm format         # Prettier write
 pnpm format:check   # Prettier check (CI gate)
 pnpm secrets:scan   # gitleaks secret scan over git history
-pnpm gen:package    # scaffold a new package in packages/ (@turbo/gen)
 ```
 
 oxlint prints nothing when there are no findings, so silent output means clean.
