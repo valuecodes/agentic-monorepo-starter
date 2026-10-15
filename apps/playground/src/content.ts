@@ -24,9 +24,9 @@ const stack: readonly StackItem[] = [
   { name: "React", version: "19", note: "This page" },
   { name: "Tailwind CSS", version: "4", note: "Utility styling" },
   { name: "oxlint", version: "1.85", note: "Type-aware linting" },
+  { name: "oxfmt", version: "0.71", note: "Prettier-compatible formatting" },
   { name: "Knip", version: "6", note: "Unused code and deps" },
   { name: "Vitest", version: "5", note: "Unit tests" },
-  { name: "Prettier", version: "3.9", note: "Shared formatting" },
 ];
 
 const commands: readonly Command[] = [
@@ -74,7 +74,6 @@ const layout = `apps/
 packages/
   logger/            pino logger for Cloud Logging
 tooling/
-  prettier/          shared Prettier config
   typescript/        shared tsconfig presets
   github/            CI setup action, secrets scan`;
 

@@ -24,7 +24,6 @@ Guidelines for AI agents and contributors working in this Turborepo monorepo.
 
 | Name       | Filter             | Description                                                      |
 | ---------- | ------------------ | ---------------------------------------------------------------- |
-| prettier   | `@repo/prettier`   | Shared Prettier config                                           |
 | typescript | `@repo/typescript` | Shared tsconfig presets (`base.json`, `node.json`, `react.json`) |
 | github     | `@repo/github`     | GitHub Actions composite setup action, gitleaks `secrets-scan`   |
 
@@ -47,8 +46,8 @@ pnpm knip                        # unused files, exports and dependencies
 pnpm typecheck                   # turbo run typecheck
 pnpm test                        # turbo run test
 pnpm build                       # turbo run build
-pnpm format                      # prettier --write .
-pnpm format:check                # prettier --check . (no writes)
+pnpm format                      # oxfmt, writes in place
+pnpm format:check                # oxfmt --check (no writes)
 pnpm secrets:scan                # gitleaks over the full git history
 pnpm clean                       # turbo run clean
 ```
@@ -56,7 +55,9 @@ pnpm clean                       # turbo run clean
 `lint` and `knip` do not go through Turbo — each is a single process over the whole
 repo. oxlint is configured by the root `.oxlintrc.json` (including `import/no-cycle`)
 and prints nothing when there are no findings, so silent output means clean. Knip is
-configured by the root `knip.jsonc` and exits 0 when clean.
+configured by the root `knip.jsonc` and exits 0 when clean. Formatting is oxfmt
+(Prettier-compatible), configured by the root `.oxfmtrc.jsonc`, which also sorts
+imports and Tailwind classes.
 
 There is no post-edit formatting hook: run `pnpm format` yourself before committing.
 

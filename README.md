@@ -6,7 +6,7 @@ and clear package boundaries — so agents move fast without turning the codebas
 ## What's inside
 
 - Vite playground in `apps/playground` (Vite 8, React 19, Tailwind CSS 4)
-- Shared tooling: oxlint, Knip, Prettier, TypeScript 7, Turbo
+- Shared tooling: oxlint, oxfmt, Knip, TypeScript 7, Turbo
 - `@repo/logger` — structured JSON logging for Cloud Run / Cloud Logging
 - pnpm catalog for versions, with supply-chain guards: a 14-day release-age wait,
   a trust-downgrade check, and no git/tarball subdependencies
@@ -15,10 +15,10 @@ and clear package boundaries — so agents move fast without turning the codebas
 ```text
 apps/playground        Vite 8 + React 19 sandbox
 packages/logger        pino logger, Cloud Logging shaped JSON
-tooling/prettier       shared Prettier config
 tooling/typescript     shared tsconfig presets (base, node, react)
 tooling/github         composite action: pnpm + Node + install; secrets-scan script
 .oxlintrc.json         single root lint config for the whole repo
+.oxfmtrc.jsonc         single root format config for the whole repo
 ```
 
 ## Getting started
@@ -38,8 +38,8 @@ pnpm knip           # unused files, exports and dependencies
 pnpm typecheck      # TypeScript 7 (tsc) across the repo
 pnpm test           # test suite
 pnpm build          # production builds
-pnpm format         # Prettier write
-pnpm format:check   # Prettier check (CI gate)
+pnpm format         # oxfmt write
+pnpm format:check   # oxfmt check (CI gate)
 pnpm secrets:scan   # gitleaks secret scan over git history
 ```
 
