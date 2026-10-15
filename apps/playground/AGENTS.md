@@ -60,6 +60,10 @@ There are no per-workspace `lint` or `format` scripts: root `pnpm lint` (oxlint)
 - Cloudflare static assets: `wrangler.jsonc` serves `dist/`; `public/_headers`
   sets the CSP and cache headers. Deploys are connected in the Cloudflare
   dashboard, not CI (settings in `README.md`).
+- `VITE_CF_BEACON_TOKEN` is an optional build variable, the Web Analytics token:
+  `vite.config.ts` adds the beacon script to `index.html` only when it is set
+  (production builds only, and the dashboard site on manual installation, so
+  there is one beacon).
 - `compatibility_date` cannot be newer than the pinned workerd's date
   (`1.YYYYMMDD.x`); bump the two together.
 

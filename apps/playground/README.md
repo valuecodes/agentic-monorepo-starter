@@ -65,6 +65,16 @@ so pinning versions there would be too late:
 
 Keep them in step with `.nvmrc` and the root `packageManager` field.
 
+### Web Analytics
+
+Cloudflare Web Analytics is optional. Add the site in the dashboard (Web
+Analytics → Add a site) with manual JS snippet installation, not automatic
+injection, which would load a second beacon. Copy the `token` from its snippet
+into the build variable `VITE_CF_BEACON_TOKEN` (Settings → Build → Variables).
+Set it on the production build only: preview builds then have no beacon and
+don't report into the site. The token is public: the build puts the beacon
+`<script>` into `index.html`. Without the variable the page has no beacon.
+
 To deploy from your machine instead, run `pnpm --filter playground exec wrangler login` once, then
 `pnpm --filter playground deploy`.
 
