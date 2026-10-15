@@ -27,7 +27,7 @@ This directory inherits `/AGENTS.md`. This file lists only additions and overrid
 Or run repo-wide via root `pnpm typecheck` / `pnpm test` / `pnpm build`.
 
 There are no per-workspace `lint` or `format` scripts: root `pnpm lint` (oxlint) and
-`pnpm format` (Prettier) each cover the whole repo.
+`pnpm format` (oxfmt) each cover the whole repo.
 
 ---
 
