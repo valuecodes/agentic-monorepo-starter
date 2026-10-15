@@ -17,11 +17,13 @@ const cloudflareBeacon = (token: string): Plugin => ({
     if (!/^[0-9a-f]{32}$/.test(token)) {
       throw new Error("VITE_CF_BEACON_TOKEN must be 32 lowercase hex digits");
     }
+    // A classic deferred script, as in Cloudflare's snippet: the beacon reads
+    // `data-cf-beacon` from `document.currentScript`, which is null in a module.
     return [
       {
         tag: "script",
         attrs: {
-          type: "module",
+          defer: true,
           src: "https://static.cloudflareinsights.com/beacon.min.js",
           "data-cf-beacon": JSON.stringify({ token }),
         },
