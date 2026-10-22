@@ -14,7 +14,7 @@
     "clean": "rm -rf .turbo node_modules .cache"
   },
   "dependencies": {
-    "pino": "10.4.0"
+    "pino": "catalog:"
   },
   "devDependencies": {
     "@repo/typescript": "workspace:*",
