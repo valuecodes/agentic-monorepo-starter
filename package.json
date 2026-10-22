@@ -21,11 +21,11 @@
   },
   "devDependencies": {
     "@types/node": "catalog:",
-    "knip": "6.40.0",
-    "oxfmt": "0.72.0",
-    "oxlint": "1.87.0",
-    "oxlint-tsgolint": "7.0.2003",
-    "turbo": "2.11.7",
+    "knip": "catalog:",
+    "oxfmt": "catalog:",
+    "oxlint": "catalog:",
+    "oxlint-tsgolint": "catalog:",
+    "turbo": "catalog:",
     "typescript": "catalog:"
   }
 }
