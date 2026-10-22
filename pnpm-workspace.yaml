@@ -10,9 +10,9 @@ packages:
 # inline in that manifest). Scoped keys must be double-quoted.
 catalog:
   # `typescript` is the native (Go) compiler; its binary is still `tsc`.
-  "@types/node": 24.13.6
+  "@types/node": 24.19.1
   typescript: 7.0.2
-  vitest: 5.0.1
+  vitest: 5.0.3
 
 # Makes `pnpm add` / `pnpm update` use the catalog and reject conflicting
 # versions. Plain `pnpm install` never evaluates it, so it is an authoring
