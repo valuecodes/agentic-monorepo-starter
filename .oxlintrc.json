@@ -228,8 +228,8 @@
     "import/no-cycle": "error",
     "import/no-duplicates": "error",
     "import/no-self-import": "error",
-    // Named exports only. Config files that need a default export are
-    // already excluded by `ignorePatterns`.
+    // Named exports only. The `overrides` entry above turns this off for the
+    // config files, which Vite and Vitest load through a default export.
     "import/no-default-export": "error",
     // Declarations first, one export list at the bottom, as in `@repo/logger`.
     "import/exports-last": "error",
