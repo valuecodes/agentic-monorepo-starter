@@ -72,10 +72,11 @@ to `main` and on PRs.
 `node-update.yml` calls the reusable workflow from `valuecodes/automation` (pinned to a
 commit SHA) daily: when a newer Node.js release is out on the `.nvmrc` major, it opens a
 `chore: bump Node.js to …` PR. Security releases open one right away; others wait 14
-days. Its PRs start CI only after someone clicks **Approve workflows to run**. Keep the
-exact Node version only in `.nvmrc`, so that PR is the whole bump; the Cloudflare
-`NODE_VERSION` build variable is the one pin to update by hand. A newer release closes
-the older PR and deletes its branch, so push any follow-up commits just before merging.
+days. Its PRs start CI only after someone clicks **Approve workflows to run** (if no
+runs show up, close and reopen the PR). Keep the exact Node version only in `.nvmrc`,
+so that PR is the whole bump; the Cloudflare `NODE_VERSION` build variable is the one
+pin to update by hand. A newer release closes the older PR and deletes its branch, so
+push any follow-up commits just before merging.
 
 ---
 
