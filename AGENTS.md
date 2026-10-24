@@ -69,9 +69,8 @@ CI (`.github/workflows/`) runs typecheck, lint, knip, format-check, test, build,
 secrets-scan and CodeQL code scanning (`javascript-typescript` and `actions`) on push
 to `main` and on PRs.
 
-Dependabot (`.github/dependabot.yml`) bumps the SHA-pinned actions monthly in one grouped
-PR; npm dependencies and the branch-pinned `valuecodes/automation` workflow are updated by
-hand.
+Dependabot (`.github/dependabot.yml`) bumps the SHA-pinned actions and reusable workflows
+monthly in one grouped PR; npm dependencies are updated by hand.
 
 `node-update.yml` calls the reusable workflow from `valuecodes/automation` (pinned to a
 commit SHA) daily: when a newer Node.js release is out on the `.nvmrc` major, it opens a
