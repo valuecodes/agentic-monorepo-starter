@@ -1,0 +1,19 @@
+name: Node.js update
+
+on:
+  schedule:
+    # Daily, so a security release gets its PR within a day. An off-peak minute
+    # avoids the top-of-the-hour queue.
+    - cron: "17 5 * * *"
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  # Opens a PR bumping `.nvmrc` when a newer Node.js release is out on its major.
+  # A called workflow cannot raise the caller's token, so the job grants it here.
+  node-update:
+    permissions:
+      contents: write
+      pull-requests: write
+    uses: valuecodes/automation/.github/workflows/node-update.yml@d541940d5d168a56f890e8aae00a4fa5430c92b2 # main
