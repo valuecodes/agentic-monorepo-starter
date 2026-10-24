@@ -16,16 +16,13 @@ Guidelines for AI agents and contributors working in this Turborepo monorepo.
 
 ### Packages (`packages/`)
 
-| Name   | Filter         | Description                                    |
-| ------ | -------------- | ---------------------------------------------- |
-| logger | `@repo/logger` | pino logger emitting Cloud Logging shaped JSON |
-
-### Tooling (`tooling/`)
-
 | Name       | Filter             | Description                                                      |
 | ---------- | ------------------ | ---------------------------------------------------------------- |
+| logger     | `@repo/logger`     | pino logger emitting Cloud Logging shaped JSON                   |
 | typescript | `@repo/typescript` | Shared tsconfig presets (`base.json`, `node.json`, `react.json`) |
-| github     | `@repo/github`     | GitHub Actions composite setup action, gitleaks `secrets-scan`   |
+
+CI helpers are not workspaces: the composite setup action lives in
+`.github/actions/setup/` and the gitleaks script in `.github/scripts/`.
 
 Apps may import packages; packages must never import apps. oxlint bans `../`
 imports and deep `@repo/*/src` imports: import other workspaces by package name,
@@ -61,13 +58,14 @@ imports and Tailwind classes.
 
 There is no post-edit formatting hook: run `pnpm format` yourself before committing.
 
-`secrets:scan` runs gitleaks (`tooling/github/scripts/secrets-scan.sh`, version pinned
+`secrets:scan` runs gitleaks (`.github/scripts/secrets-scan.sh`, version pinned
 there) using a local `gitleaks` v8.19+ if one is on PATH, otherwise the pinned Docker image.
 It exits 0 when clean and 1 when it finds a leak.
 
-CI (`.github/workflows/`) runs typecheck, lint, knip, format-check, test, build,
-secrets-scan and CodeQL code scanning (`javascript-typescript` and `actions`) on push
-to `main` and on PRs.
+CI (`.github/workflows/ci.yml`) runs typecheck, lint, knip, format:check, test, build,
+secrets-scan and CodeQL code scanning (`javascript-typescript` and `actions`) on PRs and
+on push to `main`. `all-passed` fans those in and is the one check to require in branch
+protection.
 
 Dependabot (`.github/dependabot.yml`) bumps the SHA-pinned actions and reusable workflows
 monthly in one grouped PR; npm dependencies are updated by hand.

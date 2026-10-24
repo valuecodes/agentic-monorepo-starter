@@ -1,7 +1,6 @@
 packages:
   - "apps/*"
   - "packages/*"
-  - "tooling/*"
 
 # Every external dependency version, referenced as `catalog:` from the
 # manifests. Update everything with `pnpm up --latest -r`, which rewrites only

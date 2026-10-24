@@ -73,8 +73,7 @@ const layout = `apps/
   playground/        Vite + React app (this page)
 packages/
   logger/            pino logger for Cloud Logging
-tooling/
   typescript/        shared tsconfig presets
-  github/            CI setup action, secrets scan`;
+.github/             CI workflow, setup action, secrets scan`;
 
 export { commands, guardrails, layout, repoUrl, stack };

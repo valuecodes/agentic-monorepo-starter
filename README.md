@@ -15,8 +15,8 @@ and clear package boundaries — so agents move fast without turning the codebas
 ```text
 apps/playground        Vite 8 + React 19 sandbox
 packages/logger        pino logger, Cloud Logging shaped JSON
-tooling/typescript     shared tsconfig presets (base, node, react)
-tooling/github         composite action: pnpm + Node + install; secrets-scan script
+packages/typescript    shared tsconfig presets (base, node, react)
+.github/               CI workflow, composite setup action, secrets-scan script
 .oxlintrc.json         single root lint config for the whole repo
 .oxfmtrc.jsonc         single root format config for the whole repo
 ```
@@ -45,9 +45,11 @@ pnpm secrets:scan   # gitleaks secret scan over git history
 
 oxlint prints nothing when there are no findings, so silent output means clean.
 
-CI runs typecheck, lint, knip, format-check, test, build and a gitleaks secret scan on
-push to `main` and on PRs, plus CodeQL code scanning. `secrets:scan` needs either
-`gitleaks` v8.19+ on PATH or a running Docker daemon.
+CI runs typecheck, lint, knip, format:check, test, build and a gitleaks secret scan on
+PRs and on push to `main`, plus CodeQL code scanning. The `all-passed` job fans them in:
+require only that check in branch protection (the former `format-check` check is now
+`format:check`). `secrets:scan` needs either `gitleaks` v8.19+ on PATH or a running
+Docker daemon.
 
 ## Use this template
 
