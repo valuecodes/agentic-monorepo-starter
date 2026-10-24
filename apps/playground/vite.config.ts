@@ -1,5 +1,6 @@
 import react from "@vitejs/plugin-react";
-import { defineConfig, loadEnv, type Plugin } from "vite";
+import { defineConfig, loadEnv } from "vite";
+import type { Plugin } from "vite";
 
 /**
  * Cloudflare Web Analytics, only in a build given `VITE_CF_BEACON_TOKEN` (a
@@ -34,12 +35,14 @@ const cloudflareBeacon = (token: string): Plugin => ({
 });
 
 // https://vite.dev/config/
-export default defineConfig(({ mode }) => ({
-  plugins: [
-    react(),
-    cloudflareBeacon(
-      loadEnv(mode, process.cwd(), "VITE_").VITE_CF_BEACON_TOKEN ?? ""
-    ),
-  ],
-  resolve: { tsconfigPaths: true },
-}));
+export default defineConfig(({ mode }) => {
+  const { VITE_CF_BEACON_TOKEN: beaconToken = "" } = loadEnv(
+    mode,
+    process.cwd(),
+    "VITE_"
+  );
+  return {
+    plugins: [react(), cloudflareBeacon(beaconToken)],
+    resolve: { tsconfigPaths: true },
+  };
+});

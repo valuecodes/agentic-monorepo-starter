@@ -47,9 +47,8 @@ oxlint prints nothing when there are no findings, so silent output means clean.
 
 CI runs typecheck, lint, knip, format:check, test, build and a gitleaks secret scan on
 PRs and on push to `main`, plus CodeQL code scanning. The `all-passed` job fans them in:
-require only that check in branch protection (the former `format-check` check is now
-`format:check`). `secrets:scan` needs either `gitleaks` v8.19+ on PATH or a running
-Docker daemon.
+require only that check in branch protection. `secrets:scan` needs either `gitleaks`
+v8.19+ on PATH or a running Docker daemon.
 
 ## Use this template
 

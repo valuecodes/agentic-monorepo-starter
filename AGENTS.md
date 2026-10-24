@@ -65,7 +65,8 @@ It exits 0 when clean and 1 when it finds a leak.
 CI (`.github/workflows/ci.yml`) runs typecheck, lint, knip, format:check, test, build,
 secrets-scan and CodeQL code scanning (`javascript-typescript` and `actions`) on PRs and
 on push to `main`. `all-passed` fans those in and is the one check to require in branch
-protection.
+protection. The typecheck, test and build jobs restore Turbo's `.turbo` cache from the
+previous run of the same task, so unchanged packages replay instead of rerunning.
 
 Dependabot (`.github/dependabot.yml`) bumps the SHA-pinned actions and reusable workflows
 monthly in one grouped PR; npm dependencies are updated by hand.
