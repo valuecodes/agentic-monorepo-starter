@@ -15,8 +15,10 @@ updates:
     groups:
       actions:
         patterns: ["*"]
-        # Pinned to a branch, not a release: an unreleased commit of a workflow
-        # that runs with write permissions gets its own PR.
+        # Pinned to a branch commit, not a release. Dependabot does not bump
+        # such pins today (dependabot-core#15577), so it is re-pinned by hand.
+        # If that changes, this workflow, which runs with write permissions,
+        # gets its own PR.
         exclude-patterns: ["valuecodes/automation*"]
     commit-message:
       prefix: chore
