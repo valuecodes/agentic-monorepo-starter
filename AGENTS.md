@@ -80,6 +80,15 @@ so that PR is the whole bump; the Cloudflare `NODE_VERSION` build variable is th
 pin to update by hand. A newer release closes the older PR and deletes its branch, so
 push any follow-up commits just before merging.
 
+`maintenance-dashboard.yml` calls the same repo's maintenance dashboard workflow daily.
+It keeps one issue, **Maintenance dashboard** (label `maintenance-dashboard`), listing
+what is due: `catalog:` updates, pnpm (`packageManager`), gitleaks (`GITLEAKS_VERSION`
+in the secrets-scan script), Node.js (`.nvmrc`) and `pnpm audit` findings. Like
+`minimumReleaseAge`, a release shows up only once it is 14 days old. It never opens
+PRs or commits; doing the updates stays manual. If `GITLEAKS_VERSION` moves out of
+`.github/scripts/secrets-scan.sh`, pass the new path as the `gitleaks-script` input.
+Both callers pin the same `valuecodes/automation` commit, so bump them together.
+
 ---
 
 ## Rules

@@ -68,6 +68,9 @@ Use GitHub's **Use this template** button, then go through the new repo's settin
    requests_, so the daily `Node.js update` workflow can open a PR when a newer
    Node.js release is out on the `.nvmrc` major. Its first PR needs **Approve
    workflows to run** before CI starts.
+5. **Issues**: run the `Maintenance dashboard` workflow once (**Actions → Maintenance
+   dashboard → Run workflow**), then pin the **Maintenance dashboard** issue it
+   creates so it stays at the top of the issue list.
 
 No environments are needed. Create one only when you enable the commented-out `deploy`
 job in `ci.yml`, with a deployment-branch rule allowing `main` only.
