@@ -80,7 +80,8 @@ so that PR is the whole bump; the Cloudflare `NODE_VERSION` build variable is th
 pin to update by hand. A newer release closes the older PR and deletes its branch, so
 push any follow-up commits just before merging.
 
-`maintenance-dashboard.yml` calls the same repo's maintenance dashboard workflow daily.
+`maintenance-dashboard.yml` calls the maintenance dashboard workflow from
+`valuecodes/automation` daily.
 It keeps one issue, **Maintenance dashboard** (label `maintenance-dashboard`), listing
 what is due: `catalog:` updates, pnpm (`packageManager`), gitleaks (`GITLEAKS_VERSION`
 in the secrets-scan script), Node.js (`.nvmrc`) and `pnpm audit` findings. Like
