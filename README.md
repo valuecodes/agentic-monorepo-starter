@@ -53,18 +53,22 @@ Docker daemon.
 
 ## Use this template
 
-Use GitHub's **Use this template** button, then:
+Use GitHub's **Use this template** button, then go through the new repo's settings:
 
-- Optionally rename the `@repo/*` scope to your own (e.g. `@acme/*`)
-- Update `name` and `description` in `package.json`
-- Verify everything is green: `pnpm lint && pnpm knip && pnpm typecheck && pnpm test && pnpm build`
-- CodeQL (the `codeql` CI job) is free on public repos; private repos need GitHub Code
-  Security. If "default setup" is enabled under Settings → Code security, turn it off —
-  GitHub rejects the workflow's uploads while it is on.
-- Under Settings → Code security, turn on **Dependabot alerts** and leave **Dependabot
-  security updates** off: you get notified about vulnerable dependencies without
-  automatic PRs. `.github/dependabot.yml` only bumps the SHA-pinned GitHub Actions
-  (one grouped PR a month); npm dependencies are updated by hand.
-- Under Settings → Actions → General, turn on **Allow GitHub Actions to create and
-  approve pull requests**. The daily `Node.js update` workflow then opens a PR when a
-  newer Node.js release is out on the `.nvmrc` major.
+1. **Rules → Rulesets**: add a ruleset for `main` that requires a pull request and
+   the `all-passed` status check. That one check fans in every CI job, so it is the
+   only one to list.
+2. **Code security → Code scanning**: turn _default setup_ **off**. CodeQL runs from
+   `ci.yml` (free on public repos; private repos need GitHub Code Security), and
+   GitHub rejects its uploads while default setup is on.
+3. **Code security → Dependabot**: turn **alerts** on and leave **security updates**
+   off. You get notified about vulnerable dependencies without automatic PRs;
+   `.github/dependabot.yml` only bumps the SHA-pinned GitHub Actions monthly, and npm
+   dependencies are updated by hand.
+4. **Actions → General**: turn on _Allow GitHub Actions to create and approve pull
+   requests_, so the daily `Node.js update` workflow can open a PR when a newer
+   Node.js release is out on the `.nvmrc` major. Its first PR needs **Approve
+   workflows to run** before CI starts.
+
+No environments are needed. Create one only when you enable the commented-out `deploy`
+job in `ci.yml`, with a deployment-branch rule allowing `main` only.
