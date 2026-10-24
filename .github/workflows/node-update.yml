@@ -16,4 +16,4 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-    uses: valuecodes/automation/.github/workflows/node-update.yml@80a352079c3018ef5a73416da9c7ae14fb60a1df # v0.1.0
+    uses: valuecodes/automation/.github/workflows/node-update.yml@3d383603d5ecb82ea0dcb95223ae8f9eab43ca9e # v0.2.0
