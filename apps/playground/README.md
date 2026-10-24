@@ -58,10 +58,10 @@ Also set these build variables (Settings → Build → Variables), so Cloudflare
 dependencies with the repo's toolchain. The install runs before the build command,
 so pinning versions there would be too late:
 
-| Variable       | Value     |
-| -------------- | --------- |
-| `NODE_VERSION` | `24.22.1` |
-| `PNPM_VERSION` | `12.6.0`  |
+| Variable       | Value                   |
+| -------------- | ----------------------- |
+| `NODE_VERSION` | the version in `.nvmrc` |
+| `PNPM_VERSION` | `12.6.0`                |
 
 Keep them in step with `.nvmrc` and the root `packageManager` field.
 

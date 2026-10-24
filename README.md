@@ -23,7 +23,7 @@ tooling/github         composite action: pnpm + Node + install; secrets-scan scr
 
 ## Getting started
 
-Requires Node.js 24.22.1 (`.nvmrc`) and pnpm 12.10.1 (`packageManager` in `package.json`).
+Requires Node.js 24 (exact version in `.nvmrc`) and pnpm 12.10.1 (`packageManager` in `package.json`).
 
 ```bash
 pnpm install
@@ -63,3 +63,6 @@ Use GitHub's **Use this template** button, then:
   security updates** off: you get notified about vulnerable dependencies without
   automatic PRs. There is deliberately no `.github/dependabot.yml`, so no version-update
   PRs either.
+- Under Settings → Actions → General, turn on **Allow GitHub Actions to create and
+  approve pull requests**. The daily `Node.js update` workflow then opens a PR when a
+  newer Node.js release is out on the `.nvmrc` major.
