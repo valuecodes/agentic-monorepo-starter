@@ -9,14 +9,11 @@
     "typecheck": {
       "dependsOn": ["^typecheck"]
     },
-    "test": {
-      "dependsOn": ["^test"]
-    },
+    "test": {},
     "clean": {
       "cache": false
     },
     "dev": {
-      "dependsOn": ["^dev"],
       "cache": false,
       "persistent": true
     }

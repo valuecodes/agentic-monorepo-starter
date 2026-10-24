@@ -49,6 +49,9 @@ There are no per-workspace `lint` or `format` scripts: root `pnpm lint` (oxlint)
 
 - `tsconfig.json` sets `"types": ["vite/client"]`. This is load-bearing:
   without it, TypeScript 7 rejects `import "./globals.css"` with TS2882.
+- `tsconfig.json` covers `src/` only. `tsconfig.node.json` covers the
+  `*.config.ts` files (Node types, no DOM), and the `typecheck` script runs both.
+  It is also what lets oxlint's type-aware rules resolve the config files.
 
 ### Vite Notes
 

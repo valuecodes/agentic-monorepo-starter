@@ -35,6 +35,17 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
 
+      # Turbo's local cache, restored from the latest run of the same task so an
+      # unchanged package replays instead of rerunning. Only typecheck, test and
+      # build go through Turbo; lint, knip and format:check have no `.turbo`.
+      - name: Turbo cache
+        if: contains(fromJSON('["typecheck", "test", "build"]'), matrix.task)
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: .turbo
+          key: turbo-${{ runner.os }}-${{ matrix.task }}-${{ github.sha }}
+          restore-keys: turbo-${{ runner.os }}-${{ matrix.task }}-
+
       # The task name goes through `env`, never straight into `run`.
       - name: Run ${{ matrix.task }}
         env:

@@ -16,6 +16,8 @@ type Guardrail = {
 
 const repoUrl = "https://github.com/valuecodes/agentic-monorepo-starter";
 
+// Hand-maintained: keep these in step with the `catalog:` block in
+// pnpm-workspace.yaml when updating dependencies.
 const stack: readonly StackItem[] = [
   { name: "Turborepo", version: "2.11", note: "Cached task graph" },
   { name: "pnpm", version: "12", note: "Workspaces and catalogs" },
@@ -23,8 +25,8 @@ const stack: readonly StackItem[] = [
   { name: "Vite", version: "8", note: "Rolldown-powered builds" },
   { name: "React", version: "19", note: "This page" },
   { name: "Tailwind CSS", version: "4", note: "Utility styling" },
-  { name: "oxlint", version: "1.85", note: "Type-aware linting" },
-  { name: "oxfmt", version: "0.71", note: "Prettier-compatible formatting" },
+  { name: "oxlint", version: "1.87", note: "Type-aware linting" },
+  { name: "oxfmt", version: "0.72", note: "Prettier-compatible formatting" },
   { name: "Knip", version: "6", note: "Unused code and deps" },
   { name: "Vitest", version: "5", note: "Unit tests" },
 ];
