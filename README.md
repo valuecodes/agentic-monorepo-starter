@@ -61,8 +61,8 @@ Use GitHub's **Use this template** button, then:
   GitHub rejects the workflow's uploads while it is on.
 - Under Settings → Code security, turn on **Dependabot alerts** and leave **Dependabot
   security updates** off: you get notified about vulnerable dependencies without
-  automatic PRs. There is deliberately no `.github/dependabot.yml`, so no version-update
-  PRs either.
+  automatic PRs. `.github/dependabot.yml` only bumps the SHA-pinned GitHub Actions
+  (one grouped PR a month); npm dependencies are updated by hand.
 - Under Settings → Actions → General, turn on **Allow GitHub Actions to create and
   approve pull requests**. The daily `Node.js update` workflow then opens a PR when a
   newer Node.js release is out on the `.nvmrc` major.

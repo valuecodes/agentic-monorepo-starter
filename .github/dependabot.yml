@@ -1,0 +1,22 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    # The default "/" covers only .github/workflows (and a root action.yml). The
+    # composite setup action lives elsewhere and pins pnpm/action-setup and
+    # actions/setup-node.
+    directories:
+      - /
+      - /tooling/github/setup
+    schedule:
+      interval: monthly
+    # Waits like pnpm's minimumReleaseAge before proposing a new action release.
+    cooldown:
+      default-days: 14
+    groups:
+      actions:
+        patterns: ["*"]
+        # Pinned to a branch, not a release: an unreleased commit of a workflow
+        # that runs with write permissions gets its own PR.
+        exclude-patterns: ["valuecodes/automation*"]
+    commit-message:
+      prefix: chore
