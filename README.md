@@ -1,7 +1,7 @@
 # Agentic Monorepo Starter
 
-A Turborepo template for agentic development: strict repo guardrails, consistent tooling,
-and clear package boundaries — so agents move fast without turning the codebase into spaghetti.
+Monorepo template for agent-assisted development: reusable packages, strict TypeScript, CI
+checks, and agent workflows.
 
 ## What's inside
 
