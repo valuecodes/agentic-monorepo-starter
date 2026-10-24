@@ -23,7 +23,7 @@ packages/typescript    shared tsconfig presets (base, node, react)
 
 ## Getting started
 
-Requires Node.js 24 (exact version in `.nvmrc`) and pnpm 12.10.1 (`packageManager` in `package.json`).
+Requires Node.js 24 (exact version in `.nvmrc`) and pnpm 12.11.2 (`packageManager` in `package.json`).
 
 ```bash
 pnpm install
