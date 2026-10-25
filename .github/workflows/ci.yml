@@ -32,8 +32,10 @@ jobs:
           persist-credentials: false
           fetch-depth: 1
 
+      # zizmor prefers the `$/` self-repository syntax, but actionlint 1.7.12
+      # rejects it; switch once actionlint accepts `$/`.
       - name: Setup
-        uses: ./.github/actions/setup
+        uses: ./.github/actions/setup # zizmor: ignore[self-repository]
 
       # Turbo's local cache, restored from the latest run of the same task so an
       # unchanged package replays instead of rerunning. Only typecheck, test and
@@ -81,9 +83,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # `actions` scans the workflow files themselves (injection, unpinned
-        # third-party actions, over-broad permissions).
-        language: [javascript-typescript, actions]
+        # The workflow files are checked by the `workflow-lint` job instead.
+        language: [javascript-typescript]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -91,7 +92,7 @@ jobs:
           fetch-depth: 1
 
       # Advanced setup: turn OFF "default setup" under Settings → Code security,
-      # or GitHub rejects these uploads. Neither language needs a build step.
+      # or GitHub rejects these uploads. No build step is needed.
       - name: Initialize CodeQL
         uses: github/codeql-action/init@24c54180a607b1449ed407dd24f251e4e9147c8d # v4.38.3
         with:
@@ -104,6 +105,13 @@ jobs:
         with:
           category: "/language:${{ matrix.language }}"
 
+  # actionlint (with shellcheck on `run:` scripts) and zizmor over the workflow
+  # and action files. Shows up as `workflow-lint / actionlint` and `/ zizmor`.
+  workflow-lint:
+    permissions:
+      contents: read
+    uses: valuecodes/automation/.github/workflows/workflow-lint.yml@faff74cb5d78478b0bd271db840916706dc2cce0 # v0.3.1
+
   # The one check to require in branch protection. `if: always()` makes it run
   # even when a needed job failed, so it reports a failure instead of skipping.
   all-passed:
@@ -111,7 +119,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 1
     if: always()
-    needs: [check, secrets-scan, codeql]
+    needs: [check, secrets-scan, codeql, workflow-lint]
     permissions: {}
     steps:
       - name: Check results
@@ -144,7 +152,7 @@ jobs:
   #         fetch-depth: 1
   #
   #     - name: Setup
-  #       uses: ./.github/actions/setup
+  #       uses: ./.github/actions/setup # zizmor: ignore[self-repository]
   #
   #     - name: Deploy
   #       run: echo "deploy here"
