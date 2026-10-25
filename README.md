@@ -47,7 +47,8 @@ oxlint prints nothing when there are no findings, so silent output means clean.
 
 CI runs typecheck, lint, knip, format:check, test, build and a gitleaks secret scan on
 PRs and on push to `main`, plus CodeQL code scanning and actionlint + zizmor over the
-workflow files. The `all-passed` job fans them in:
+workflow files. The checks live once in `checks.yml`, called by `feature.yml` (PRs) and
+`main.yml` (push to `main`). The `all-passed` job fans them in:
 require only that check in branch protection. `secrets:scan` needs either `gitleaks`
 v8.19+ on PATH or a running Docker daemon.
 
@@ -59,7 +60,7 @@ Use GitHub's **Use this template** button, then go through the new repo's settin
    the `all-passed` status check. That one check fans in every CI job, so it is the
    only one to list.
 2. **Code security → Code scanning**: turn _default setup_ **off**. CodeQL runs from
-   `ci.yml` (free on public repos; private repos need GitHub Code Security), and
+   `checks.yml` (free on public repos; private repos need GitHub Code Security), and
    GitHub rejects its uploads while default setup is on.
 3. **Code security → Dependabot**: turn **alerts** on and leave **security updates**
    off. You get notified about vulnerable dependencies without automatic PRs;
@@ -70,4 +71,4 @@ Use GitHub's **Use this template** button, then go through the new repo's settin
    creates so it stays at the top of the issue list.
 
 No environments are needed. Create one only when you enable the commented-out `deploy`
-job in `ci.yml`, with a deployment-branch rule allowing `main` only.
+job in `main.yml`, with a deployment-branch rule allowing `main` only.
