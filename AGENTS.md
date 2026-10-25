@@ -62,12 +62,14 @@ There is no post-edit formatting hook: run `pnpm format` yourself before committ
 there) using a local `gitleaks` v8.19+ if one is on PATH, otherwise the pinned Docker image.
 It exits 0 when clean and 1 when it finds a leak.
 
-CI (`.github/workflows/ci.yml`) runs typecheck, lint, knip, format:check, test, build,
-secrets-scan, CodeQL code scanning (`javascript-typescript`) and workflow-lint on PRs and
-on push to `main`. workflow-lint calls the reusable workflow from `valuecodes/automation`:
-actionlint (with shellcheck) and zizmor over the workflow and action files. Each tool
-reads `.github/actionlint.yaml` / `zizmor.yml` if added. `all-passed` fans those in
-and is the one check to require in branch protection. The typecheck, test and build
+CI checks are defined once in the reusable `.github/workflows/checks.yml`: typecheck,
+lint, knip, format:check, test, build, secrets-scan, CodeQL code scanning
+(`javascript-typescript`) and workflow-lint. `feature.yml` calls it on PRs and
+`main.yml` on push to `main` (deploy jobs go there). workflow-lint calls the reusable
+workflow from `valuecodes/automation`: actionlint (with shellcheck) and zizmor over the
+workflow and action files. Each tool reads `.github/actionlint.yaml` / `zizmor.yml` if
+added. `all-passed` in `feature.yml` fans the checks in and is the one check to require
+in branch protection. The typecheck, test and build
 jobs restore Turbo's `.turbo` cache from the previous run of the same task, so
 unchanged packages replay instead of rerunning.
 
