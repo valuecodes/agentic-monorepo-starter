@@ -53,7 +53,8 @@ const guardrails: readonly Guardrail[] = [
   },
   {
     title: "Code scanning",
-    detail: "CodeQL analyses the TypeScript and the GitHub Actions workflows.",
+    detail:
+      "CodeQL analyses the TypeScript; actionlint and zizmor check the GitHub Actions workflows.",
   },
   {
     title: "Boundaries",

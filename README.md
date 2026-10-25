@@ -46,7 +46,8 @@ pnpm secrets:scan   # gitleaks secret scan over git history
 oxlint prints nothing when there are no findings, so silent output means clean.
 
 CI runs typecheck, lint, knip, format:check, test, build and a gitleaks secret scan on
-PRs and on push to `main`, plus CodeQL code scanning. The `all-passed` job fans them in:
+PRs and on push to `main`, plus CodeQL code scanning and actionlint + zizmor over the
+workflow files. The `all-passed` job fans them in:
 require only that check in branch protection. `secrets:scan` needs either `gitleaks`
 v8.19+ on PATH or a running Docker daemon.
 
@@ -64,11 +65,7 @@ Use GitHub's **Use this template** button, then go through the new repo's settin
    off. You get notified about vulnerable dependencies without automatic PRs;
    `.github/dependabot.yml` only bumps the SHA-pinned GitHub Actions monthly, and npm
    dependencies are updated by hand.
-4. **Actions → General**: turn on _Allow GitHub Actions to create and approve pull
-   requests_, so the daily `Node.js update` workflow can open a PR when a newer
-   Node.js release is out on the `.nvmrc` major. Its first PR needs **Approve
-   workflows to run** before CI starts.
-5. **Issues**: run the `Maintenance dashboard` workflow once (**Actions → Maintenance
+4. **Issues**: run the `Maintenance dashboard` workflow once (**Actions → Maintenance
    dashboard → Run workflow**), then pin the **Maintenance dashboard** issue it
    creates so it stays at the top of the issue list.
 
