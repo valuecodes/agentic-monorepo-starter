@@ -60,9 +60,10 @@ Nothing formats on edit, and the pre-commit hook only checks formatting: run
 `pnpm format` yourself before committing.
 
 Git hooks live in `.githooks/` and are plain shell scripts, with no hook manager.
-`pnpm install` enables them through the root `prepare` script. In a checkout that
-was installed before the hooks existed, run `git config core.hooksPath .githooks`
-once. `pre-commit` runs `format:check`, `lint` and `secrets:scan --staged`. The
+`pnpm install` enables them through the root `prepare` script. The setting goes in
+the clone's shared git config, so it covers every worktree, and a branch without
+`.githooks/` simply runs no hooks. If you cloned before the hooks existed and have
+not run `pnpm install` since, run `git config core.hooksPath .githooks` once. `pre-commit` runs `format:check`, `lint` and `secrets:scan --staged`. The
 secrets scan fails closed, so the commit is refused when neither gitleaks nor
 Docker is available. `pre-push` runs `typecheck`, `test` and `knip`. CI still
 runs every check. `format:check` and `lint` read the working tree, not the staged
