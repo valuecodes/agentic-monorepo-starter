@@ -10,6 +10,8 @@ checks, and agent workflows.
 - `@repo/logger` — structured JSON logging for Cloud Run / Cloud Logging
 - pnpm catalog for versions, with supply-chain guards: a 14-day release-age wait,
   a trust-downgrade check, and no git/tarball subdependencies
+- Git hooks in `.githooks/`: format, lint and a staged secrets scan before each
+  commit; typecheck, test and Knip before each push
 - Claude Code settings in `.claude/`
 
 ```text
@@ -17,6 +19,7 @@ apps/playground        Vite 8 + React 19 sandbox
 packages/logger        pino logger, Cloud Logging shaped JSON
 packages/typescript    shared tsconfig presets (base, node, react)
 .github/               CI workflow, composite setup action, secrets-scan script
+.githooks/             pre-commit and pre-push hooks
 .oxlintrc.json         single root lint config for the whole repo
 .oxfmtrc.jsonc         single root format config for the whole repo
 ```
@@ -29,6 +32,9 @@ Requires Node.js 24 (exact version in `.nvmrc`) and pnpm 12.11.2 (`packageManage
 pnpm install
 pnpm dev          # playground at http://localhost:3000
 ```
+
+`pnpm install` also turns on the git hooks. Committing needs `gitleaks` v8.19+ on PATH
+or a running Docker daemon for the staged secrets scan.
 
 ## Commands
 

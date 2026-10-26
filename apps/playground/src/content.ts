@@ -49,7 +49,12 @@ const guardrails: readonly Guardrail[] = [
   {
     title: "Secrets",
     detail:
-      "gitleaks scans the full git history locally and in CI with a pinned version.",
+      "gitleaks scans staged changes before every commit and the full git history in CI, with a pinned version.",
+  },
+  {
+    title: "Git hooks",
+    detail:
+      "Format, lint and secrets checks before every commit; typecheck, tests and Knip before every push.",
   },
   {
     title: "Code scanning",
@@ -77,6 +82,7 @@ const layout = `apps/
 packages/
   logger/            pino logger for Cloud Logging
   typescript/        shared tsconfig presets
-.github/             CI workflow, setup action, secrets scan`;
+.github/             CI workflow, setup action, secrets scan
+.githooks/           pre-commit and pre-push hooks`;
 
 export { commands, guardrails, layout, repoUrl, stack };
