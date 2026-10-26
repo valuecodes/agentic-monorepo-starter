@@ -56,7 +56,17 @@ configured by the root `knip.jsonc` and exits 0 when clean. Formatting is oxfmt
 (Prettier-compatible), configured by the root `.oxfmtrc.jsonc`, which also sorts
 imports and Tailwind classes.
 
-There is no post-edit formatting hook: run `pnpm format` yourself before committing.
+Nothing formats on edit, and the pre-commit hook only checks formatting: run
+`pnpm format` yourself before committing.
+
+Git hooks live in `.githooks/` and are plain shell scripts, with no hook manager.
+`pnpm install` enables them through the root `prepare` script. In a checkout that
+was installed before the hooks existed, run `git config core.hooksPath .githooks`
+once. `pre-commit` runs `format:check`, `lint` and `secrets:scan --staged`. The
+secrets scan fails closed, so the commit is refused when neither gitleaks nor
+Docker is available. `pre-push` runs `typecheck`, `test` and `knip`. CI still
+runs every check. `format:check` and `lint` read the working tree, not the staged
+snapshot, so stage everything you mean to commit.
 
 `secrets:scan` runs gitleaks (`.github/scripts/secrets-scan.sh`, version pinned
 there) using a local `gitleaks` v8.19+ if one is on PATH, otherwise the pinned Docker image.
@@ -95,6 +105,7 @@ the `gitleaks-script` input. The dashboard and workflow-lint callers pin the sam
 
 - Keep diffs tight and focused; no drive-by refactors or new tooling without discussion.
 - Never commit secrets, credentials, or `.env` files. All code must be public-safe.
+- Never bypass the git hooks with `--no-verify`; fix the failure instead.
 - Add dependencies to the correct workspace with `pnpm --filter <package> add <dep>`.
   Every external version lives in the `catalog:` block of `pnpm-workspace.yaml`
   and manifests reference it as `catalog:`; `@repo/*` deps stay `workspace:*`.
