@@ -1,0 +1,24 @@
+name: Maintenance updates
+
+on:
+  schedule:
+    # Weekly on Monday, after the daily dashboard run. An off-peak minute avoids
+    # the top-of-the-hour queue.
+    - cron: "17 6 * * 1"
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  # Keeps one PR per update kind (Node.js, pnpm, gitleaks, catalog) open for
+  # updates on the current major. Nothing auto-merges. A called workflow cannot
+  # raise the caller's token, so the job grants it here.
+  maintenance-updates:
+    permissions:
+      contents: write # push the update branches
+      pull-requests: write # open, edit and close the PRs
+      actions: write # start ci-workflow on the branches
+      issues: read # link the dashboard issue
+    uses: valuecodes/automation/.github/workflows/maintenance-updates.yml@c81e21084fe923dcfe73589b4190b5fa01148260 # v0.6.0
+    with:
+      ci-workflow: feature.yml

@@ -26,7 +26,8 @@ packages/typescript    shared tsconfig presets (base, node, react)
 
 ## Getting started
 
-Requires Node.js 24 (exact version in `.nvmrc`) and pnpm 12.11.2 (`packageManager` in `package.json`).
+Requires Node.js 26 (exact version in `.nvmrc`) and pnpm 12 (exact version in `packageManager` in `package.json`).
+Node.js 26 no longer bundles Corepack, so install it once with `npm install -g corepack && corepack enable`.
 
 ```bash
 pnpm install
