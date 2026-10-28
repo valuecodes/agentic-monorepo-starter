@@ -3,6 +3,9 @@ name: Feature branch CI
 on:
   pull_request:
     branches: [main]
+  # Started by maintenance-updates.yml on its update branches: a PR opened with
+  # GITHUB_TOKEN does not trigger `pull_request`.
+  workflow_dispatch:
 
 permissions: {}
 
