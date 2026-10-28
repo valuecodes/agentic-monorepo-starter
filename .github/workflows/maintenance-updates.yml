@@ -11,14 +11,14 @@ permissions: {}
 
 jobs:
   # Keeps one PR per update kind (Node.js, pnpm, gitleaks, catalog) open for
-  # updates on the current major. Nothing auto-merges. A called workflow cannot
-  # raise the caller's token, so the job grants it here.
+  # updates on the current major. Nothing auto-merges. The PRs are opened with
+  # GITHUB_TOKEN, so their `pull_request` checks wait for someone with write
+  # access to approve them in the PR. A called workflow cannot raise the
+  # caller's token, so the job grants it here.
   maintenance-updates:
     permissions:
       contents: write # push the update branches
       pull-requests: write # open, edit and close the PRs
-      actions: write # start ci-workflow on the branches
+      actions: write # required by the called job even without ci-workflow
       issues: read # link the dashboard issue
-    uses: valuecodes/automation/.github/workflows/maintenance-updates.yml@c81e21084fe923dcfe73589b4190b5fa01148260 # v0.6.0
-    with:
-      ci-workflow: feature.yml
+    uses: valuecodes/automation/.github/workflows/maintenance-updates.yml@d9365b5fd79107dfc3fe1cb49706fdedda722290 # v0.6.1

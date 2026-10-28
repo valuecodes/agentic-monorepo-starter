@@ -99,10 +99,9 @@ release shows up right away and is flagged. It never opens PRs or commits.
 `valuecodes/automation` weekly. It keeps one PR per kind open (Node.js, pnpm,
 gitleaks, `catalog:`) on a `maintenance-updates/<kind>` branch, for updates on the
 current major only; majors stay manual. Those PRs are opened with `GITHUB_TOKEN`, so
-`pull_request` does not fire: the workflow starts `feature.yml` on each branch through
-its `workflow_dispatch` trigger instead. It needs **Allow GitHub Actions to create and
-approve pull requests** turned on under Settings → Actions → General. Nothing
-auto-merges. After merging a Node.js or pnpm update, set the Cloudflare `NODE_VERSION`
+their `pull_request` checks wait until someone with write access clicks **Approve
+workflows to run** in the PR. It needs **Allow GitHub Actions to create and approve
+pull requests** turned on under Settings → Actions → General. Nothing auto-merges. After merging a Node.js or pnpm update, set the Cloudflare `NODE_VERSION`
 or `PNPM_VERSION` build variable to match. If `GITLEAKS_VERSION` moves out of
 `.github/scripts/secrets-scan.sh`, pass the new path as the `gitleaks-script` input to
 both callers. The dashboard, updates and workflow-lint callers pin the same
