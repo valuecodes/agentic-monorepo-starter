@@ -1,0 +1,8 @@
+# actionlint 1.7.12 does not know GitHub's `$/` self-repository syntax, which
+# the workflow lockfile needs for the local composite action in checks.yml.
+# Ignore only that error; drop this file once actionlint accepts `$/`
+# (rhysd/actionlint#711).
+paths:
+  .github/workflows/checks.yml:
+    ignore:
+      - 'specifying action "\$/\.github/actions/[^"]+" in invalid format because ref is missing'

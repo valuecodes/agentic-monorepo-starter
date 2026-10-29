@@ -1,0 +1,10 @@
+# The workflow lockfile (`.github/workflows/actions.lock`) holds the commit for
+# every `uses:`, so the workflows reference release tags and the runner rejects
+# any other commit. zizmor 1.30.1 does not read the lockfile yet and would
+# demand SHA pins; drop this file once the workflow-lint zizmor is lockfile-aware
+# (zizmorcore/zizmor#2477).
+rules:
+  unpinned-uses:
+    config:
+      policies:
+        "*": ref-pin

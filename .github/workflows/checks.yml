@@ -21,22 +21,23 @@ jobs:
         # Root package.json script names.
         task: [typecheck, lint, knip, "format:check", test, build]
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           fetch-depth: 1
 
-      # zizmor prefers the `$/` self-repository syntax, but actionlint 1.7.12
-      # rejects it; switch once actionlint accepts `$/`.
+      # `$/` (self-repository syntax) lets the lockfile cover the actions this
+      # composite calls; `./` cannot. actionlint 1.7.12 does not know `$/` yet,
+      # so `.github/actionlint.yaml` ignores that one error.
       - name: Setup
-        uses: ./.github/actions/setup # zizmor: ignore[self-repository]
+        uses: $/.github/actions/setup
 
       # Turbo's local cache, restored from the latest run of the same task so an
       # unchanged package replays instead of rerunning. Only typecheck, test and
       # build go through Turbo; lint, knip and format:check have no `.turbo`.
       - name: Turbo cache
         if: contains(fromJSON('["typecheck", "test", "build"]'), matrix.task)
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        uses: actions/cache@v6.1.0
         with:
           path: .turbo
           key: turbo-${{ runner.os }}-${{ matrix.task }}-${{ github.sha }}
@@ -56,7 +57,7 @@ jobs:
       contents: read
     steps:
       # Full history: gitleaks scans every commit, not just the checked-out tree.
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -65,6 +66,30 @@ jobs:
       # image, so no pnpm/Node setup is needed.
       - name: Scan for secrets
         run: sh .github/scripts/secrets-scan.sh
+
+  # Verifies `.github/workflows/actions.lock`: every `uses:` has an entry and
+  # each locked commit is still reachable from its tag in the action's own
+  # repository. The runner repeats the check when a job starts. Rerun
+  # `gh actions-lock` after any `uses:` change. The extension version is bumped
+  # by hand; the maintenance dashboard does not track it.
+  actions-lock:
+    name: actions-lock
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Verify the workflow lockfile
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh extension install github/gh-actions-lock --pin v0.4.0
+          gh actions-lock --verify
 
   codeql:
     name: codeql (${{ matrix.language }})
@@ -80,7 +105,7 @@ jobs:
         # The workflow files are checked by the `workflow-lint` job instead.
         language: [javascript-typescript]
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           fetch-depth: 1
@@ -88,14 +113,14 @@ jobs:
       # Advanced setup: turn OFF "default setup" under Settings → Code security,
       # or GitHub rejects these uploads. No build step is needed.
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@24c54180a607b1449ed407dd24f251e4e9147c8d # v4.38.3
+        uses: github/codeql-action/init@v4.38.3
         with:
           languages: ${{ matrix.language }}
           build-mode: none
           queries: security-extended
 
       - name: Analyze
-        uses: github/codeql-action/analyze@24c54180a607b1449ed407dd24f251e4e9147c8d # v4.38.3
+        uses: github/codeql-action/analyze@v4.38.3
         with:
           category: "/language:${{ matrix.language }}"
 

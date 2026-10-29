@@ -39,7 +39,7 @@ jobs:
   #         fetch-depth: 1
   #
   #     - name: Setup
-  #       uses: ./.github/actions/setup # zizmor: ignore[self-repository]
+  #       uses: $/.github/actions/setup
   #
   #     - name: Deploy
   #       run: echo "deploy here"
