@@ -104,4 +104,4 @@ jobs:
   workflow-lint:
     permissions:
       contents: read
-    uses: valuecodes/automation/.github/workflows/workflow-lint.yml@d9365b5fd79107dfc3fe1cb49706fdedda722290 # v0.6.1
+    uses: valuecodes/automation/.github/workflows/workflow-lint.yml@5c8e09f76205c0fa9bb049c52757b845636e76ad # v0.7.0
