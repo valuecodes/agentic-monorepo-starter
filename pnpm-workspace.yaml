@@ -23,12 +23,12 @@ catalog:
   react: 19.3.1
   react-dom: 19.3.1
   tailwindcss: 4.3.3
-  turbo: 2.11.8
+  turbo: 2.11.9
   # `typescript` is the native (Go) compiler; its binary is still `tsc`.
   typescript: 7.0.2
   vite: 8.3.4
   vitest: 5.0.5
-  wrangler: 4.151.0
+  wrangler: 4.151.1
 
 # Skipped by `pnpm up --latest`. `@types/node` must track the Node major in
 # `.nvmrc`, so bump it by hand within that line.
