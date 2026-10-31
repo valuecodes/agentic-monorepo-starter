@@ -18,7 +18,7 @@ checks, and agent workflows.
 apps/playground        Vite 8 + React 19 sandbox
 packages/logger        pino logger, Cloud Logging shaped JSON
 packages/typescript    shared tsconfig presets (base, node, react)
-.github/               CI workflow, composite setup action, secrets-scan script
+.github/               CI workflows, composite setup action
 .githooks/             pre-commit and pre-push hooks
 .oxlintrc.json         single root lint config for the whole repo
 .oxfmtrc.jsonc         single root format config for the whole repo
@@ -35,7 +35,7 @@ pnpm dev          # playground at http://localhost:3000
 ```
 
 `pnpm install` also turns on the git hooks. Committing needs `gitleaks` v8.19+ on PATH
-or a running Docker daemon for the staged secrets scan.
+for the staged secrets scan.
 
 ## Commands
 
@@ -47,7 +47,6 @@ pnpm test           # test suite
 pnpm build          # production builds
 pnpm format         # oxfmt write
 pnpm format:check   # oxfmt check (CI gate)
-pnpm secrets:scan   # gitleaks secret scan over git history
 ```
 
 oxlint prints nothing when there are no findings, so silent output means clean.
@@ -56,8 +55,7 @@ CI runs typecheck, lint, knip, format:check, test, build and a gitleaks secret s
 PRs and on push to `main`, plus CodeQL code scanning and actionlint + zizmor over the
 workflow files. The checks live once in `checks.yml`, called by `feature.yml` (PRs) and
 `main.yml` (push to `main`). The `all-passed` job fans them in:
-require only that check in branch protection. `secrets:scan` needs either `gitleaks`
-v8.19+ on PATH or a running Docker daemon.
+require only that check in branch protection.
 
 ## Use this template
 
@@ -73,7 +71,7 @@ Use GitHub's **Use this template** button, then go through the new repo's settin
    off. You get notified about vulnerable dependencies without automatic PRs;
    `.github/dependabot.yml` only bumps the SHA-pinned GitHub Actions monthly, and npm
    dependencies are updated by hand.
-4. **Issues**: run the `Maintenance dashboard` workflow once (**Actions → Maintenance
+4. **Issues**: run the `Maintain-kit dashboard` workflow once (**Actions → Maintain-kit
    dashboard → Run workflow**), then pin the **Maintenance dashboard** issue it
    creates so it stays at the top of the issue list.
 
