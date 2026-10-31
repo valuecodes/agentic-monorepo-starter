@@ -35,7 +35,9 @@ pnpm dev          # playground at http://localhost:3000
 ```
 
 `pnpm install` also turns on the git hooks. Committing needs `gitleaks` v8.19+ on PATH
-for the staged secrets scan.
+for the staged secrets scan: `brew install gitleaks` (macOS, Linux and WSL), or unpack the
+`linux_x64` tarball from the [releases page](https://github.com/gitleaks/gitleaks/releases)
+into a directory on PATH such as `~/.local/bin`.
 
 ## Commands
 
