@@ -74,7 +74,8 @@ no gitleaks pin.
 
 CI checks are defined once in the reusable `.github/workflows/checks.yml`: typecheck,
 lint, knip, format:check, test, build, CodeQL code scanning
-(`javascript-typescript`), secret-scan and workflow-lint. `feature.yml` calls it on PRs and
+(`javascript-typescript`, public repos only: private repos need GitHub Code Security),
+secret-scan and workflow-lint. `feature.yml` calls it on PRs and
 `main.yml` on push to `main` (deploy jobs go there). secret-scan and workflow-lint call the
 reusable workflows from `valuecodes/maintain-kit`: gitleaks over the full git history,
 and actionlint (with shellcheck) and zizmor over the workflow and action files. Each tool reads `.github/actionlint.yaml` / `zizmor.yml` if
