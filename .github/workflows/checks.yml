@@ -55,8 +55,11 @@ jobs:
       contents: read
     uses: valuecodes/maintain-kit/.github/workflows/secret-scan.yml@e5bf1d24a413d9312cd2051c39ef44ddd9358be5 # v1.0.0
 
+  # Private repos need GitHub Code Security for CodeQL, so it runs on public
+  # repos only. A skipped job does not fail the calling workflow.
   codeql:
     name: codeql (${{ matrix.language }})
+    if: ${{ !github.event.repository.private }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     permissions:
